@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/home.dart';
 
 class CadasterPage extends StatelessWidget {
   @override
@@ -6,8 +7,8 @@ class CadasterPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 100,
-        backgroundColor: Color.fromARGB(0, 0, 0, 0),
-        shadowColor: Color.fromARGB(0, 0, 0, 0),
+        backgroundColor: const Color.fromARGB(0, 0, 0, 0),
+        shadowColor: const Color.fromARGB(0, 0, 0, 0),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_outlined,
@@ -104,11 +105,13 @@ class CadasterPage extends StatelessWidget {
             Center(
               child: ElevatedButton(
                 onPressed: () {
-                  
+                  Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => HomePage())
+                  );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(61, 112, 128, 1),
-                  minimumSize: Size(double.infinity, 50),
+                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Cadastrar'),
               ),
@@ -116,7 +119,9 @@ class CadasterPage extends StatelessWidget {
             const Spacer(),
             Center(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  
+                },
                 child: const Text(
                     'Ajuda',
                     style: TextStyle(

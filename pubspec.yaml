@@ -52,10 +52,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-#  fonts:
-#    - family: righteous
-#      fonts:
-#        - asset: one\android\fonts\Righteous-Regular.ttf
+  fonts:
+    - family: Righteous
+      fonts:
+        - asset: android\fonts\righ.ttf
   assets:
   - android\app\src\main\res\drawable\onelogo.png
   - android\app\src\main\res\drawable\charging.gif

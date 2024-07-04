@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
+    // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => LoginPage()),
@@ -75,7 +76,7 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(), 
                 ),
               ),
               const SizedBox(height: 16),
