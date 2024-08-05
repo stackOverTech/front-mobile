@@ -1,60 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one/cadaster.dart';
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    );
-  }
-}
-
-class SplashScreen extends StatefulWidget {
-  @override
-  _SplashScreenState createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    _navigateToLogin();
-  }
-
-  _navigateToLogin() async {
-    await Future.delayed(const Duration(seconds: 5), () {});
-    // ignore: use_build_context_synchronously
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => SignUpPage()),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 170),
-            Image.asset('android/app/src/main/res/drawable/onelogo.png', height: 400, width: 250,),
-            const SizedBox(height: 200),
-            Image.asset('android/app/src/main/res/drawable/charging.gif'),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class SignUpPage extends StatelessWidget {
+import 'package:one/home.dart';
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,7 +13,7 @@ class SignUpPage extends StatelessWidget {
               Image.asset('android/app/src/main/res/drawable/onelogo.png', height: 220),
               const SizedBox(height: 30),
               const Text(
-                'Sua jornada\ncomeça aqui',
+                'Pronto para\naprender?',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
               ),
@@ -94,27 +40,27 @@ class SignUpPage extends StatelessWidget {
                 style: ButtonStyle(
                   foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(211, 0, 0, 0))
                 ),
-                child: const Text('Já tem uma conta? Faça seu login'),
+                child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => CadasterPage()),
+                    MaterialPageRoute(builder: (context) => HomePage()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color.fromRGBO(61, 112, 128, 1),
                   minimumSize: Size(double.infinity, 50),
                 ),
-                child: const Text('Continuar'),
+                child: const Text('Entrar'),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
                 child: const Text(
-                    'Ajuda',
+                    'Esqueci minha senha',
                     style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline

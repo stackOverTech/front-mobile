@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/question.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -132,23 +133,28 @@ class MyApp extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (context) => NewQuestionPage(
+                
+              ),
+            ),
+          );
         },
         child: Icon(Icons.add),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-      ),
+      //bottomNavigationBar: BottomNavigationBar(
+      //  items: const [
+      //    BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+      //    BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+      //    BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+      //    BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+      // ],
+      //),
     );
   }
 }
-
 class CategoryChip extends StatelessWidget {
   final String label;
 

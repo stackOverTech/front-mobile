@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one/home.dart';
+import 'package:one/login.dart';
 
 class CadasterPage extends StatelessWidget {
   @override
@@ -106,7 +106,7 @@ class CadasterPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => HomePage())
+                    context, MaterialPageRoute(builder: (context) => LoginPage())
                   );
                 },
                 style: ElevatedButton.styleFrom(
