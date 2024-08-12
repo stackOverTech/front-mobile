@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/introduction.dart';
 import 'package:one/login.dart';
 
 class CadasterPage extends StatelessWidget {
@@ -17,15 +18,15 @@ class CadasterPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-        ), 
+        ),
         title: const Text(
           'Cadastro',
           style: TextStyle(
-            fontSize: 36, 
+            fontSize: 36,
             fontWeight: FontWeight.w400,
             color: Color.fromARGB(255, 0, 0, 0),
-            ),
           ),
+        ),
         centerTitle: true,
       ),
       body: Padding(
@@ -38,17 +39,17 @@ class CadasterPage extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-                ),
+              ),
             ),
             const SizedBox(height: 8),
             const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(61, 112, 128, 1),
-                    width: 300,
-                  ), borderRadius: BorderRadius.all(Radius.circular(10))
-                ),
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                      width: 300,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),
             const SizedBox(height: 16),
@@ -57,7 +58,7 @@ class CadasterPage extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-                ),
+              ),
             ),
             const SizedBox(height: 8),
             const TextField(
@@ -71,7 +72,7 @@ class CadasterPage extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-                ),
+              ),
             ),
             const SizedBox(height: 8),
             const TextField(
@@ -86,14 +87,15 @@ class CadasterPage extends StatelessWidget {
               style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-                ),
+              ),
             ),
             const SizedBox(height: 8),
             DropdownButtonFormField<String>(
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
-              items: <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
+              items:
+                  <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -106,8 +108,9 @@ class CadasterPage extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                    context, MaterialPageRoute(builder: (context) => LoginPage())
-                  );
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => IntroductionPage()));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
@@ -119,16 +122,13 @@ class CadasterPage extends StatelessWidget {
             const Spacer(),
             Center(
               child: TextButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 child: const Text(
-                    'Ajuda',
-                    style: TextStyle(
+                  'Ajuda',
+                  style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
-                      decoration: TextDecoration.underline
-                      ),
-                  ),
+                      decoration: TextDecoration.underline),
+                ),
               ),
             ),
           ],
