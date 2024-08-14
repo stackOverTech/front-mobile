@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one/question.dart';
+import 'package:one/pages/question.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -7,7 +7,8 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Column( // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
+          Column(
+            // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
             children: [
               Container(
                 color: const Color.fromRGBO(61, 112, 128, 1),
@@ -19,17 +20,12 @@ class HomePage extends StatelessWidget {
                       elevation: 0,
                       title: const Text(
                         'One',
-                        style: TextStyle(
-                          height: 24,
-                          fontFamily: "Righteous"
-                        ),
+                        style: TextStyle(height: 24, fontFamily: "Righteous"),
                       ),
                       actions: [
                         IconButton(
                           icon: const Icon(Icons.search),
-                          onPressed: () {
-                            
-                          },
+                          onPressed: () {},
                         ),
                       ],
                     ),
@@ -46,7 +42,7 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    const SizedBox(height: 8), 
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),
@@ -57,7 +53,8 @@ class HomePage extends StatelessWidget {
               ),
             ],
           ),
-          DraggableScrollableSheet( //elemento arrastável e scrollavel de listagem dos posts
+          DraggableScrollableSheet(
+            //elemento arrastável e scrollavel de listagem dos posts
             initialChildSize: 0.85,
             minChildSize: 0.85,
             maxChildSize: 1.0,
@@ -65,7 +62,8 @@ class HomePage extends StatelessWidget {
               return Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16.0)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black26,
@@ -135,9 +133,7 @@ class MyApp extends StatelessWidget {
         onPressed: () {
           Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => NewQuestionPage(
-                
-              ),
+              builder: (context) => NewQuestionPage(),
             ),
           );
         },
@@ -155,6 +151,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
 class CategoryChip extends StatelessWidget {
   final String label;
 
@@ -207,9 +204,14 @@ class PostCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(username, style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(category, style: const TextStyle(color: Color.fromRGBO(97, 46, 88, 1))),
-                    Text(timeAgo, style: const TextStyle(color: Color.fromRGBO(91, 94, 85, 1))),
+                    Text(username,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(category,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(97, 46, 88, 1))),
+                    Text(timeAgo,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(91, 94, 85, 1))),
                   ],
                 ),
               ],
@@ -218,7 +220,8 @@ class PostCard extends StatelessWidget {
             Text(content),
             if (codeSnippet != null)
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 8.0), //horizontal: 8.0 não ta querendo
+                margin: const EdgeInsets.symmetric(
+                    vertical: 8.0), //horizontal: 8.0 não ta querendo
                 padding: const EdgeInsets.all(8.0),
                 color: Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
@@ -230,15 +233,11 @@ class PostCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
-                onPressed: () {
-                  
-                },
-                icon: const Icon(Icons.chat_bubble),
-                label: const Text('Responder'),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1)
-                )
-              ),
+                  onPressed: () {},
+                  icon: const Icon(Icons.chat_bubble),
+                  label: const Text('Responder'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1))),
             ),
           ],
         ),
