@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/cadaster.dart';
+import 'package:one/login.dart';
+import 'package:one/starter.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => SignUpPage()),
+      MaterialPageRoute(builder: (context) => StarterPage()),
     );
   }
 
@@ -92,24 +94,12 @@ class SignUpPage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(211, 0, 0, 0))
+                  foregroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(211, 0, 0, 0))
                 ),
                 child: const Text('Já tem uma conta? Faça seu login'),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => CadasterPage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(61, 112, 128, 1),
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                child: const Text('Continuar'),
-              ),
+              DefaultBtn(text: "Continuar", page: CadasterPage()),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
@@ -118,8 +108,8 @@ class SignUpPage extends StatelessWidget {
                     style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline
-                      ),
                   ),
+                ),
               ),
             ],
           ),

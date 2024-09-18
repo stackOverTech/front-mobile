@@ -124,6 +124,16 @@ class MyApp extends StatelessWidget {
                       timeAgo: '1d',
                       content: 'Lorem ipsum dolor sit amet consectetur...',
                     ),
+                    PostCard(
+                      username: 'lena',
+                      category: 'TCC',
+                      timeAgo: '2d',
+                      content: 'Como é que se fala "eu te odeio" em libras mesmo?',
+                      codeSnippet: '''
+print("i hate you")
+hate()
+                      ''',
+                    ),
                   ],
                 ),
               );
@@ -144,14 +154,15 @@ class MyApp extends StatelessWidget {
         child: Icon(Icons.add),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
-      //bottomNavigationBar: BottomNavigationBar(
-      //  items: const [
-      //    BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-      // ],
-      //),
+      bottomNavigationBar: BottomNavigationBar(
+       items: const [
+         BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+         BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+         BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+         BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        ],
+        elevation: 10,
+      ),
     );
   }
 }
@@ -220,7 +231,7 @@ class PostCard extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 8.0), //horizontal: 8.0 não ta querendo
                 padding: const EdgeInsets.all(8.0),
-                color: Color.fromRGBO(202, 202, 202, 1),
+                color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
                   codeSnippet!,
                   style: const TextStyle(fontFamily: 'monospace'),

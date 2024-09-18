@@ -38,24 +38,25 @@ class LoginPage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(211, 0, 0, 0))
+                  foregroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(211, 0, 0, 0))
                 ),
                 child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(61, 112, 128, 1),
-                  minimumSize: Size(double.infinity, 50),
-                ),
-                child: const Text('Entrar'),
-              ),
+              DefaultBtn(text: "Entrar", page: HomePage()),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => HomePage()),
+              //     );
+              //   },
+              // style: ElevatedButton.styleFrom(
+              //   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+              //   minimumSize: const Size(double.infinity, 50),
+              // ),
+              //   child: const Text('Entrar'),
+              // ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
@@ -64,13 +65,40 @@ class LoginPage extends StatelessWidget {
                     style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline
-                      ),
+                    ),
                   ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+}
+
+class DefaultBtn extends StatelessWidget{
+  final String text;
+  final StatelessWidget page;
+
+  DefaultBtn({
+    required this.text,
+    required this.page
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      onPressed: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => page),
+        );
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+        minimumSize: const Size(double.infinity, 50),
+      ),
+      child: Text(text),
     );
   }
 }
