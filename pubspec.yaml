@@ -57,8 +57,8 @@ flutter:
       fonts:
         - asset: android\fonts\righ.ttf
   # assets:
-  # - front-mobile/android/app/src/main/res/drawable/onelogo.png
-  # - front-mobile/android/app/src/main/res/drawable/charging.gif
+  # - android\app\src\main\res\drawable\onelogo.png
+  # - android\app\src\main\res\drawable\charging.gif
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
