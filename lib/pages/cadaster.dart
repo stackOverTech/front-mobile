@@ -125,7 +125,7 @@ class CadasterPage extends StatelessWidget {
                 child: const Text(
                   'Ajuda',
                   style: TextStyle(
-                      color: Color.fromRGBO(61, 112, 128, 1),
+                      color: AppColors.LIGHT_COLOR,
                       decoration: TextDecoration.underline),
                 ),
               ),

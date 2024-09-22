@@ -19,35 +19,24 @@ class IntroductionPage extends StatelessWidget {
                 'Seja Bem-Vindo',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                    fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
+                    fontSize: 36, fontWeight: FontWeight.w300, height: 0.9),
               ),
               const SizedBox(height: 48),
-              TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => CadasterPage()));
-                },
-                style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(211, 0, 0, 0))),
-                child: const Text('Não tem uma conta? Introdução'),
-              ),
-              const SizedBox(height: 20),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: const [
                   Icon(
                     Icons.home_outlined,
                     size: 30,
-                    color: Colors.blue,
+                    color: AppColors.DARKER_COLOR,
                   ),
-                  SizedBox(width: 10), // Espaço entre o ícone e o texto
+                  SizedBox(width: 10),
                   Text(
                     'Tire suas dúvidas',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,
-                      color: Colors.black,
+                      color: AppColors.BLACK_TEXT,
                     ),
                   ),
                 ],
@@ -59,15 +48,15 @@ class IntroductionPage extends StatelessWidget {
                   Icon(
                     Icons.book_outlined,
                     size: 30,
-                    color: Colors.blue,
+                    color: AppColors.DARKER_COLOR,
                   ),
-                  SizedBox(width: 10), // Espaço entre o ícone e o texto
+                  SizedBox(width: 10),
                   Text(
                     'Marque monitoria',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,
-                      color: Colors.black,
+                      color: AppColors.BLACK_TEXT,
                     ),
                   ),
                 ],
@@ -79,15 +68,15 @@ class IntroductionPage extends StatelessWidget {
                   Icon(
                     Icons.people_alt_outlined,
                     size: 30,
-                    color: Colors.blue,
+                    color: AppColors.DARKER_COLOR,
                   ),
-                  SizedBox(width: 10), // Espaço entre o ícone e o texto
+                  SizedBox(width: 10),
                   Text(
                     'Entre em  grupos \nde estudos',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,
-                      color: Colors.black,
+                      color: AppColors.BLACK_TEXT,
                     ),
                   ),
                 ],
@@ -99,15 +88,15 @@ class IntroductionPage extends StatelessWidget {
                   Icon(
                     Icons.person_outline,
                     size: 30,
-                    color: Colors.blue,
+                    color: AppColors.DARKER_COLOR,
                   ),
-                  SizedBox(width: 10), // Espaço entre o ícone e o texto
+                  SizedBox(width: 10),
                   Text(
                     'E veja seu ranking',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w300,
-                      color: Colors.black,
+                      color: AppColors.BLACK_TEXT,
                     ),
                   ),
                 ],
