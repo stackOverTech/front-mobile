@@ -1,46 +1,99 @@
 import 'package:flutter/material.dart';
-import 'package:one/pages/question.dart';
+import 'package:one/functions/get-posts-discipline-filter.dart';
+import 'package:one/models/disciplinas.model.dart';
+import 'package:one/models/pergunta.model.dart';
+import 'package:one/functions/get-posts.dart';
+import 'package:one/functions/get-disciplines.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+String formatTimeAgo(int tempoDesdeCriacao) {
+  if (tempoDesdeCriacao > 24) {
+    int dias = (tempoDesdeCriacao / 24).floor();
+    return '$dias d';
+  } else {
+    return '$tempoDesdeCriacao h'; // Retorna em horas
+  }
+}
+
+class _HomePageState extends State<HomePage> {
+  late Future<List<Pergunta>> _postsFuture;
+  late Future<List<Disciplina>> _disciplinasFuture;
+  String? _disciplinaSelecionada; // Para armazenar a disciplina selecionada
+
+  @override
+  void initState() {
+    super.initState();
+    _postsFuture = fetchPerguntas();
+    _disciplinasFuture = fetchDisciplinas();
+  }
+
+  void _buscarPerguntasPorDisciplina(int disciplineId) {
+    setState(() {
+      _postsFuture = fetchPerguntasPorDisciplina(disciplineId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+        elevation: 0,
+        title: const Text(
+          'One',
+          style: TextStyle(height: 24, fontFamily: "Righteous"),
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           Column(
-            // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
             children: [
               Container(
                 color: const Color.fromRGBO(61, 112, 128, 1),
                 child: Column(
                   children: [
-                    AppBar(
-                      automaticallyImplyLeading: false, // some com o back btn
-                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                      elevation: 0,
-                      title: const Text(
-                        'One',
-                        style: TextStyle(height: 24, fontFamily: "Righteous"),
-                      ),
-                      actions: [
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ],
-                    ),
-                    const SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          CategoryChip(label: 'Banco de Dados'),
-                          CategoryChip(label: 'Português'),
-                          CategoryChip(label: 'Matemática'),
-                          CategoryChip(label: 'Engenharia (EQSW)'),
-                          CategoryChip(label: 'Inglês'),
-                          CategoryChip(label: 'Mobile'),
-                        ],
-                      ),
+                    FutureBuilder<List<Disciplina>>(
+                      future: _disciplinasFuture,
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (snapshot.hasError) {
+                          return Center(child: Text('Erro: ${snapshot.error}'));
+                        } else if (!snapshot.hasData ||
+                            snapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('Nenhuma disciplina disponível.'));
+                        } else {
+                          final disciplinas = snapshot.data!;
+                          return SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              children: disciplinas.map((disciplina) {
+                                return CategoryChip(
+                                  label: disciplina.nome,
+                                  disciplineId:
+                                      disciplina.id, // Passa o ID da disciplina
+                                  onTap: () => _buscarPerguntasPorDisciplina(
+                                      disciplina.id), // Chama a função com o ID
+                                );
+                              }).toList(),
+                            ),
+                          );
+                        }
+                      },
                     ),
                     const SizedBox(height: 8),
                   ],
@@ -54,7 +107,6 @@ class HomePage extends StatelessWidget {
             ],
           ),
           DraggableScrollableSheet(
-            //elemento arrastável e scrollavel de listagem dos posts
             initialChildSize: 0.85,
             minChildSize: 0.85,
             maxChildSize: 1.0,
@@ -73,56 +125,35 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: ListView(
-                  controller: scrollController,
-                  children: [
-                    const SizedBox(height: 8),
-                    PostCard(
-                      username: 'harry',
-                      category: 'Banco de Dados',
-                      timeAgo: '2h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'bruno',
-                      category: 'POO',
-                      timeAgo: '3h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                      codeSnippet: '''
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    );
-  }
-}
-                      ''',
-                    ),
-                    PostCard(
-                      username: 'gui',
-                      category: 'Inglês',
-                      timeAgo: '4h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'ana',
-                      category: 'Banco de Dados',
-                      timeAgo: '1d',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'bruno',
-                      category: 'Inglês',
-                      timeAgo: '1d',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                  ],
+                child: FutureBuilder<List<Pergunta>>(
+                  future: _postsFuture,
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return Center(child: CircularProgressIndicator());
+                    } else if (snapshot.hasError) {
+                      return Center(child: Text('Erro: ${snapshot.error}'));
+                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                      return Center(
+                          child: Text('Nenhuma pergunta disponível.'));
+                    } else {
+                      final posts = snapshot.data!;
+                      return ListView.builder(
+                        controller: scrollController,
+                        itemCount: posts.length,
+                        itemBuilder: (context, index) {
+                          final post = posts[index];
+                          return PostCard(
+                            image: post.imagem,
+                            username: post.usuario,
+                            category: post.disciplinas,
+                            timeAgo: formatTimeAgo(post.tempoDesdeCriacao),
+                            content: post.enunciado,
+                            codeSnippet: post.codigo,
+                          );
+                        },
+                      );
+                    }
+                  },
                 ),
               );
             },
@@ -130,41 +161,41 @@ class MyApp extends StatelessWidget {
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => NewQuestionPage(),
-            ),
-          );
-        },
-        child: Icon(Icons.add),
+        onPressed: () {},
+        child: const Icon(Icons.add),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
-      //bottomNavigationBar: BottomNavigationBar(
-      //  items: const [
-      //    BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-      // ],
-      //),
     );
   }
 }
 
 class CategoryChip extends StatelessWidget {
   final String label;
+  final int disciplineId;
+  final VoidCallback onTap;
 
-  const CategoryChip({required this.label});
+  const CategoryChip({
+    required this.label,
+    required this.disciplineId,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Chip(
-        label: Text(label, style: const TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-        shape: const StadiumBorder(side: BorderSide(color: Colors.white)),
+      child: GestureDetector(
+        onTap: onTap, // Ação ao clicar no chip
+        child: Chip(
+          label: Text(
+            label,
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+          shape: const StadiumBorder(side: BorderSide(color: Colors.white)),
+        ),
       ),
     );
   }
@@ -175,12 +206,14 @@ class PostCard extends StatelessWidget {
   final String category;
   final String timeAgo;
   final String content;
+  final String? image;
   final String? codeSnippet;
 
   PostCard({
     required this.username,
     required this.category,
     required this.timeAgo,
+    required this.image,
     required this.content,
     this.codeSnippet,
   });
@@ -220,8 +253,7 @@ class PostCard extends StatelessWidget {
             Text(content),
             if (codeSnippet != null)
               Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 8.0), //horizontal: 8.0 não ta querendo
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
                 padding: const EdgeInsets.all(8.0),
                 color: Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
@@ -233,11 +265,12 @@ class PostCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.chat_bubble),
-                  label: const Text('Responder'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1))),
+                onPressed: () {},
+                icon: const Icon(Icons.chat_bubble),
+                label: const Text('Responder'),
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(61, 112, 128, 1)),
+              ),
             ),
           ],
         ),

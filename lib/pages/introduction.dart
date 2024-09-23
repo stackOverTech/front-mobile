@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
+import 'package:one/pages/cadaster.dart';
 import 'package:one/pages/home.dart';
 
 class IntroductionPage extends StatelessWidget {
