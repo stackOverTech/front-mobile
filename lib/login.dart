@@ -45,13 +45,8 @@ class LoginPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => CadasterPage()));
                 },
                 style: ButtonStyle(
-<<<<<<< HEAD
-                  foregroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(211, 0, 0, 0))
-                ),
-=======
                     foregroundColor: MaterialStateProperty.all<Color>(
                         Color.fromARGB(211, 0, 0, 0))),
->>>>>>> b8d7f8723ba8dab80063203e6b4e729742e1f6bd
                 child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
@@ -76,14 +71,8 @@ class LoginPage extends StatelessWidget {
                   'Esqueci minha senha',
                   style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
-<<<<<<< HEAD
-                      decoration: TextDecoration.underline
-                    ),
-                  ),
-=======
                       decoration: TextDecoration.underline),
                 ),
->>>>>>> b8d7f8723ba8dab80063203e6b4e729742e1f6bd
               ),
             ],
           ),
@@ -92,7 +81,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
 
 class DefaultBtn extends StatelessWidget{
   final String text;
@@ -120,5 +108,3 @@ class DefaultBtn extends StatelessWidget{
     );
   }
 }
-=======
->>>>>>> b8d7f8723ba8dab80063203e6b4e729742e1f6bd
