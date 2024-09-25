@@ -9,8 +9,11 @@ class MonitoringPage extends StatelessWidget {
         children: [
           // Cabeçalho com o nome do usuário e saudação
           Container(
-            padding: EdgeInsets.all(16.0),
-            color: const Color.fromRGBO(61, 112, 128, 1),
+            padding: const EdgeInsets.all(16.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              color: const Color.fromRGBO(61, 112, 128, 1),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -21,31 +24,30 @@ class MonitoringPage extends StatelessWidget {
                   title: const Text(
                     'One',
                     style: TextStyle(
-                      fontFamily: "Righteous",
-                      fontSize: 24,
-                      color: Colors.white
-                    ),
+                        fontFamily: "Righteous",
+                        fontSize: 24,
+                        color: Colors.white),
                   ),
                   actions: [
                     IconButton(
                       icon: const Icon(Icons.search),
+                      color: Colors.white,
                       onPressed: () {},
                     ),
                   ],
                 ),
-                SizedBox(height: 16),
-                Text(
-                  'Taylor, sua monitoria te espera :)',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
               ],
             ),
           ),
-
+          SizedBox(height: 14),
+          Text(
+            'Taylor, sua \nmonitoria te \nespera :)',
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: const Color(0xFF2C313A),
+            ),
+          ),
           // Disciplinas existentes
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -110,33 +112,30 @@ class MonitoringPage extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
-            1, 
-        onTap: (int index) {
-          if (index == 0) {
-            // Verifica se o item "home" foi clicado
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    HomePage(), 
-              ),
-            );
-          }
-        }, 
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
-        unselectedItemColor: Colors.white,
-        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
-        elevation: 10,
-        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        type: BottomNavigationBarType.fixed
-      ),
+          currentIndex: 1,
+          onTap: (int index) {
+            if (index == 0) {
+              // Verifica se o item "home" foi clicado
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HomePage(),
+                ),
+              );
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+          ],
+          selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+          unselectedItemColor: Colors.white,
+          backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+          elevation: 10,
+          selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          type: BottomNavigationBarType.fixed),
     );
   }
 }

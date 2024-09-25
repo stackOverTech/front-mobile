@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:one/introduction.dart';
-import 'package:one/login.dart';
 
 class CadasterPage extends StatelessWidget {
   @override
