@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one/home.dart';
+import 'package:one/pages/home.dart';
 
 class MonitoringPage extends StatelessWidget {
   @override
@@ -9,16 +9,17 @@ class MonitoringPage extends StatelessWidget {
         children: [
           // Cabeçalho com o nome do usuário e saudação
           Container(
+            //  decoration: BoxDecoration(
+            //   borderRadius: BorderRadius.circular(20),
+            //   color: const Color.fromRGBO(61, 112, 128, 1),
+            //  ),
             padding: const EdgeInsets.all(16.0),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20),
-              color: const Color.fromRGBO(61, 112, 128, 1),
-            ),
+            color: const Color.fromRGBO(61, 112, 128, 1),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
-                  automaticallyImplyLeading: false, // remove o botão de back
+                  automaticallyImplyLeading: false, 
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   elevation: 0,
                   title: const Text(
