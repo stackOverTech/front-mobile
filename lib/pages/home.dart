@@ -21,10 +21,12 @@ class HomePage extends StatelessWidget {
                       title: const Text(
                         'One',
                         style: TextStyle(height: 24, fontFamily: "Righteous"),
+                        style: TextStyle(height: 24, fontFamily: "Righteous"),
                       ),
                       actions: [
                         IconButton(
                           icon: const Icon(Icons.search),
+                          onPressed: () {},
                           onPressed: () {},
                         ),
                       ],
@@ -43,6 +45,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 8),
+                    const SizedBox(height: 8),
                   ],
                 ),
               ),
@@ -55,6 +58,8 @@ class HomePage extends StatelessWidget {
           ),
           DraggableScrollableSheet(
             //elemento arrastável e scrollavel de listagem dos posts
+          DraggableScrollableSheet(
+            //elemento arrastável e scrollavel de listagem dos posts
             initialChildSize: 0.85,
             minChildSize: 0.85,
             maxChildSize: 1.0,
@@ -62,6 +67,8 @@ class HomePage extends StatelessWidget {
               return Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
+                  borderRadius:
+                      BorderRadius.vertical(top: Radius.circular(16.0)),
                   borderRadius:
                       BorderRadius.vertical(top: Radius.circular(16.0)),
                   boxShadow: [
@@ -122,6 +129,17 @@ class MyApp extends StatelessWidget {
                       timeAgo: '1d',
                       content: 'Lorem ipsum dolor sit amet consectetur...',
                     ),
+                    PostCard(
+                      username: 'lena',
+                      category: 'TCC',
+                      timeAgo: '2d',
+                      content:
+                          'Como é que se fala "eu te odeio" em libras mesmo?',
+                      codeSnippet: '''
+print("i hate you")
+hate()
+                      ''',
+                    ),
                   ],
                 ),
               );
@@ -134,23 +152,45 @@ class MyApp extends StatelessWidget {
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => NewQuestionPage(),
+              builder: (context) => NewQuestionPage(),
             ),
           );
         },
         child: Icon(Icons.add),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
-      //bottomNavigationBar: BottomNavigationBar(
-      //  items: const [
-      //    BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-      //    BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-      // ],
-      //),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex:
+            0, 
+        onTap: (int index) {
+          if (index == 1) {
+            // Verifica se o item "people" foi clicado
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) =>
+                    MonitoringPage(), 
+              ),
+            );
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        ],
+        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+         unselectedItemColor: Colors.white,
+        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+        elevation: 10,
+        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        type: BottomNavigationBarType.fixed
+      ),
     );
   }
 }
+
 
 class CategoryChip extends StatelessWidget {
   final String label;
@@ -212,6 +252,14 @@ class PostCard extends StatelessWidget {
                     Text(timeAgo,
                         style: const TextStyle(
                             color: Color.fromRGBO(91, 94, 85, 1))),
+                    Text(username,
+                        style: const TextStyle(fontWeight: FontWeight.bold)),
+                    Text(category,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(97, 46, 88, 1))),
+                    Text(timeAgo,
+                        style: const TextStyle(
+                            color: Color.fromRGBO(91, 94, 85, 1))),
                   ],
                 ),
               ],
@@ -222,8 +270,10 @@ class PostCard extends StatelessWidget {
               Container(
                 margin: const EdgeInsets.symmetric(
                     vertical: 8.0), //horizontal: 8.0 não ta querendo
+                margin: const EdgeInsets.symmetric(
+                    vertical: 8.0), //horizontal: 8.0 não ta querendo
                 padding: const EdgeInsets.all(8.0),
-                color: Color.fromRGBO(202, 202, 202, 1),
+                color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
                   codeSnippet!,
                   style: const TextStyle(fontFamily: 'monospace'),
@@ -233,6 +283,11 @@ class PostCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
+                  onPressed: () {},
+                  icon: const Icon(Icons.chat_bubble),
+                  label: const Text('Responder'),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1))),
                   onPressed: () {},
                   icon: const Icon(Icons.chat_bubble),
                   label: const Text('Responder'),

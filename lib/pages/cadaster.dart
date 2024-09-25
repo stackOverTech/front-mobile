@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/introduction.dart';
 
 class CadasterPage extends StatelessWidget {
