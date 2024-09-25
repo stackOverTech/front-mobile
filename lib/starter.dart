@@ -29,7 +29,7 @@ class StarterPage extends StatelessWidget {
                       Color.fromARGB(211, 0, 0, 0)),
                 ),
                 child: const Text(
-                    'Crie uma conta ou entre em\n          uma já existente.'),
+                    'Crie uma conta ou entre em\numa já existente.'),
               ),
               const SizedBox(height: 40),
               DefaultBtn(text: "Cadastrar", page: SignUpPage()),

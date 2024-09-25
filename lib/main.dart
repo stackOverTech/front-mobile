@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one/pages/cadaster.dart';
 import 'package:one/pages/login.dart';
 import 'package:one/starter.dart';
+import 'package:one/pages/conect.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,7 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: Conect( // Envolve a tela principal com Conect
+        child: SplashScreen(),
+      ),
     );
   }
 }
@@ -51,7 +54,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 400,
               width: 250,
             ),
-            const SizedBox(height: 200),
+            const SizedBox(height: 100),
             Image.asset('android/app/src/main/res/drawable/charging.gif'),
           ],
         ),
