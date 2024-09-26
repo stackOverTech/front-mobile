@@ -20,15 +20,19 @@ class HomePage extends StatelessWidget {
                       backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                       elevation: 0,
                       title: const Text(
-                        'One',
-                        style: TextStyle(height: 24, fontFamily: "Righteous"),
-                      ),
-                      actions: [
-                        IconButton(
-                          icon: const Icon(Icons.search),
-                          onPressed: () {},
-                        ),
-                      ],
+                    'One',
+                    style: TextStyle(
+                        fontFamily: "Righteous",
+                        fontSize: 24,
+                        color: Colors.white),
+                  ),
+                  actions: [
+                    IconButton(
+                      icon: const Icon(Icons.search),
+                      color: Colors.white,
+                      onPressed: () {},
+                    ),
+                  ],
                     ),
                     const SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -56,9 +60,9 @@ class HomePage extends StatelessWidget {
           ),
           DraggableScrollableSheet(
             //elemento arrastável e scrollavel de listagem dos posts
-            initialChildSize: 0.85,
-            minChildSize: 0.85,
-            maxChildSize: 1.0,
+            initialChildSize: 0.75,
+            // minChildSize: 0.85,
+            // maxChildSize: 1.0,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: const BoxDecoration(
