@@ -4,6 +4,7 @@ import 'package:one/models/disciplinas.model.dart';
 import 'package:one/models/pergunta.model.dart';
 import 'package:one/functions/get-posts.dart';
 import 'package:one/functions/get-disciplines.dart';
+import 'package:one/helpers/appcolors.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,7 +23,9 @@ String formatTimeAgo(int tempoDesdeCriacao) {
 class _HomePageState extends State<HomePage> {
   late Future<List<Pergunta>> _postsFuture;
   late Future<List<Disciplina>> _disciplinasFuture;
-  String? _disciplinaSelecionada; // Para armazenar a disciplina selecionada
+  String? _disciplinaSelecionada;
+  bool _isSearching = false; // Estado da pesquisa
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -37,6 +40,15 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  void _toggleSearch() {
+    setState(() {
+      _isSearching = !_isSearching;
+      if (!_isSearching) {
+        _searchController.clear();
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,14 +56,36 @@ class _HomePageState extends State<HomePage> {
         automaticallyImplyLeading: false,
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
         elevation: 0,
-        title: const Text(
-          'One',
-          style: TextStyle(height: 24, fontFamily: "Righteous"),
+        title: Row(
+          children: [
+            const Text(
+              'One',
+              style: TextStyle(height: 24, fontFamily: "Righteous"),
+            ),
+            const SizedBox(width: 8), // Espaço entre o título e o campo de pesquisa
+            if (_isSearching)
+              Expanded(
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    hintText: 'Quer procurar algo?',
+                    filled: true,
+                    fillColor: AppColors.LIGHT_COLOR,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    hintStyle: const TextStyle(color: AppColors.BACKGROUND_COLOR),
+                  ),
+                  style: const TextStyle(color: AppColors.BACKGROUND_COLOR),
+                ),
+              ),
+          ],
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
+            icon: Icon(_isSearching ? Icons.close : Icons.search),
+            onPressed: _toggleSearch,
           ),
         ],
       ),
@@ -66,16 +100,12 @@ class _HomePageState extends State<HomePage> {
                     FutureBuilder<List<Disciplina>>(
                       future: _disciplinasFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
                           return Center(child: Text('Erro: ${snapshot.error}'));
-                        } else if (!snapshot.hasData ||
-                            snapshot.data!.isEmpty) {
-                          return const Center(
-                              child: Text('Nenhuma disciplina disponível.'));
+                        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                          return const Center(child: Text('Nenhuma disciplina disponível.'));
                         } else {
                           final disciplinas = snapshot.data!;
                           return SingleChildScrollView(
@@ -84,10 +114,8 @@ class _HomePageState extends State<HomePage> {
                               children: disciplinas.map((disciplina) {
                                 return CategoryChip(
                                   label: disciplina.nome,
-                                  disciplineId:
-                                      disciplina.id, // Passa o ID da disciplina
-                                  onTap: () => _buscarPerguntasPorDisciplina(
-                                      disciplina.id), // Chama a função com o ID
+                                  disciplineId: disciplina.id,
+                                  onTap: () => _buscarPerguntasPorDisciplina(disciplina.id),
                                 );
                               }).toList(),
                             ),
@@ -114,8 +142,7 @@ class _HomePageState extends State<HomePage> {
               return Container(
                 decoration: const BoxDecoration(
                   color: Colors.white,
-                  borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black26,
@@ -133,8 +160,7 @@ class _HomePageState extends State<HomePage> {
                     } else if (snapshot.hasError) {
                       return Center(child: Text('Erro: ${snapshot.error}'));
                     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                      return Center(
-                          child: Text('Nenhuma pergunta disponível.'));
+                      return Center(child: Text('Nenhuma pergunta disponível.'));
                     } else {
                       final posts = snapshot.data!;
                       return ListView.builder(
@@ -185,7 +211,7 @@ class CategoryChip extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: GestureDetector(
-        onTap: onTap, // Ação ao clicar no chip
+        onTap: onTap,
         child: Chip(
           label: Text(
             label,
