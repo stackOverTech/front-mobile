@@ -1,19 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: FeedbackMonitors(),
-    );
-  }
-}
-
 class FeedbackMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
@@ -223,8 +210,6 @@ void _sendFeedback(BuildContext context) {
   });
 }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -345,7 +330,7 @@ void _sendFeedback(BuildContext context) {
                         const SizedBox(height: 10),
                         TextField(
                           controller: _feedbackController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
                             border: OutlineInputBorder(),
                           ),

@@ -2,21 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/feedback_monitors.dart';
 import 'package:one/pages/apointmant_monitor.dart';
-import 'package:intl/date_symbol_data_local.dart';
-
-
-void main() {
-  initializeDateFormatting().then((_) => runApp(MyApp()));
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ViewMonitors(),
-    );
-  }
-}
 
 class ViewMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
