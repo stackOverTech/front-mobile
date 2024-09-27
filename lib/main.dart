@@ -3,9 +3,11 @@ import 'package:one/pages/cadaster.dart';
 import 'package:one/pages/login.dart';
 import 'package:one/starter.dart';
 import 'package:one/pages/conect.dart';
+import 'package:one/helpers/appcolors.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Conect( // Envolve a tela principal com Conect
+      home: Conect(
         child: SplashScreen(),
       ),
     );
@@ -34,7 +36,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
-    // ignore: use_build_context_synchronously
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(builder: (context) => StarterPage()),
@@ -86,7 +87,7 @@ class SignUpPage extends StatelessWidget {
               const TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
+                  labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -95,7 +96,7 @@ class SignUpPage extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
+                  labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -103,8 +104,8 @@ class SignUpPage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(211, 0, 0, 0))),
+                    foregroundColor: WidgetStateProperty.all<Color>(
+                        AppColors.BLACK_TEXT)),
                 child: const Text('Já tem uma conta? Faça seu login'),
               ),
               const SizedBox(height: 20),
@@ -115,7 +116,7 @@ class SignUpPage extends StatelessWidget {
                 child: const Text(
                   'Ajuda',
                   style: TextStyle(
-                      color: Color.fromRGBO(61, 112, 128, 1),
+                      color: AppColors.BLUE_AGENDA,
                       decoration: TextDecoration.underline),
                 ),
               ),

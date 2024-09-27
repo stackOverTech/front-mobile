@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/pages/cadaster.dart';
 import 'package:one/pages/home.dart';
+import 'package:one/helpers/appcolors.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -25,7 +26,7 @@ class LoginPage extends StatelessWidget {
               const TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
+                  labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -34,7 +35,7 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
+                  labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -45,8 +46,8 @@ class LoginPage extends StatelessWidget {
                       MaterialPageRoute(builder: (context) => CadasterPage()));
                 },
                 style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(211, 0, 0, 0))),
+                    foregroundColor: WidgetStateProperty .all<Color>(
+                        AppColors.BLACK_TEXT)),
                 child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
