@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';
 
@@ -161,13 +162,22 @@ hate()
             0, 
         onTap: (int index) {
           if (index == 1) {
-            // Verifica se o item "people" foi clicado
+            // Verifica se o item "book" foi clicado
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) =>
                     MonitoringPage(), 
               ),
             );
+          }
+          if (index == 2) {
+            // Verifica se o item "group" foi clicado
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) =>
+            //         GroupPage(), 
+            //   ),
+            // );
           }
         },
         items: const [

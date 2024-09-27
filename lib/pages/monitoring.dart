@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 
 class MonitoringPage extends StatelessWidget {
@@ -36,36 +37,35 @@ class MonitoringPage extends StatelessWidget {
           ),
           Expanded(
             child: Container(
-              decoration: BoxDecoration(
-                color: const Color.fromRGBO(253, 253, 253, 1.0),
-                borderRadius: const BorderRadius.only(
-                  topLeft:
-                      Radius.circular(20), 
-                  topRight:
-                      Radius.circular(20), 
+              decoration: const BoxDecoration(
+                color: Color.fromRGBO(253, 253, 253, 1.0),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromRGBO(61, 112, 128, 1),
+                    color: Color.fromRGBO(61, 112, 128, 1),
                     spreadRadius: 12,
                     offset: Offset(0, 3),
                   ),
                 ],
               ),
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
+                  const Text(
                     'Taylor, sua \nmonitoria te \nespera :)',
                     style: TextStyle(
                       fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF2C313A),
+                      fontFamily: "inter",
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF2C313A),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 24.0),
+                    padding: EdgeInsets.only(top: 24.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -77,18 +77,75 @@ class MonitoringPage extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SubjectCard(
-                              title: 'Matemática',
-                              color: const Color(0xFFBB4C53),
-                            ),
-                            SubjectCard(
-                              title: 'História',
-                              color: const Color(0xFF7E4987),
-                            ),
-                          ],
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         MathematicsPage(), // Substituir pela página correta
+                                  //   ),
+                                  // );
+                                },
+                                child: SubjectCard(
+                                  title: 'Matemática',
+                                  color: Color(0xFFBB4C53),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         HistoryPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: SubjectCard(
+                                  title: 'História',
+                                  color: Color(0xFF7E4987),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         ScheduleMonitoringPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: SubjectCard(
+                                  title: 'DAD',
+                                  color: Color(0xFF305A77),
+                                ),
+                              ),
+                              SizedBox(width: 16),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         ScheduleMonitoringPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: SubjectCard(
+                                  title: 'Português',
+                                  color: Color(0xFFD27051),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -98,30 +155,71 @@ class MonitoringPage extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
+                        const Text(
                           'Disciplinas que recebo monitoria',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 16),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            SubjectCard(
-                              title: 'DAD',
-                              color: const Color(0xFF305A77),
-                            ),
-                            SubjectCard(
-                              title: 'Português',
-                              color: const Color(0xFFD27051),
-                            ),
-                          ],
-                        ),
+                        const SizedBox(height: 16),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         ScheduleMonitoringPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: const SubjectCard(
+                                  title: 'DAD',
+                                  color: Color(0xFF305A77),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         ScheduleMonitoringPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: const SubjectCard(
+                                  title: 'Português',
+                                  color: Color(0xFFD27051),
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              InkWell(
+                                onTap: () {
+                                  // Navigator.push(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) =>
+                                  //         ScheduleMonitoringPage(), 
+                                  //   ),
+                                  // );
+                                },
+                                child: const SubjectCard(
+                                  title: 'Matemática',
+                                  color: Color(0xFFBB4C53),
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
                       ],
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
@@ -137,6 +235,13 @@ class MonitoringPage extends StatelessWidget {
                 builder: (context) => HomePage(),
               ),
             );
+          }
+          if (index == 2) {
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => GroupPage(),
+            //   ),
+            // );
           }
         },
         items: const [
@@ -175,7 +280,7 @@ class SubjectCard extends StatelessWidget {
       child: Center(
         child: Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
