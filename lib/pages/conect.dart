@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:one/helpers/appcolors.dart';
 
 class Conect extends StatefulWidget {
-  final Widget child; // Widget que será envolvido pelo Conect
+  final Widget child;
 
   const Conect({Key? key, required this.child}) : super(key: key);
 
@@ -18,9 +19,7 @@ class _ConectState extends State<Conect> {
   @override
   void initState() {
     super.initState();
-    // Checa a conectividade inicial
     _checkInitialConnection();
-    // Escuta mudanças de conectividade
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       verificarConexao(result);
     });
@@ -36,6 +35,15 @@ class _ConectState extends State<Conect> {
     setState(() {
       isConnected = conectado;
     });
+    
+    // Se estiver conectado, recarregar a tela
+    if (conectado) {
+      // Isso pode ser uma navegação, ou apenas um setState para reconstruir o widget
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => widget.child),
+        (Route<dynamic> route) => false,
+      );
+    }
   }
 
   @override
@@ -48,7 +56,7 @@ class _ConectState extends State<Conect> {
   Widget build(BuildContext context) {
     if (!isConnected) {
       return Scaffold(
-        backgroundColor: Color(0xFFF0F0F0),
+        backgroundColor: AppColors.BACKGROUND_COLOR,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -61,21 +69,22 @@ class _ConectState extends State<Conect> {
                   fit: BoxFit.fitHeight,
                 ),
               ),
-              SizedBox(height: 16),
-              Text(
-                'Ops... Parece que você está sem internet',
-                style: TextStyle(fontSize: 24, color: Color(0xFF555555)),
+              const SizedBox(height: 30),
+              const Text(
+                'Ops... Parece que você \nestá sem internet',
+                style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
+                textAlign: TextAlign.center,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 120),
               ElevatedButton(
                 onPressed: () {
                   _checkInitialConnection();
                 },
                 style: ElevatedButton.styleFrom(
-                backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                minimumSize: const Size(double.infinity, 50),
-              ),
-                child: Text('Tentar Novamente'),
+                  backgroundColor: AppColors.MEDIUM_COLOR,
+                  minimumSize: const Size(262, 55),
+                ),
+                child: const Text('Tentar Novamente', style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
               ),
             ],
           ),
