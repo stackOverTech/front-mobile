@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one/main.dart';
 import 'package:one/pages/login.dart';
+import 'package:one/signup.dart';
 
 class StarterPage extends StatelessWidget {
   @override
