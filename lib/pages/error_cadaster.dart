@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/pages/cadaster.dart';
+import 'package:one/helpers/appcolors.dart';
 
 class ErrorScreen extends StatefulWidget {
   @override
@@ -14,7 +15,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   }
 
   void _navigateToCadasterAfterDelay() {
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 5), () {
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -27,7 +28,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF4F4F4),
+      backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -40,9 +41,10 @@ class _ErrorScreenState extends State<ErrorScreen> {
                 fit: BoxFit.fitHeight,
               ),
             ),
-            Text(
+            const SizedBox(height: 30),
+            const Text(
               'Erro ao cadastrar',
-              style: TextStyle(fontSize: 24, color: Color(0xFF333333)),
+              style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
             ),
           ],
         ),
