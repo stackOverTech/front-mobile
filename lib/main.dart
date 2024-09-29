@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:one/pages/cadaster.dart';
 import 'package:one/pages/login.dart';
 import 'package:one/starter.dart';
+import 'package:one/pages/conect.dart';
+import 'package:one/helpers/appcolors.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: Conect(
+        child: SplashScreen(),
+      ),
     );
   }
 }
@@ -31,6 +36,7 @@ class SplashScreenState extends State<SplashScreen> {
 
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
+<<<<<<< HEAD
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
@@ -38,6 +44,12 @@ class SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => StarterPage()),
       );
     });
+=======
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => StarterPage()),
+    );
+>>>>>>> 9e987e29a555d9f6856f7765403d52f7f7aedd74
   }
 
   // _navigateToLogin() async {
@@ -62,7 +74,7 @@ class SplashScreenState extends State<SplashScreen> {
               height: 400,
               width: 250,
             ),
-            const SizedBox(height: 200),
+            const SizedBox(height: 100),
             Image.asset('android/app/src/main/res/drawable/charging.gif'),
           ],
         ),
