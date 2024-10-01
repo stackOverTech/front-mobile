@@ -28,6 +28,9 @@ flutter:
   assets:
   - android\app\src\main\res\drawable\onelogo.png
   - android\app\src\main\res\drawable\charging.gif
+  - android\app\src\main\res\drawable\osbrabosdojava.png
+  - android\app\src\main\res\drawable\thebrabos.png
+  - android\app\src\main\res\drawable\grupodeestudos.png
 
 
   uses-material-design: true
