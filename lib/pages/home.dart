@@ -172,12 +172,12 @@ hate()
           }
           if (index == 2) {
             // Verifica se o item "group" foi clicado
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) =>
-            //         GroupPage(), 
-            //   ),
-            // );
+             Navigator.of(context).push(
+               MaterialPageRoute(
+                 builder: (context) =>
+                     GroupPage(), 
+               ),
+             );
           }
         },
         items: const [

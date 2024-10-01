@@ -237,11 +237,11 @@ class MonitoringPage extends StatelessWidget {
             );
           }
           if (index == 2) {
-            // Navigator.of(context).push(
-            //   MaterialPageRoute(
-            //     builder: (context) => GroupPage(),
-            //   ),
-            // );
+             Navigator.of(context).push(
+               MaterialPageRoute(
+                 builder: (context) => GroupPage(),
+               ),
+             );
           }
         },
         items: const [
