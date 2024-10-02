@@ -34,8 +34,8 @@ class GroupPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(253, 253, 253, 1.0),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
                 boxShadow: [
                   BoxShadow(
@@ -54,7 +54,7 @@ class GroupPage extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 24,
                       fontFamily: "inter",
-                      fontWeight: FontWeight.w700,
+                      fontWeight: FontWeight.w600,
                       color: Color(0xFF2C313A),
                     ),
                   ),
@@ -70,13 +70,23 @@ class GroupPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   ListTile(
-                    leading: CircleAvatar(
+                    leading: const CircleAvatar(
+                      radius: 24,
                       backgroundImage: AssetImage(
                           'android/app/src/main/res/drawable/grupodeestudos.png'),
                     ),
-                    title: const Text('grupo dos estudiosos'),
+                    title: const Text(
+                      'grupo dos estudiosos',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                     subtitle: const Text('DAD'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 24,
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                    ),
                     onTap: () {
                       // Ação ao clicar no grupo
                     },
@@ -94,36 +104,66 @@ class GroupPage extends StatelessWidget {
                   const SizedBox(height: 8),
                   ListTile(
                     leading: CircleAvatar(
+                      radius: 24,
                       backgroundImage: AssetImage(
                           'android/app/src/main/res/drawable/grupodeestudos.png'),
                     ),
-                    title: const Text('grupo dos estudiosos'),
+                    title: const Text(
+                      'grupo dos estudiosos',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                     subtitle: const Text('DAD'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 24,
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                    ),
                     onTap: () {
                       // Ação ao clicar no grupo
                     },
                   ),
                   ListTile(
                     leading: CircleAvatar(
+                      radius: 24,
                       backgroundImage: AssetImage(
                           'android/app/src/main/res/drawable/osbrabosdojava.png'),
                     ),
-                    title: const Text('os brabos do java'),
+                    title: const Text(
+                      'os brabos do java',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                     subtitle: const Text('POO'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 24,
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                    ),
                     onTap: () {
                       // Ação ao clicar no grupo
                     },
                   ),
                   ListTile(
                     leading: CircleAvatar(
+                      radius: 24,
                       backgroundImage: AssetImage(
                           'android/app/src/main/res/drawable/thebrabos.png'),
                     ),
-                    title: const Text('the brabos'),
+                    title: const Text(
+                      'the brabos',
+                      style: TextStyle(
+                        fontSize: 18,
+                      ),
+                    ),
                     subtitle: const Text('Inglês'),
-                    trailing: const Icon(Icons.arrow_forward_ios, size: 16),
+                    trailing: const Icon(
+                      Icons.arrow_forward_ios,
+                      size: 24,
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                    ),
                     onTap: () {
                       // Ação ao clicar no grupo
                     },
@@ -138,26 +178,35 @@ class GroupPage extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 70.0),
-            child: FloatingActionButton.extended(
-              onPressed: () {
-                // Ação ao criar grupo
-              },
-              backgroundColor: Colors.grey[600],
-              foregroundColor: Colors.white,
-              label: const Text('Crie um grupo'),
-              icon: const SizedBox(),
+            padding: const EdgeInsets.only(right: 60.0),
+            child: ConstrainedBox(
+              constraints: BoxConstraints.tightFor(
+                  width: 120),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  // Ação ao criar grupo
+                },
+                backgroundColor: Colors.grey[600],
+                foregroundColor: Colors.white,
+                label: const Text(
+                  'Crie um grupo',
+                  style: TextStyle(fontSize: 14),
+                ),
+              ),
             ),
           ),
           Positioned(
-            right: 8,
             child: FloatingActionButton(
               onPressed: () {
                 // Ação ao clicar no +
               },
               backgroundColor: const Color.fromRGBO(
-                  61, 112, 128, 1), // Cor do botão circular
-              child: const Icon(Icons.add), // Ícone de "+"
+                  61, 112, 128, 1), 
+              child: const Icon(
+                Icons.add,
+                color: Colors.white, // Cor do ícone "+"
+              ),
+              shape: const CircleBorder(),
             ),
           ),
         ],

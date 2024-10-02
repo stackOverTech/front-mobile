@@ -154,7 +154,11 @@ hate()
             ),
           );
         },
-        child: Icon(Icons.add),
+         child: const Icon(
+                Icons.add,
+                color: Colors.white, // Cor do ícone "+"
+              ),
+              shape: const CircleBorder(),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
       bottomNavigationBar: BottomNavigationBar(

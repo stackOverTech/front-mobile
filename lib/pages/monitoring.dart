@@ -40,8 +40,8 @@ class MonitoringPage extends StatelessWidget {
               decoration: const BoxDecoration(
                 color: Color.fromRGBO(253, 253, 253, 1.0),
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
                 ),
                 boxShadow: [
                   BoxShadow(
