@@ -32,6 +32,6 @@ flutter:
   - android\app\src\main\res\drawable\osbrabosdojava.png
   - android\app\src\main\res\drawable\thebrabos.png
   - android\app\src\main\res\drawable\grupodeestudos.png
-
+  - android\app\src\main\res\drawable\back_button.png
 
   uses-material-design: true

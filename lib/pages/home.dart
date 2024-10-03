@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/edit_profile.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';
@@ -183,6 +184,15 @@ hate()
                ),
              );
           }
+          if (index == 3) {
+            // Verifica se o item "person" foi clicado
+             Navigator.of(context).push(
+               MaterialPageRoute(
+                 builder: (context) =>
+                     ProfilePage(), 
+               ),
+             );
+          }
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
@@ -271,7 +281,7 @@ class PostCard extends StatelessWidget {
             if (codeSnippet != null)
               Container(
                 margin: const EdgeInsets.symmetric(
-                    vertical: 8.0), //horizontal: 8.0 não ta querendo
+                    vertical: 8.0), 
                 padding: const EdgeInsets.all(8.0),
                 color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(

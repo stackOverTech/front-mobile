@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/pages/home.dart';
 import 'package:one/pages/monitoring.dart';
+import 'package:one/pages/group_details.dart';
 
 class GroupPage extends StatelessWidget {
   @override
@@ -88,7 +89,11 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                      // Ação ao clicar no grupo
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => GroupDetailsPage(),
+                        ),
+                      );
                     },
                   ),
                   const SizedBox(height: 24),
@@ -180,8 +185,7 @@ class GroupPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 60.0),
             child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(
-                  width: 120),
+              constraints: BoxConstraints.tightFor(width: 120),
               child: FloatingActionButton.extended(
                 onPressed: () {
                   // Ação ao criar grupo
@@ -200,8 +204,7 @@ class GroupPage extends StatelessWidget {
               onPressed: () {
                 // Ação ao clicar no +
               },
-              backgroundColor: const Color.fromRGBO(
-                  61, 112, 128, 1), 
+              backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
               child: const Icon(
                 Icons.add,
                 color: Colors.white, // Cor do ícone "+"
