@@ -1,6 +1,26 @@
 import 'package:flutter/material.dart';
 
-class GroupDetailsPage extends StatelessWidget {
+class GroupDetailsPage extends StatefulWidget {
+  @override
+  _GroupDetailsPageState createState() => _GroupDetailsPageState();
+}
+
+class _GroupDetailsPageState extends State<GroupDetailsPage> {
+  String buttonText = 'Entrar no grupo'; 
+  Color buttonColor = const Color.fromRGBO(61, 112, 128, 1); 
+
+  void _toggleButton() {
+    setState(() {
+      if (buttonText == 'Entrar no grupo') {
+        buttonText = 'Sair do grupo'; 
+        buttonColor = Colors.grey; 
+      } else {
+        buttonText = 'Entrar no grupo'; 
+        buttonColor = const Color.fromRGBO(61, 112, 128, 1); 
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,20 +63,6 @@ class GroupDetailsPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // ListTile(
-                  //   title: Center(
-                  //     child: Column(
-                  //       children: [
-                  //         CircleAvatar(
-                  //           radius: 50, 
-                  //           backgroundImage: AssetImage(
-                  //             'android/app/src/main/res/drawable/grupodeestudos.png',
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ),
                   const SizedBox(height: 20),
                   Center(
                     child: const Text(
@@ -183,14 +189,12 @@ class GroupDetailsPage extends StatelessWidget {
             child: ConstrainedBox(
               constraints: const BoxConstraints.tightFor(width: 240),
               child: FloatingActionButton.extended(
-                onPressed: () {
-                  // Ação ao criar grupo
-                },
-                backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                onPressed: _toggleButton,
+                backgroundColor: buttonColor,
                 foregroundColor: Colors.white,
-                label: const Text(
-                  'Entrar no grupo',
-                  style: TextStyle(fontSize: 18),
+                label: Text(
+                  buttonText,
+                  style: const TextStyle(fontSize: 18),
                 ),
               ),
             ),
