@@ -11,28 +11,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  fluttertoast: ^8.2.1
   cupertino_icons: ^1.0.2
   http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  shared_preferences: ^2.0.13 
-
   flutter_lints: ^2.0.0
+  shared_preferences: ^2.0.13
 
 flutter:
   fonts:
     - family: Righteous
       fonts:
-        - asset: android\fonts\righ.ttf
+        - asset: android/fonts/righ.ttf
+        
   assets:
-  - android\app\src\main\res\drawable\onelogo.png
-  - android\app\src\main\res\drawable\charging.gif
-  - android\app\src\main\res\drawable\osbrabosdojava.png
-  - android\app\src\main\res\drawable\thebrabos.png
-  - android\app\src\main\res\drawable\grupodeestudos.png
-  - android\app\src\main\res\drawable\back_button.png
+    - android/app/src/main/res/drawable/onelogo.png
+    - android/app/src/main/res/drawable/charging.gif
+    - android/app/src/main/res/drawable/osbrabosdojava.png
+    - android/app/src/main/res/drawable/thebrabos.png
+    - android/app/src/main/res/drawable/grupodeestudos.png
+    - android/app/src/main/res/drawable/back_button.png
+    - android/app/src/main/res/drawable/back_button_grey.png
+    - android/app/src/main/res/drawable/task_alt.png
 
   uses-material-design: true
