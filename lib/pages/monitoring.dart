@@ -1,8 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 
-class MonitoringPage extends StatelessWidget {
+class MonitoringPage extends StatefulWidget {
+  @override
+  _MonitoringPageState createState() => _MonitoringPageState();
+}
+
+class _MonitoringPageState extends State<MonitoringPage> {
+  String _searchQuery = '';
+
+  void _onSearch(String query) {
+    setState(() {
+      _searchQuery = query;
+      // Atualiza a busca de perguntas
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,15 +35,14 @@ class MonitoringPage extends StatelessWidget {
                   title: const Text(
                     'One',
                     style: TextStyle(
-                        fontFamily: "Righteous",
-                        fontSize: 24,
-                        color: Colors.white),
+                      fontFamily: "Righteous",
+                      fontSize: 24,
+                      color: Colors.white,
+                    ),
                   ),
                   actions: [
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      color: Colors.white,
-                      onPressed: () {},
+                    SearchExpanded(
+                      onSearch: _onSearch,
                     ),
                   ],
                 ),
@@ -64,162 +78,81 @@ class MonitoringPage extends StatelessWidget {
                       color: Color(0xFF2C313A),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 24.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Disciplinas Existentes',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  const SizedBox(height: 24),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Disciplinas Existentes',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 24),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         MathematicsPage(), // Substituir pela página correta
-                                  //   ),
-                                  // );
-                                },
-                                child: SubjectCard(
-                                  title: 'Matemática',
-                                  color: Color(0xFFBB4C53),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         HistoryPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: SubjectCard(
-                                  title: 'História',
-                                  color: Color(0xFF7E4987),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         ScheduleMonitoringPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: SubjectCard(
-                                  title: 'DAD',
-                                  color: Color(0xFF305A77),
-                                ),
-                              ),
-                              SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         ScheduleMonitoringPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: SubjectCard(
-                                  title: 'Português',
-                                  color: Color(0xFFD27051),
-                                ),
-                              ),
-                            ],
-                          ),
+                      ),
+                      const SizedBox(height: 24),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SubjectCard(
+                              title: 'Matemática',
+                              color: const Color(0xFFBB4C53),
+                            ),
+                            const SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'História',
+                              color: const Color(0xFF7E4987),
+                            ),
+                            const SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'DAD',
+                              color: const Color(0xFF305A77),
+                            ),
+                            const SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'Português',
+                              color: const Color(0xFFD27051),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          'Disciplinas que recebo monitoria',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
+                  const SizedBox(height: 16),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Disciplinas que recebo monitoria',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(height: 16),
-                        SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         ScheduleMonitoringPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: const SubjectCard(
-                                  title: 'DAD',
-                                  color: Color(0xFF305A77),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         ScheduleMonitoringPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: const SubjectCard(
-                                  title: 'Português',
-                                  color: Color(0xFFD27051),
-                                ),
-                              ),
-                              const SizedBox(width: 16),
-                              InkWell(
-                                onTap: () {
-                                  // Navigator.push(
-                                  //   context,
-                                  //   MaterialPageRoute(
-                                  //     builder: (context) =>
-                                  //         ScheduleMonitoringPage(), 
-                                  //   ),
-                                  // );
-                                },
-                                child: const SubjectCard(
-                                  title: 'Matemática',
-                                  color: Color(0xFFBB4C53),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                      ),
+                      const SizedBox(height: 16),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            SubjectCard(
+                              title: 'DAD',
+                              color: const Color(0xFF305A77),
+                            ),
+                            const SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'Português',
+                              color: const Color(0xFFD27051),
+                            ),
+                            const SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'Matemática',
+                              color: const Color(0xFFBB4C53),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -235,13 +168,12 @@ class MonitoringPage extends StatelessWidget {
                 builder: (context) => HomePage(),
               ),
             );
-          }
-          if (index == 2) {
-             Navigator.of(context).push(
-               MaterialPageRoute(
-                 builder: (context) => GroupPage(),
-               ),
-             );
+          } else if (index == 2) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => GroupPage(),
+              ),
+            );
           }
         },
         items: const [
@@ -258,6 +190,69 @@ class MonitoringPage extends StatelessWidget {
         unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
         type: BottomNavigationBarType.fixed,
       ),
+    );
+  }
+}
+
+class SearchExpanded extends StatefulWidget {
+  final Function(String) onSearch;
+
+  const SearchExpanded({required this.onSearch});
+
+  @override
+  _SearchExpandedState createState() => _SearchExpandedState();
+}
+
+class _SearchExpandedState extends State<SearchExpanded> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearching = !_isSearching;
+      if (!_isSearching) {
+        _searchController.clear();
+        widget.onSearch('');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        if (_isSearching)
+          Container(
+            width: 280,
+            height: 35,
+            child: TextField(
+              controller: _searchController,
+              onChanged: widget.onSearch,
+              decoration: InputDecoration(
+                hintText: 'Quer procurar algo?',
+                filled: true,
+                fillColor: Color.fromRGBO(121, 147, 153, 100),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal:
+                        10.0), 
+                hintStyle: const TextStyle(color: Colors.white),
+              ),
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        IconButton(
+          icon: Icon(
+            _isSearching ? Icons.close : Icons.search,
+            color: Colors.white,
+          ),
+          onPressed: _toggleSearch,
+        ),
+      ],
     );
   }
 }
