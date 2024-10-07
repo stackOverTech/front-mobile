@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 
@@ -10,11 +9,28 @@ class MonitoringPage extends StatefulWidget {
 
 class _MonitoringPageState extends State<MonitoringPage> {
   String _searchQuery = '';
+  String userProfile = 'aluno';
+  String studentName = '';
+  String teacherName = '';
+  String monitorName = '';
 
   void _onSearch(String query) {
     setState(() {
       _searchQuery = query;
-      // Atualiza a busca de perguntas
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchNamesFromDatabase();
+  }
+
+  void fetchNamesFromDatabase() async {
+    setState(() {
+      studentName = 'Taylor';
+      teacherName = 'Grilo';
+      monitorName = 'Harry';
     });
   }
 
@@ -69,9 +85,13 @@ class _MonitoringPageState extends State<MonitoringPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Taylor, sua \nmonitoria te \nespera :)',
-                    style: TextStyle(
+                  Text(
+                    userProfile == 'aluno'
+                        ? '$studentName, sua \nmonitoria te \nespera :)'
+                        : userProfile == 'professor'
+                            ? '$teacherName, fique de olho no andamento das monitorias :)'
+                            : '$monitorName, fique de olho no andamento das suas monitorias :)',
+                    style: const TextStyle(
                       fontSize: 24,
                       fontFamily: "inter",
                       fontWeight: FontWeight.w600,
@@ -237,9 +257,7 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0,
-                    horizontal:
-                        10.0), 
+                    vertical: 10.0, horizontal: 10.0),
                 hintStyle: const TextStyle(color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),

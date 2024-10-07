@@ -186,12 +186,12 @@ hate()
           }
           if (index == 3) {
             // Verifica se o item "person" foi clicado
-             Navigator.of(context).push(
-               MaterialPageRoute(
-                 builder: (context) =>
-                     ProfilePage(), 
-               ),
-             );
+            //  Navigator.of(context).push(
+            //    MaterialPageRoute(
+            //      builder: (context) =>
+            //          ProfilePage(), 
+            //    ),
+            //  );
           }
         },
         items: const [
