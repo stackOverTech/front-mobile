@@ -181,16 +181,6 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ApointmantMonitor(
-                                monitorName: monitorInfo['nomesAlunos'][i],
-                              ),
-                            ),
-                          );
-                        },
                         child: Container(
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
@@ -234,24 +224,6 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class ApointmantMonitor extends StatelessWidget {
-  final String monitorName;
-
-  const ApointmantMonitor({required this.monitorName});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Agendar com $monitorName'),
-      ),
-      body: Center(
-        child: Text('Agendamento com o monitor $monitorName'),
       ),
     );
   }
