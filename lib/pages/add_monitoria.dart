@@ -1,22 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
-import 'package:one/pages/feedback_monitors.dart';
 import 'package:one/pages/edit_teacher_agenda.dart';
 import 'package:one/pages/view_teacher_agenda.dart';
-
-
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: AddMonitoria(),
-    );
-  }
-}
+import 'package:one/pages/view_feedback_monitors.dart';
 
 class AddMonitoria extends StatelessWidget {
   @override
@@ -82,7 +68,7 @@ class AddMonitoria extends StatelessWidget {
                         const Text(
                           'Visualize as monitorias\nagendadas:',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -119,7 +105,7 @@ class AddMonitoria extends StatelessWidget {
                         const Text(
                           'Edite sua agenda de monitorias:',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -156,7 +142,7 @@ class AddMonitoria extends StatelessWidget {
                         const Text(
                           'Ver feedbacks: ',
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
                         ElevatedButton(
@@ -164,7 +150,7 @@ class AddMonitoria extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => FeedbackMonitors()),
+                                  builder: (context) => ViewFeedbackMonitors()),
                             );
                           },
                           style: ElevatedButton.styleFrom(
