@@ -2,22 +2,7 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: ViewTeacherAgenda(),
-    );
-  }
-}
-
 class ViewTeacherAgenda extends StatefulWidget {
-  final String monitorName = 'Dado';
-
   @override
   _ViewTeacherAgendaState createState() => _ViewTeacherAgendaState();
 }
