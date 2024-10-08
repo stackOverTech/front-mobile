@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one/pages/edit_profile.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';

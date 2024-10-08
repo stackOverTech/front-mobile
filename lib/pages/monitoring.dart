@@ -8,17 +8,10 @@ class MonitoringPage extends StatefulWidget {
 }
 
 class _MonitoringPageState extends State<MonitoringPage> {
-  String _searchQuery = '';
-  String userProfile = 'aluno';
+  String userProfile = 'aluno'; 
   String studentName = '';
   String teacherName = '';
   String monitorName = '';
-
-  void _onSearch(String query) {
-    setState(() {
-      _searchQuery = query;
-    });
-  }
 
   @override
   void initState() {
@@ -34,36 +27,32 @@ class _MonitoringPageState extends State<MonitoringPage> {
     });
   }
 
+  void _onSearch(String query) {
+    print('Searching for: $query');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            padding: const EdgeInsets.all(0.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AppBar(
-                  automaticallyImplyLeading: false,
-                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                  title: const Text(
-                    'One',
-                    style: TextStyle(
-                      fontFamily: "Righteous",
-                      fontSize: 24,
-                      color: Colors.white,
-                    ),
-                  ),
-                  actions: [
-                    SearchExpanded(
-                      onSearch: _onSearch,
-                    ),
-                  ],
-                ),
-              ],
+          AppBar(
+            automaticallyImplyLeading: false,
+            backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+            title: const Text(
+              'One',
+              style: TextStyle(
+                fontFamily: "Righteous",
+                fontSize: 24,
+                color: Colors.white,
+              ),
             ),
+            actions: [
+              SearchExpanded(
+                onSearch: _onSearch,
+              ),
+            ],
           ),
           Expanded(
             child: Container(
@@ -89,8 +78,8 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     userProfile == 'aluno'
                         ? '$studentName, sua \nmonitoria te \nespera :)'
                         : userProfile == 'professor'
-                            ? '$teacherName, fique de olho no andamento das monitorias :)'
-                            : '$monitorName, fique de olho no andamento das suas monitorias :)',
+                            ? '$teacherName, fique de olho \nno andamento das \nmonitorias :)'
+                            : '$monitorName, fique de olho \nno andamento das \nsuas monitorias :)',
                     style: const TextStyle(
                       fontSize: 24,
                       fontFamily: "inter",
@@ -99,6 +88,44 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
+
+                  // Se for monitor, adiciona mais uma coluna de disciplinas
+                  if (userProfile == 'monitor') ...[
+                    const Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Agenda de monitorias',
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 16),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              SizedBox(width: 16),
+                              SubjectCard(
+                                title: 'Biologia',
+                                color: Color.fromARGB(255, 48, 119, 82),
+                              ),
+                              SizedBox(width: 16),
+                              SubjectCard(
+                                title: 'Geografia',
+                                color: Color.fromARGB(255, 119, 48, 81),
+                              ),
+                              SizedBox(width: 16),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                  ],
+
+                  // Disciplinas Existentes (Para todos os perfis)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -113,38 +140,53 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: [
+                          children: const [
                             SubjectCard(
                               title: 'Matemática',
-                              color: const Color(0xFFBB4C53),
+                              color: Color(0xFFBB4C53),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: 16),
                             SubjectCard(
                               title: 'História',
-                              color: const Color(0xFF7E4987),
+                              color: Color(0xFF7E4987),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: 16),
                             SubjectCard(
                               title: 'DAD',
-                              color: const Color(0xFF305A77),
+                              color: Color(0xFF305A77),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: 16),
                             SubjectCard(
                               title: 'Português',
-                              color: const Color(0xFFD27051),
+                              color: Color(0xFFD27051),
+                            ),
+                            SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'Biologia',
+                              color: Color.fromARGB(255, 48, 119, 82),
+                            ),
+                            SizedBox(width: 16),
+                            SubjectCard(
+                              title: 'Geografia',
+                              color: Color.fromARGB(255, 119, 48, 81),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
+
                   const SizedBox(height: 16),
+
+                  // Disciplinas que recebo monitoria (Para aluno e monitor)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
-                        'Disciplinas que recebo monitoria',
-                        style: TextStyle(
+                      Text(
+                        userProfile == 'professor'
+                            ? 'Disciplinas que você acompanha' // Para professor
+                            : 'Disciplinas que recebo monitoria', // Para aluno e monitor
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                         ),
@@ -153,20 +195,20 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: [
+                          children: const [
                             SubjectCard(
                               title: 'DAD',
-                              color: const Color(0xFF305A77),
+                              color: Color(0xFF305A77),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: 16),
                             SubjectCard(
                               title: 'Português',
-                              color: const Color(0xFFD27051),
+                              color: Color(0xFFD27051),
                             ),
-                            const SizedBox(width: 16),
+                            SizedBox(width: 16),
                             SubjectCard(
                               title: 'Matemática',
-                              color: const Color(0xFFBB4C53),
+                              color: Color(0xFFBB4C53),
                             ),
                           ],
                         ),
@@ -209,6 +251,35 @@ class _MonitoringPageState extends State<MonitoringPage> {
         selectedIconTheme: const IconThemeData(size: 24, weight: 24),
         unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
         type: BottomNavigationBarType.fixed,
+      ),
+    );
+  }
+}
+
+class SubjectCard extends StatelessWidget {
+  final String title;
+  final Color color;
+
+  const SubjectCard({required this.title, required this.color});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 150,
+      height: 100,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Text(
+          title,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }
@@ -271,35 +342,6 @@ class _SearchExpandedState extends State<SearchExpanded> {
           onPressed: _toggleSearch,
         ),
       ],
-    );
-  }
-}
-
-class SubjectCard extends StatelessWidget {
-  final String title;
-  final Color color;
-
-  const SubjectCard({required this.title, required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 100,
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(
-        child: Text(
-          title,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
     );
   }
 }
