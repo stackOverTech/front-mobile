@@ -148,20 +148,52 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => NewQuestionPage(),
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
+            child: ConstrainedBox(
+              constraints:
+                  const BoxConstraints.tightFor(width: 150, height: 40),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NewQuestionPage(),
+                    ),
+                  );
+                },
+                backgroundColor: Colors.grey[600],
+                foregroundColor: Colors.white,
+                label: const Text(
+                  'Faça sua pergunta',
+                  style: TextStyle(fontSize: 14),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
             ),
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.white, // Cor do ícone "+"
-        ),
-        shape: const CircleBorder(),
-        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+          ),
+          Positioned(
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NewQuestionPage(),
+                  ),
+                );
+              },
+              backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              shape: const CircleBorder(),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: 0,
@@ -337,13 +369,13 @@ class PostCard extends StatelessWidget {
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 6.0),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 6.0),
                   minimumSize: const Size(0, 0),
                 ).copyWith(
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0)
-                    ),
+                        borderRadius: BorderRadius.circular(8.0)),
                   ),
                 ),
               ),
@@ -398,7 +430,7 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
+                    vertical: 7.0, horizontal: 10.0),
                 hintStyle: const TextStyle(color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),

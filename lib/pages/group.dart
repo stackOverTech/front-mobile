@@ -196,7 +196,7 @@ class GroupPage extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 60.0, bottom: 6.0),
+            padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
             child: ConstrainedBox(
               constraints: const BoxConstraints.tightFor(width: 120, height: 40),
               child: FloatingActionButton.extended(
@@ -212,6 +212,9 @@ class GroupPage extends StatelessWidget {
                 label: const Text(
                   'Crie um grupo',  
                   style: TextStyle(fontSize: 14),
+                ),
+                 shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
             ),
