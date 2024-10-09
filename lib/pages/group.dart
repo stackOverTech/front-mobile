@@ -4,7 +4,22 @@ import 'package:one/pages/home.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/group_details.dart';
 
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: GroupPage(),
+    );
+  }
+}
+
 class GroupPage extends StatelessWidget {
+  final String role = 'teacher';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,10 +65,12 @@ class GroupPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 20),
-                  const Text(
-                    'Entre em um grupo \nde estudos :)',
-                    style: TextStyle(
+                  const SizedBox(height: 20),
+                  Text(
+                    (role == 'teacher')
+                        ? 'Veja os grupos de\nestudos que seus\nalunos estão criando :)'
+                        : 'Entre em um grupo \nde estudos :)',
+                    style: const TextStyle(
                       fontSize: 24,
                       fontFamily: "inter",
                       fontWeight: FontWeight.w600,
@@ -63,9 +80,56 @@ class GroupPage extends StatelessWidget {
                   const SizedBox(height: 24),
 
                   // Grupos que você já participa
-                  const Text(
-                    'Grupos que você já participa (1)',
-                    style: TextStyle(
+                  (role == 'teacher')
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : ListBody(
+                          children: [
+                            const Text(
+                              'Grupos que você já participa (1)',
+                              style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w500,
+                                  fontFamily: "inter"),
+                            ),
+                            const SizedBox(height: 8),
+                            ListTile(
+                              leading: const CircleAvatar(
+                                radius: 24,
+                                backgroundImage: AssetImage(
+                                    'android/app/src/main/res/drawable/grupodeestudos.png'),
+                              ),
+                              title: const Text(
+                                'grupo dos estudiosos',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                ),
+                              ),
+                              subtitle: const Text('DAD'),
+                              trailing: const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 24,
+                                color: Color.fromRGBO(61, 112, 128, 1),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => GroupDetailsPage(),
+                                  ),
+                                );
+                              },
+                            ),
+                          ],
+                        ),
+                  const SizedBox(height: 24),
+
+                  // Grupos que você ainda não participa
+                  Text(
+                    (role == 'teacher')
+                        ? 'Grupos (3)'
+                        : 'Grupos que você ainda não participa (3)',
+                    style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
                         fontFamily: "inter"),
@@ -97,43 +161,6 @@ class GroupPage extends StatelessWidget {
                       );
                     },
                   ),
-                  const SizedBox(height: 24),
-
-                  // Grupos que você ainda não participa
-                  const Text(
-                    'Grupos que você ainda não participa (3)',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: "inter"),
-                  ),
-                  const SizedBox(height: 8),
-                  ListTile(
-                    leading: CircleAvatar(
-                      radius: 24,
-                      backgroundImage: AssetImage(
-                          'android/app/src/main/res/drawable/grupodeestudos.png'),
-                    ),
-                    title: const Text(
-                      'grupo dos estudiosos',
-                      style: TextStyle(
-                        fontSize: 18,
-                      ),
-                    ),
-                    subtitle: const Text('DAD'),
-                    trailing: const Icon(
-                      Icons.arrow_forward_ios,
-                      size: 24,
-                      color: Color.fromRGBO(61, 112, 128, 1),
-                    ),
-                    onTap: () {
-                       Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => GroupDetailsPage(),
-                        ),
-                      );
-                    },
-                  ),
                   ListTile(
                     leading: CircleAvatar(
                       radius: 24,
@@ -153,7 +180,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -179,7 +206,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -192,7 +219,7 @@ class GroupPage extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: Stack(
+      floatingActionButton: (role == 'teacher') ? const SizedBox(height: 30,) : Stack(
         alignment: Alignment.bottomRight,
         children: [
           Padding(
@@ -202,10 +229,10 @@ class GroupPage extends StatelessWidget {
               child: FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                    MaterialPageRoute(
+                      builder: (context) => CreateGroupPage(),
+                    ),
+                  );
                 },
                 backgroundColor: Colors.grey[600],
                 foregroundColor: Colors.white,
@@ -220,10 +247,10 @@ class GroupPage extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                  MaterialPageRoute(
+                    builder: (context) => CreateGroupPage(),
+                  ),
+                );
               },
               backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
               child: const Icon(
