@@ -3,9 +3,9 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/feedback_monitors.dart';
 import 'package:one/pages/apointmant_monitor.dart';
 
-// subindo as telas 
-
 class ViewMonitors extends StatelessWidget {
+  final String role = 'teacher';
+
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
     String quantidadeMonitores = "4";
@@ -157,41 +157,48 @@ class ViewMonitors extends StatelessWidget {
                       ),
                     ),
                   const SizedBox(height: 30),
-                  Container(
-                    padding: const EdgeInsets.all(18.0),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Dê feedback para os monitores:',
-                          style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
-                        ),
-                        const SizedBox(height: 10),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => FeedbackMonitors()),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.MEDIUM_COLOR,
-                              minimumSize: const Size(262, 55)),
-                          child: const Text(
-                            'Feedback',
-                            style: TextStyle(
-                                color: AppColors.BACKGROUND_COLOR,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
+                  (role == 'teacher')
+                      ? const SizedBox(
+                          height: 0,
+                        )
+                      : Container(
+                          padding: const EdgeInsets.all(18.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                                color: AppColors.BLACK_TEXT, width: 1),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Column(
+                            children: [
+                              const Text(
+                                'Dê feedback para os monitores:',
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(height: 10),
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            FeedbackMonitors()),
+                                  );
+                                },
+                                style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.MEDIUM_COLOR,
+                                    minimumSize: const Size(262, 55)),
+                                child: const Text(
+                                  'Feedback',
+                                  style: TextStyle(
+                                      color: AppColors.BACKGROUND_COLOR,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  ),
                   const SizedBox(height: 30),
                   AddDisciplineButton(), // Adicionando o novo botão
                 ],
@@ -211,7 +218,7 @@ class AddDisciplineButton extends StatefulWidget {
 }
 
 class _AddDisciplineButtonState extends State<AddDisciplineButton> {
-  bool _isAdded = false; // indica se a materia foi adicionada 
+  bool _isAdded = false; // indica se a materia foi adicionada
 
   void _toggleFavorite() {
     setState(() {
@@ -240,7 +247,8 @@ class _AddDisciplineButtonState extends State<AddDisciplineButton> {
               _toggleFavorite();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor: _isAdded ? AppColors.DAD_COLOR : AppColors.DARKER_COLOR,
+              backgroundColor:
+                  _isAdded ? AppColors.DAD_COLOR : AppColors.DARKER_COLOR,
               minimumSize: const Size(262, 55),
             ),
             child: Text(
