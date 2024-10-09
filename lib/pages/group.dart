@@ -196,9 +196,9 @@ class GroupPage extends StatelessWidget {
         alignment: Alignment.bottomRight,
         children: [
           Padding(
-            padding: const EdgeInsets.only(right: 60.0),
+            padding: const EdgeInsets.only(right: 60.0, bottom: 6.0),
             child: ConstrainedBox(
-              constraints: BoxConstraints.tightFor(width: 120),
+              constraints: const BoxConstraints.tightFor(width: 120, height: 40),
               child: FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.of(context).push(
@@ -210,7 +210,7 @@ class GroupPage extends StatelessWidget {
                 backgroundColor: Colors.grey[600],
                 foregroundColor: Colors.white,
                 label: const Text(
-                  'Crie um grupo',
+                  'Crie um grupo',  
                   style: TextStyle(fontSize: 14),
                 ),
               ),
