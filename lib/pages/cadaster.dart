@@ -3,6 +3,8 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/sucess_cadaster.dart';
 import 'package:one/pages/error_cadaster.dart';
 
+// subindo as telas 
+
 class CadasterPage extends StatelessWidget {
   Future<bool> _simulateRegistration() async {
     await Future.delayed(Duration(seconds: 2));

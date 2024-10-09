@@ -3,6 +3,8 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
+// subindo as telas 
+
 class Conect extends StatefulWidget {
   final Widget child;
 

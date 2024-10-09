@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
+// subindo as telas 
 
 class ViewProfile extends StatelessWidget {
   final int age = 17;
