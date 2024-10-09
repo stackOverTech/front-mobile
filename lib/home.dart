@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one/pages/group.dart';
-import 'package:one/pages/monitoring.dart';
+import 'package:one/monitoring.dart';
 import 'package:one/pages/question.dart';
 
 class HomePage extends StatelessWidget {
@@ -21,19 +20,15 @@ class HomePage extends StatelessWidget {
                       backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                       elevation: 0,
                       title: const Text(
-                    'One',
-                    style: TextStyle(
-                        fontFamily: "Righteous",
-                        fontSize: 24,
-                        color: Colors.white),
-                  ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
+                        'One',
+                        style: TextStyle(height: 24, fontFamily: "Righteous"),
+                      ),
+                      actions: [
+                        IconButton(
+                          icon: const Icon(Icons.search),
+                          onPressed: () {},
+                        ),
+                      ],
                     ),
                     const SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -61,9 +56,9 @@ class HomePage extends StatelessWidget {
           ),
           DraggableScrollableSheet(
             //elemento arrastável e scrollavel de listagem dos posts
-            initialChildSize: 0.75,
-            // minChildSize: 0.85,
-            // maxChildSize: 1.0,
+            initialChildSize: 0.85,
+            minChildSize: 0.85,
+            maxChildSize: 1.0,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: const BoxDecoration(
@@ -154,59 +149,34 @@ hate()
             ),
           );
         },
-         child: const Icon(
-                Icons.add,
-                color: Colors.white, // Cor do ícone "+"
-              ),
-              shape: const CircleBorder(),
+        child: Icon(Icons.add),
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
-            0, 
-        onTap: (int index) {
-          if (index == 1) {
-            // Verifica se o item "book" foi clicado
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    MonitoringPage(), 
-              ),
-            );
-          }
-          if (index == 2) {
-            // Verifica se o item "group" foi clicado
-             Navigator.of(context).push(
-               MaterialPageRoute(
-                 builder: (context) =>
-                     GroupPage(), 
-               ),
-             );
-          }
-          if (index == 3) {
-            // Verifica se o item "person" foi clicado
-            //  Navigator.of(context).push(
-            //    MaterialPageRoute(
-            //      builder: (context) =>
-            //          ProfilePage(), 
-            //    ),
-            //  );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
-         unselectedItemColor: Colors.white,
-        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
-        elevation: 10,
-        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        type: BottomNavigationBarType.fixed
-      ),
+          currentIndex: 0,
+          onTap: (int index) {
+            if (index == 1) {
+              // Verifica se o item "people" foi clicado
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MonitoringPage(),
+                ),
+              );
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+          ],
+          selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+          unselectedItemColor: Colors.white,
+          backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+          elevation: 10,
+          selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          type: BottomNavigationBarType.fixed),
     );
   }
 }
@@ -280,7 +250,7 @@ class PostCard extends StatelessWidget {
             if (codeSnippet != null)
               Container(
                 margin: const EdgeInsets.symmetric(
-                    vertical: 8.0), 
+                    vertical: 8.0), //horizontal: 8.0 não ta querendo
                 padding: const EdgeInsets.all(8.0),
                 color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(

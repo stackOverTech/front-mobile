@@ -24,12 +24,12 @@ class _ConectState extends State<Conect> {
     _checkInitialConnection();
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       verificarConexao(result);
-    });
+    } as void Function(List<ConnectivityResult> event)?) as StreamSubscription<ConnectivityResult>;
   }
 
   Future<void> _checkInitialConnection() async {
     var result = await Connectivity().checkConnectivity();
-    verificarConexao(result);
+    verificarConexao(result as ConnectivityResult);
   }
 
   void verificarConexao(ConnectivityResult result) {

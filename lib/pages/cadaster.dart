@@ -1,32 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:one/helpers/appcolors.dart';
-import 'package:one/pages/sucess_cadaster.dart';
-import 'package:one/pages/error_cadaster.dart';
+import 'package:one/pages/introduction.dart';
 
 // subindo as telas 
 
 class CadasterPage extends StatelessWidget {
-  Future<bool> _simulateRegistration() async {
-    await Future.delayed(Duration(seconds: 2));
-    return true; // Simulando o envio dos dados para o DB e retornando true
-  }
-
-  void _register(BuildContext context) async {
-    bool isSuccess = await _simulateRegistration();
-
-    if (isSuccess) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => NotificationScreen()),
-      );
-    } else {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => ErrorScreen()),
-      );
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +31,7 @@ class CadasterPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -69,11 +46,11 @@ class CadasterPage extends StatelessWidget {
             const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Color.fromRGBO(61, 112, 128, 1),
-                  ),
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                ),
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                      width: 300,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
               ),
             ),
             const SizedBox(height: 16),
@@ -118,7 +95,8 @@ class CadasterPage extends StatelessWidget {
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
               ),
-              items: <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
+              items:
+                  <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -129,12 +107,17 @@ class CadasterPage extends StatelessWidget {
             const SizedBox(height: 96),
             Center(
               child: ElevatedButton(
-                onPressed: () => _register(context), // Chama a função de registro
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => IntroductionPage()));
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Cadastrar', style: TextStyle(color: AppColors.BACKGROUND_COLOR),),
+                child: const Text('Cadastrar'),
               ),
             ),
             const Spacer(),
@@ -144,7 +127,7 @@ class CadasterPage extends StatelessWidget {
                 child: const Text(
                   'Ajuda',
                   style: TextStyle(
-                      color: AppColors.LIGHT_COLOR,
+                      color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline),
                 ),
               ),
