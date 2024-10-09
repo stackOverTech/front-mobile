@@ -4,19 +4,6 @@ import 'package:one/pages/home.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/group_details.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: GroupPage(),
-    );
-  }
-}
-
 class GroupPage extends StatelessWidget {
   final String role = 'teacher';
 
