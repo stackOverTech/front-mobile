@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/starter.dart';
+import 'package:one/pages/conect.dart';
 
 void main() {
   runApp(MyApp());
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: Conect(child: SplashScreen()),
     );
   }
 }
@@ -26,9 +27,10 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
     _navigateToLogin();
   }
+
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
         context,
@@ -36,7 +38,6 @@ class SplashScreenState extends State<SplashScreen> {
       );
     });
   }
-
 
   // _navigateToLogin() async {
   //   await Future.delayed(const Duration(seconds: 5), () {});
@@ -68,4 +69,3 @@ class SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

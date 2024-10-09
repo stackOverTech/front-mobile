@@ -3,8 +3,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas 
-
 class Conect extends StatefulWidget {
   final Widget child;
 
@@ -24,12 +22,12 @@ class _ConectState extends State<Conect> {
     _checkInitialConnection();
     subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
       verificarConexao(result);
-    } as void Function(List<ConnectivityResult> event)?) as StreamSubscription<ConnectivityResult>;
+    });
   }
 
   Future<void> _checkInitialConnection() async {
     var result = await Connectivity().checkConnectivity();
-    verificarConexao(result as ConnectivityResult);
+    verificarConexao(result);
   }
 
   void verificarConexao(ConnectivityResult result) {
