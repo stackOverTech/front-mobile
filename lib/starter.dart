@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/pages/login.dart';
-import 'package:one/signup.dart';
+import 'package:one/pages/signup.dart';
 
 class StarterPage extends StatelessWidget {
   @override
@@ -12,24 +12,20 @@ class StarterPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('android/app/src/main/res/drawable/onelogo.png',
-                  height: 220),
+              Image.asset('android/app/src/main/res/drawable/onelogo.png', height: 220),
               const SizedBox(height: 30),
               const Text(
                 'Entre em\numa\ncomunidade\nde estudos',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                  foregroundColor: MaterialStateProperty.all<Color>(
-                      Color.fromARGB(211, 0, 0, 0)),
+                  foregroundColor: MaterialStateProperty.all<Color>(Color.fromARGB(211, 0, 0, 0)),
                 ),
-                child: const Text(
-                    'Crie uma conta ou entre em\numa já existente.'),
+                child: const Text('Crie uma conta ou entre em\n          uma já existente.'),
               ),
               const SizedBox(height: 40),
               DefaultBtn(text: "Cadastrar", page: SignUpPage()),

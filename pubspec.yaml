@@ -11,42 +11,30 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  connectivity_plus: ^4.0.1
-  provider: ^6.0.0
-  table_calendar: ^3.0.0
-  intl: ^0.17.0
-
+  fluttertoast: ^8.2.1
   cupertino_icons: ^1.0.2
-  http: ^1.1.0
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
   flutter_lints: ^2.0.0
+  shared_preferences: ^2.0.13
 
 flutter:
   fonts:
     - family: Righteous
       fonts:
-        - asset: android\fonts\righ.ttf
-  # assets:
-  # - android\app\src\main\res\drawable\onelogo.png
-  # - android\app\src\main\res\drawable\charging.gif
-
+        - asset: android/fonts/righ.ttf
+        
   assets:
-      - android/app/src/main/res/drawable/onelogo.png
-      - android/app/src/main/res/drawable/charging.gif
-      - android/app/src/main/res/drawable/task_alt.png
-      - android/app/src/main/res/drawable/error.png
-      - android/app/src/main/res/drawable/arrow.png
-      - android/app/src/main/res/drawable/back_button.png
-      - android/app/src/main/res/drawable/back_button_light.png
-      - android/app/src/main/res/drawable/star_null.png
-      - android/app/src/main/res/drawable/star_filled.png
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
-  uses-material-design: true
+    - android/app/src/main/res/drawable/onelogo.png
+    - android/app/src/main/res/drawable/charging.gif
+    - android/app/src/main/res/drawable/osbrabosdojava.png
+    - android/app/src/main/res/drawable/thebrabos.png
+    - android/app/src/main/res/drawable/grupodeestudos.png
+    - android/app/src/main/res/drawable/back_button.png
+    - android/app/src/main/res/drawable/back_button_grey.png
+    - android/app/src/main/res/drawable/task_alt.png
 
   uses-material-design: true
