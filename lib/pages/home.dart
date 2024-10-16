@@ -92,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius:
-                      BorderRadius.vertical(top: Radius.circular(16.0)),
+                      BorderRadius.vertical(top: Radius.circular(24.0)),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black26,
@@ -104,7 +104,6 @@ class _HomePageState extends State<HomePage> {
                 ),
                 child: Column(
                   children: [
-                    // Adicione a imagem aqui
                     Padding(
                       padding: const EdgeInsets.only(top: 10.0),
                       child: Image.asset(
