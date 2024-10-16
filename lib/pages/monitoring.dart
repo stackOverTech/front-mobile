@@ -328,7 +328,7 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   borderSide: BorderSide.none,
                 ),
                 contentPadding: const EdgeInsets.symmetric(
-                    vertical: 10.0, horizontal: 10.0),
+                    vertical: 7.0, horizontal: 10.0),
                 hintStyle: const TextStyle(color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
