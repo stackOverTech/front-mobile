@@ -3,9 +3,42 @@ import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  String _selectedDiscipline = '';
+
   void _onSearch(String query) {
     print('Searching for: $query');
+  }
+
+  Widget _buildDisciplineSelector() {
+    const disciplines = ['Banco de Dados', 'Português', 'Matemática', 'Inglês', 'História', 'Geografia'];
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const SizedBox(height: 12),
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: disciplines.map((discipline) {
+              return CategoryChip(
+                label: discipline,
+                selected: _selectedDiscipline == discipline,
+                onSelected: (selected) {
+                  setState(() {
+                    _selectedDiscipline = selected ? discipline : '';
+                  });
+                },
+              );
+            }).toList(),
+          ),
+        ),
+      ],
+    );
   }
 
   @override
@@ -21,7 +54,7 @@ class HomePage extends StatelessWidget {
                 child: Column(
                   children: [
                     AppBar(
-                      automaticallyImplyLeading: false, // some com o back btn
+                      automaticallyImplyLeading: false, 
                       backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                       elevation: 0,
                       title: const Text(
@@ -37,19 +70,8 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          CategoryChip(label: 'Banco de Dados'),
-                          CategoryChip(label: 'Português'),
-                          CategoryChip(label: 'Matemática'),
-                          CategoryChip(label: 'Engenharia (EQSW)'),
-                          CategoryChip(label: 'Inglês'),
-                          CategoryChip(label: 'Mobile'),
-                        ],
-                      ),
-                    ),
+                    const SizedBox(height: 8),
+                    _buildDisciplineSelector(), // Adiciona o seletor de disciplinas
                     const SizedBox(height: 8),
                   ],
                 ),
@@ -62,10 +84,9 @@ class HomePage extends StatelessWidget {
             ],
           ),
           DraggableScrollableSheet(
-            //elemento arrastável e scrollavel de listagem dos posts
             initialChildSize: 0.75,
-            // minChildSize: 0.85,
-            // maxChildSize: 1.0,
+            minChildSize: 0.75,
+            maxChildSize: 1.00,
             builder: (BuildContext context, ScrollController scrollController) {
               return Container(
                 decoration: const BoxDecoration(
@@ -81,65 +102,77 @@ class HomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: ListView(
-                  controller: scrollController,
+                child: Column(
                   children: [
-                    const SizedBox(height: 8),
-                    PostCard(
-                      username: 'harry',
-                      category: 'Banco de Dados',
-                      timeAgo: '2h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
+                    // Adicione a imagem aqui
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10.0),
+                      child: Image.asset(
+                        'android/app/src/main/res/drawable/home_detail.png',
+                        width: 70,
+                      ),
                     ),
-                    PostCard(
-                      username: 'bruno',
-                      category: 'POO',
-                      timeAgo: '3h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                      codeSnippet: '''
-                      void main() {
-                        runApp(MyApp());
-                      }
-
-                      class MyApp extends StatelessWidget {
-                        @override
-                        Widget build(BuildContext context) {
-                          return MaterialApp(
-                            debugShowCheckedModeBanner: false,
-                            home: SplashScreen(),
-                          );
-                        }
-                      }
-                      ''',
-                    ),
-                    PostCard(
-                      username: 'gui',
-                      category: 'Inglês',
-                      timeAgo: '4h',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'ana',
-                      category: 'Banco de Dados',
-                      timeAgo: '1d',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'bruno',
-                      category: 'Inglês',
-                      timeAgo: '1d',
-                      content: 'Lorem ipsum dolor sit amet consectetur...',
-                    ),
-                    PostCard(
-                      username: 'lena',
-                      category: 'TCC',
-                      timeAgo: '2d',
-                      content:
-                          'Como é que se fala "eu te odeio" em libras mesmo?',
-                      codeSnippet: '''
-                        print("i hate you")
-                        hate()
-                      ''',
+                    Expanded(
+                      child: ListView(
+                        controller: scrollController,
+                        children: [
+                          PostCard(
+                            username: 'harry',
+                            category: 'Banco de Dados',
+                            timeAgo: '2h',
+                            content:
+                                'Lorem ipsum dolor sit amet consectetur...',
+                            imageUser:
+                                'android/app/src/main/res/drawable/harry.png',
+                          ),
+                          PostCard(
+                            username: 'bruno',
+                            category: 'POO',
+                            timeAgo: '3h',
+                            content:
+                                'Lorem ipsum dolor sit amet consectetur...',
+                            imageUrl:
+                                'android/app/src/main/res/drawable/bruno_code.png',
+                            imageUser:
+                                'android/app/src/main/res/drawable/bruninho.png',
+                          ),
+                          PostCard(
+                            username: 'gui',
+                            category: 'Inglês',
+                            timeAgo: '4h',
+                            content:
+                                'Lorem ipsum dolor sit amet consectetur...',
+                          ),
+                          PostCard(
+                            username: 'taylor',
+                            category: 'Banco de Dados',
+                            timeAgo: '1d',
+                            content:
+                                'Lorem ipsum dolor sit amet consectetur...',
+                            imageUser:
+                                'android/app/src/main/res/drawable/taylor.png',
+                          ),
+                          PostCard(
+                            username: 'bibia',
+                            category: 'Inglês',
+                            timeAgo: '1d',
+                            content:
+                                'Lorem ipsum dolor sit amet consectetur...',
+                            imageUser:
+                                'android/app/src/main/res/drawable/bibia.png',
+                          ),
+                          PostCard(
+                            username: 'lena',
+                            category: 'TCC',
+                            timeAgo: '2d',
+                            content:
+                                'Como é que se fala "eu te odeio" em libras mesmo?',
+                            codeSnippet: 'print("i hate you")\nhate()',
+                            imageUser:
+                                'android/app/src/main/res/drawable/olivia.png',
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -243,17 +276,52 @@ class HomePage extends StatelessWidget {
 
 class CategoryChip extends StatelessWidget {
   final String label;
+  final bool selected;
+  final ValueChanged<bool> onSelected;
 
-  const CategoryChip({required this.label});
+  const CategoryChip({
+    required this.label,
+    required this.selected,
+    required this.onSelected,
+  });
 
-  @override
+    @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: Chip(
-        label: Text(label, style: const TextStyle(color: Colors.white)),
-        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-        shape: const StadiumBorder(side: BorderSide(color: Colors.white)),
+      child: Container(
+        height: 35.0,
+        alignment: Alignment.topCenter,
+        child: GestureDetector(
+          onTap: () {
+            onSelected(!selected); 
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: selected
+                  ? const Color.fromRGBO(97, 46, 88, 10)
+                  : const Color.fromRGBO(61, 112, 128, 1),
+              border: Border.all(
+                color: selected
+                    ? const Color.fromRGBO(97, 46, 88, 100)
+                    : Colors.white,
+                width: 1.0,
+              ),
+              borderRadius: BorderRadius.circular(8.0),
+            ),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8.0),
+            child: Text(
+              label,
+              style: const TextStyle(
+                fontSize: 13.0,
+                fontWeight: FontWeight.w500,
+                fontFamily: "Inter",
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }
@@ -265,12 +333,16 @@ class PostCard extends StatelessWidget {
   final String timeAgo;
   final String content;
   final String? codeSnippet;
+  final String? imageUser;
+  final String? imageUrl;
 
   PostCard({
     required this.username,
     required this.category,
     required this.timeAgo,
     required this.content,
+    this.imageUser,
+    this.imageUrl,
     this.codeSnippet,
   });
 
@@ -286,10 +358,16 @@ class PostCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                const CircleAvatar(
-                  radius: 20,
-                  child: Icon(Icons.person),
-                ),
+                imageUser != null
+                    ? CircleAvatar(
+                        radius: 20,
+                        backgroundImage:
+                            AssetImage(imageUser!), 
+                      )
+                    : const CircleAvatar(
+                        radius: 20,
+                        child: Icon(Icons.person),
+                      ),
                 const SizedBox(width: 8.0),
                 Expanded(
                   child: Column(
@@ -342,6 +420,10 @@ class PostCard extends StatelessWidget {
             ),
             const SizedBox(height: 8.0),
             Text(content),
+            if (imageUrl != null) ...[
+              const SizedBox(height: 8.0),
+              Image.asset(imageUrl!),
+            ],
             if (codeSnippet != null)
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -429,8 +511,8 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 7.0, horizontal: 10.0),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 7.0, horizontal: 10.0),
                 hintStyle: const TextStyle(color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),

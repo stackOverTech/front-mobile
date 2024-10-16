@@ -18,7 +18,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
   shared_preferences: ^2.0.13
 
 flutter:
@@ -37,6 +37,12 @@ flutter:
     - android/app/src/main/res/drawable/back_button_grey.png
     - android/app/src/main/res/drawable/task_alt.png
     - android/app/src/main/res/drawable/answer.png
+    - android/app/src/main/res/drawable/bibia.png
+    - android/app/src/main/res/drawable/bruninho.png
+    - android/app/src/main/res/drawable/bruno_code.png
+    - android/app/src/main/res/drawable/harry.png
+    - android/app/src/main/res/drawable/home_detail.png
+    - android/app/src/main/res/drawable/taylor.png
 
 
   uses-material-design: true
