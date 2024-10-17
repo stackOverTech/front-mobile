@@ -16,7 +16,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildDisciplineSelector() {
-    const disciplines = ['Banco de Dados', 'Português', 'Matemática', 'Inglês', 'História', 'Geografia'];
+    const disciplines = [
+      'Banco de Dados',
+      'Português',
+      'Matemática',
+      'Inglês',
+      'História',
+      'Geografia'
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,7 +61,7 @@ class _HomePageState extends State<HomePage> {
                 child: Column(
                   children: [
                     AppBar(
-                      automaticallyImplyLeading: false, 
+                      automaticallyImplyLeading: false,
                       backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                       elevation: 0,
                       title: const Text(
@@ -284,16 +291,16 @@ class CategoryChip extends StatelessWidget {
     required this.onSelected,
   });
 
-    @override
+  @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
+      padding: const EdgeInsets.only(left: 10.0),
       child: Container(
-        height: 35.0,
+        height: 38.0,
         alignment: Alignment.topCenter,
         child: GestureDetector(
           onTap: () {
-            onSelected(!selected); 
+            onSelected(!selected);
           },
           child: Container(
             decoration: BoxDecoration(
@@ -304,7 +311,7 @@ class CategoryChip extends StatelessWidget {
                 color: selected
                     ? const Color.fromRGBO(97, 46, 88, 100)
                     : Colors.white,
-                width: 1.0,
+                width: 2.0,
               ),
               borderRadius: BorderRadius.circular(8.0),
             ),
@@ -313,7 +320,7 @@ class CategoryChip extends StatelessWidget {
             child: Text(
               label,
               style: const TextStyle(
-                fontSize: 13.0,
+                fontSize: 13.5,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Inter",
                 color: Colors.white,
@@ -360,8 +367,7 @@ class PostCard extends StatelessWidget {
                 imageUser != null
                     ? CircleAvatar(
                         radius: 20,
-                        backgroundImage:
-                            AssetImage(imageUser!), 
+                        backgroundImage: AssetImage(imageUser!),
                       )
                     : const CircleAvatar(
                         radius: 20,
