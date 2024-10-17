@@ -43,6 +43,8 @@ flutter:
     - android/app/src/main/res/drawable/harry.png
     - android/app/src/main/res/drawable/home_detail.png
     - android/app/src/main/res/drawable/taylor.png
+    - android/app/src/main/res/drawable/enviar.png
+    - android/app/src/main/res/drawable/anexo.png
 
 
   uses-material-design: true

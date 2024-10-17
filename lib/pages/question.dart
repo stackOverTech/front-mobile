@@ -28,7 +28,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 15.0, bottom: 20),
+        padding: const EdgeInsets.only(left: 15.0, bottom: 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -37,63 +37,94 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               imageUser: 'android/app/src/main/res/drawable/taylor.png',
             ),
             const SizedBox(height: 16.0),
-            Expanded(
-              flex: 0, 
-              child: Container(
-                constraints: BoxConstraints(
-                  maxWidth: 380, 
-                  minWidth: 350, 
-                ),
-                child: TextField(
-                  controller: _contentController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    hintText: 'Escreva aqui sua pergunta...',
-                    filled: true,
-                    fillColor: Colors.grey[200],
-                    border: OutlineInputBorder(
-                      borderRadius:
-                          BorderRadius.circular(15.0), 
-                      borderSide: BorderSide.none, 
+            Container(
+              constraints: BoxConstraints(
+                maxWidth: 380,
+                minWidth: 350,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    height: 190,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(15.0),
+                    ),
+                    child: Stack(
+                      children: [
+                        TextField(
+                          controller: _contentController,
+                          maxLines: 5,
+                          decoration: InputDecoration(
+                            hintText: 'Escreva aqui sua pergunta...',
+                            border: InputBorder.none,
+                            contentPadding: EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 10.0),
+                          ),
+                          style: TextStyle(
+                            fontFamily: 'Inter',
+                            fontSize: 16.0,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        Positioned(
+                          bottom: 10,
+                          right: 16,
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              IconButton(
+                                icon: Image.asset(
+                                  'android/app/src/main/res/drawable/anexo.png',
+                                  width: 30,
+                                  height: 30,
+                                ),
+                                onPressed: () {
+                                  // Não implementado: funcionalidade de anexo de arquivo
+                                },
+                              ),
+                              IconButton(
+                                icon: Image.asset(
+                                  'android/app/src/main/res/drawable/enviar.png',
+                                  width: 35,
+                                  height: 35,
+                                ),
+                                onPressed: () {
+                                  if (_contentController.text.isNotEmpty &&
+                                      _selectedCategory.isNotEmpty) {
+                                    Navigator.of(context).pop({
+                                      'content': _contentController.text,
+                                      'category': _selectedCategory,
+                                    });
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  style: TextStyle(
-                    fontFamily:
-                        'Inter', 
-                    fontSize: 16.0,
-                    color: Colors.black87,
-                  ),
+                  const SizedBox(height: 24.0),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 12.0),
+              child: const Text(
+                'Vincule a uma disciplina',
+                style: TextStyle(
+                  fontFamily: 'Inter',
+                  fontSize: 16.0,
+                  color: Colors.black87,
                 ),
               ),
             ),
-            const SizedBox(height: 16.0),
-            Row(
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.attach_file),
-                  onPressed: () {
-                    // Não implementado: funcionalidade de anexo de arquivo
-                  },
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    if (_contentController.text.isNotEmpty &&
-                        _selectedCategory.isNotEmpty) {
-                      Navigator.of(context).pop({
-                        'content': _contentController.text,
-                        'category': _selectedCategory,
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 16.0),
-            const Text('Vincule a uma disciplina'),
             const SizedBox(height: 8.0),
             SingleChildScrollView(
+              padding: const EdgeInsets.only(
+                  left: 12.0),
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -154,17 +185,31 @@ class CategoryChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: ChoiceChip(
-        label: Text(label,
-            style: TextStyle(color: selected ? Colors.white : Colors.teal)),
+      padding: const EdgeInsets.only(right: 8.0),
+      child: FilterChip(
+        label: Text(
+          label,
+          style: TextStyle(
+            color:
+                selected ? Colors.white : const Color.fromRGBO(61, 112, 128, 1),
+            fontSize: 14.0,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         selected: selected,
         onSelected: (bool value) {
           onSelected();
         },
-        selectedColor: Colors.teal,
-        backgroundColor: Colors.transparent,
-        shape: StadiumBorder(side: BorderSide(color: Colors.teal)),
+        selectedColor: const Color.fromRGBO(61, 112, 128, 1),
+        backgroundColor: const Color(0xFFFDFDFD),
+        elevation: 2,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          side: BorderSide(
+            color: const Color.fromRGBO(61, 112, 128, 1),
+            width: 2.0,
+          ),
+        ),
       ),
     );
   }
