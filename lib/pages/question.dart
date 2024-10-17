@@ -12,44 +12,65 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xFFFDFDFD),
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFFDFDFD),
+        toolbarHeight: 70,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          padding: const EdgeInsets.only(left: 15.0),
+          icon: Image.asset(
+              width: 60,
+              'android/app/src/main/res/drawable/back_button_grey.png'),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.pop(context);
           },
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 15.0, bottom: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              children: [
-                CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
-                SizedBox(width: 8.0),
-                Text('taylor', style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
+            UserProfileRow(
+              username: 'taylor',
+              imageUser: 'android/app/src/main/res/drawable/taylor.png',
             ),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: _contentController,
-              maxLines: 5,
-              decoration: const InputDecoration(
-                hintText: 'Escreva aqui sua pergunta...',
-                border: OutlineInputBorder(),
+            Expanded(
+              flex: 0, 
+              child: Container(
+                constraints: BoxConstraints(
+                  maxWidth: 380, 
+                  minWidth: 350, 
+                ),
+                child: TextField(
+                  controller: _contentController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    hintText: 'Escreva aqui sua pergunta...',
+                    filled: true,
+                    fillColor: Colors.grey[200],
+                    border: OutlineInputBorder(
+                      borderRadius:
+                          BorderRadius.circular(15.0), 
+                      borderSide: BorderSide.none, 
+                    ),
+                  ),
+                  style: TextStyle(
+                    fontFamily:
+                        'Inter', 
+                    fontSize: 16.0,
+                    color: Colors.black87,
+                  ),
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
             Row(
               children: [
                 IconButton(
-                  icon:const  Icon(Icons.attach_file),
+                  icon: const Icon(Icons.attach_file),
                   onPressed: () {
                     // Não implementado: funcionalidade de anexo de arquivo
                   },
@@ -58,7 +79,8 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                 IconButton(
                   icon: const Icon(Icons.send),
                   onPressed: () {
-                    if (_contentController.text.isNotEmpty && _selectedCategory.isNotEmpty) {
+                    if (_contentController.text.isNotEmpty &&
+                        _selectedCategory.isNotEmpty) {
                       Navigator.of(context).pop({
                         'content': _contentController.text,
                         'category': _selectedCategory,
@@ -126,14 +148,16 @@ class CategoryChip extends StatelessWidget {
   final bool selected;
   final Function onSelected;
 
-  CategoryChip({required this.label, required this.selected, required this.onSelected});
+  CategoryChip(
+      {required this.label, required this.selected, required this.onSelected});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 4.0),
       child: ChoiceChip(
-        label: Text(label, style: TextStyle(color: selected ? Colors.white : Colors.teal)),
+        label: Text(label,
+            style: TextStyle(color: selected ? Colors.white : Colors.teal)),
         selected: selected,
         onSelected: (bool value) {
           onSelected();
@@ -142,6 +166,49 @@ class CategoryChip extends StatelessWidget {
         backgroundColor: Colors.transparent,
         shape: StadiumBorder(side: BorderSide(color: Colors.teal)),
       ),
+    );
+  }
+}
+
+class UserProfileRow extends StatelessWidget {
+  final String username;
+  final String? imageUser;
+
+  const UserProfileRow({
+    Key? key,
+    required this.username,
+    this.imageUser,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        CircleAvatar(
+          radius: 20,
+          child: ClipOval(
+            child: imageUser != null
+                ? Image.asset(
+                    imageUser!,
+                    fit: BoxFit.cover,
+                    width: 40,
+                    height: 40,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.person, size: 40);
+                    },
+                  )
+                : const Icon(Icons.person, size: 40),
+          ),
+        ),
+        const SizedBox(width: 8.0),
+        Text(
+          username,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
+          ),
+        ),
+      ],
     );
   }
 }

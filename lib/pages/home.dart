@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    _buildDisciplineSelector(), // Adiciona o seletor de disciplinas
+                    _buildDisciplineSelector(), 
                     const SizedBox(height: 8),
                   ],
                 ),
@@ -443,7 +443,12 @@ class PostCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () {
+                  //Navigator.push(
+                    //context,
+                    //MaterialPageRoute(builder: (context) => NewQuestionPage()),
+                  //);
+                },
                 icon: Image.asset(
                     'android/app/src/main/res/drawable/answer.png',
                     width: 15),
