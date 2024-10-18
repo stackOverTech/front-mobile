@@ -30,6 +30,7 @@ class CadasterPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -44,6 +45,11 @@ class CadasterPage extends StatelessWidget {
             const TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
+                    borderSide: BorderSide(
+                      color: Color.fromRGBO(61, 112, 128, 1),
+                      width: 300,
+                    ),
+                    borderRadius: BorderRadius.all(Radius.circular(10))),
                     borderSide: BorderSide(
                       color: Color.fromRGBO(61, 112, 128, 1),
                       width: 300,
@@ -95,6 +101,8 @@ class CadasterPage extends StatelessWidget {
               ),
               items:
                   <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
+              items:
+                  <String>['Turma A', 'Turma B', 'Turma C'].map((String value) {
                 return DropdownMenuItem<String>(
                   value: value,
                   child: Text(value),
@@ -111,10 +119,17 @@ class CadasterPage extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => IntroductionPage()));
                 },
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => IntroductionPage()));
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   minimumSize: const Size(double.infinity, 50),
                 ),
+                child: const Text('Cadastrar'),
                 child: const Text('Cadastrar'),
               ),
             ),
@@ -125,6 +140,7 @@ class CadasterPage extends StatelessWidget {
                 child: const Text(
                   'Ajuda',
                   style: TextStyle(
+                      color: Color.fromRGBO(61, 112, 128, 1),
                       color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline),
                 ),

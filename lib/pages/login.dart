@@ -31,6 +31,7 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
+                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -39,6 +40,7 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
+                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   border: OutlineInputBorder(),
                 ),
@@ -79,7 +81,7 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class DefaultBtn extends StatelessWidget {
+class DefaultBtn extends StatelessWidget{
   final String text;
   final Widget page; // Mudamos para Widget em vez de StatelessWidget
 
@@ -92,7 +94,7 @@ class DefaultBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: (){
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => page),

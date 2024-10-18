@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Column(
             // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
+            // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
             children: [
               Container(
                 color: const Color.fromRGBO(61, 112, 128, 1),
@@ -431,8 +432,10 @@ class PostCard extends StatelessWidget {
             ],
             if (codeSnippet != null)
               Container(
-                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                margin: const EdgeInsets.symmetric(
+                    vertical: 8.0), 
                 padding: const EdgeInsets.all(8.0),
+                color: const Color.fromRGBO(202, 202, 202, 1),
                 color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
                   codeSnippet!,

@@ -3,6 +3,7 @@ import 'package:one/starter.dart';
 
 void main() {
   runApp(MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +19,10 @@ class MyApp extends StatelessWidget {
 class SplashScreen extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();
+  SplashScreenState createState() => SplashScreenState();
 }
 
+class SplashScreenState extends State<SplashScreen> {
 class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
@@ -59,6 +62,7 @@ class SplashScreenState extends State<SplashScreen> {
               height: 400,
               width: 250,
             ),
+            const SizedBox(height: 200),
             const SizedBox(height: 200),
             Image.asset('android/app/src/main/res/drawable/charging.gif'),
           ],

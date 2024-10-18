@@ -4,50 +4,81 @@ import 'package:table_calendar/table_calendar.dart';
 
 // subindo as telas 
 
-void _sendFeedback(BuildContext context) {
-  final overlay = Overlay.of(context);
-  final overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: 50,
-      right: 0,
-      child: Material(
-        elevation: 6.0,
-        child: Container(
-          color: AppColors.BACKGROUND_COLOR,
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Image.asset(
-                'android/app/src/main/res/drawable/task_alt.png',
-                width: 38,
-                height: 38,
-              ),
-              const SizedBox(width: 8),
-              const Text('Salvo com sucesso!',
-                  style: TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT)),
-            ],
+class ApointmantMonitor extends StatefulWidget {
+  final String monitorName;
+
+  ApointmantMonitor({required this.monitorName});
+
+  @override
+  _ApointmantMonitorState createState() => _ApointmantMonitorState();
+}
+
+class _ApointmantMonitorState extends State<ApointmantMonitor> {
+  DateTime selectedDay = DateTime.now();
+  String? selectedTime;
+
+  void _sendFeedback(BuildContext context) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 50,
+        right: 0,
+        child: Material(
+          elevation: 6.0,
+          child: Container(
+            color: AppColors.BACKGROUND_COLOR,
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Image.asset(
+                  'android/app/src/main/res/drawable/task_alt.png',
+                  width: 38,
+                  height: 38,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  'Agendado com sucesso!',
+                  style: TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT),
+                ),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
 
-  overlay.insert(overlayEntry);
+    overlay.insert(overlayEntry);
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+      Navigator.pop(context);
+    });
+  }
 
-  Future.delayed(const Duration(seconds: 3), () {
-    overlayEntry.remove();
-    Navigator.pop(context);
-  });
-}
+  List<Widget> _buildTimeOptions() {
+    List<String> times = ['10h-11h', '12h-13h', '14h-15h'];
 
-class EditTeacherAgenda extends StatefulWidget {
-  @override
-  _EditTeacherAgendaState createState() => _EditTeacherAgendaState();
-}
-
-class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
-  DateTime selectedDay = DateTime.now();
-  String? selectedTime;
+    return times.map((time) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Radio<String>(
+            value: time,
+            groupValue: selectedTime,
+            onChanged: (value) {
+              setState(() {
+                selectedTime = value;
+              });
+            },
+            activeColor: AppColors.DARKER_COLOR,
+          ),
+          Text(
+            time,
+            style: const TextStyle(color: AppColors.BLACK_TEXT, fontSize: 16),
+          ),
+        ],
+      );
+    }).toList();
+  }
 
   String _formatMonth(DateTime date) {
     List<String> months = [
@@ -79,7 +110,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                 padding: EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
-                    'Editar monitorias',
+                    'Agenda do monitor',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -118,6 +149,11 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
                   const SizedBox(height: 40),
+                  const Text(
+                    'Selecione o dia desejado: ',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 15),
                   Container(
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
@@ -126,6 +162,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     child: TableCalendar(
+                      locale: 'pt_BR',
                       firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(2030, 12, 31),
                       focusedDay: selectedDay,
@@ -137,7 +174,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                       selectedDayPredicate: (day) {
                         return isSameDay(selectedDay, day);
                       },
-                      headerStyle: const HeaderStyle(
+                      headerStyle: HeaderStyle(
                         formatButtonVisible: false,
                         titleTextStyle: TextStyle(
                           color: AppColors.BACKGROUND_COLOR,
@@ -153,6 +190,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                         todayTextStyle:
                             TextStyle(color: AppColors.BACKGROUND_COLOR),
                       ),
+                      // Personalizando o cabeçalho do calendário
                       onPageChanged: (focusedDay) {
                         setState(() {
                           selectedDay = focusedDay;
@@ -163,7 +201,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                           return Center(
                             child: Text(
                               _formatMonth(day),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.BACKGROUND_COLOR,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -174,40 +212,34 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   Container(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(18.0),
                     decoration: BoxDecoration(
                       border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
                       borderRadius: BorderRadius.circular(8.0),
                     ),
-                    child: const Column(
+                    child: Column(
                       children: [
-                        Text(
-                          'Escreva os horários que têm disponíveis:',
+                        const Text(
+                          'Horários disponíveis no dia\nselecionado:',
+                          textAlign: TextAlign.left,
                           style: TextStyle(
-                              fontSize: 16, fontWeight: FontWeight.w500),
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
-                        SizedBox(height: 10),
-                        TextField(
-                          decoration: InputDecoration(
-                            labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
+                        ..._buildTimeOptions(),
                       ],
                     ),
                   ),
-                  const SizedBox(height: 28),
+                  const SizedBox(height: 20),
                   ElevatedButton(
-                    onPressed: () {
-                      _sendFeedback(context);
-                    },
+                    onPressed: () => _sendFeedback(context),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.MEDIUM_COLOR,
-                        minimumSize: const Size(262, 55)),
+                      backgroundColor: AppColors.DARKER_COLOR,
+                      minimumSize: const Size(262, 55),
+                    ),
                     child: const Text(
-                      'Salvar',
+                      'Agendar',
                       style: TextStyle(
                           color: AppColors.BACKGROUND_COLOR,
                           fontSize: 18,
