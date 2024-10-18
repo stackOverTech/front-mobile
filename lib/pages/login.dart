@@ -31,7 +31,6 @@ class LoginPage extends StatelessWidget {
                 decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   border: OutlineInputBorder(),
                 ),
               ),
@@ -40,7 +39,6 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
                 decoration: InputDecoration(
                   labelText: 'Senha',
-                  labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
                   border: OutlineInputBorder(),
                 ),

@@ -436,7 +436,6 @@ class PostCard extends StatelessWidget {
                     vertical: 8.0), 
                 padding: const EdgeInsets.all(8.0),
                 color: const Color.fromRGBO(202, 202, 202, 1),
-                color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
                   codeSnippet!,
                   style: const TextStyle(fontFamily: 'monospace'),

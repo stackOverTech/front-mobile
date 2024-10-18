@@ -4,17 +4,17 @@ import 'package:one/pages/feedback_monitors.dart';
 import 'package:one/pages/apointmant_monitor.dart';
 
 class ViewMonitors extends StatelessWidget {
-  final String role = 'teacher';
+  final String role = 'student';
 
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
     String quantidadeMonitores = "4";
-    List<String> nomesMonitores = ["Harry", "Olivia", "Bruno", "Bibia"];
+    List<String> nomesMonitores = ["harry", "olivia", "bruno", "bibia"];  
     List<String> imagensMonitores = [
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png"
+      "android/app/src/main/res/drawable/harry.png",
+      "android/app/src/main/res/drawable/taylor.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/bibia.png"
     ];
 
     return {
@@ -84,8 +84,9 @@ class ViewMonitors extends StatelessWidget {
                       'Selecione o monitor\ndesejado:',
                       style: TextStyle(
                         fontSize: 24,
-                        color: AppColors.HOUR_TEXT,
+                        fontFamily: "Inter",
                         fontWeight: FontWeight.w600,
+                        color: Color(0xFF2C313A),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -96,9 +97,10 @@ class ViewMonitors extends StatelessWidget {
                     child: Text(
                       "Monitores (${monitorInfo['quantidadeMonitores']})",
                       style: const TextStyle(
-                        fontSize: 24,
-                        color: AppColors.HOUR_TEXT,
+                        fontSize: 20,
+                        fontFamily: "Inter",
                         fontWeight: FontWeight.w500,
+                        color: Color(0xFF2C313A),
                       ),
                       textAlign: TextAlign.left,
                     ),
@@ -140,16 +142,18 @@ class ViewMonitors extends StatelessWidget {
                                   Text(
                                     monitorInfo['nomesMonitores'][i],
                                     style: const TextStyle(
-                                      fontSize: 18,
-                                      color: AppColors.HOUR_TEXT,
+                                      fontSize: 20,
+                                      fontFamily: "Inter",
+                                      fontWeight: FontWeight.w500,
+                                      color: Color(0xFF2C313A),
                                     ),
                                   ),
                                 ],
                               ),
-                              Image.asset(
-                                'android/app/src/main/res/drawable/arrow.png',
-                                width: 34,
-                                height: 34,
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 24,
+                                color: Color.fromRGBO(61, 112, 128, 1),
                               ),
                             ],
                           ),

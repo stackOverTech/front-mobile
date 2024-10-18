@@ -2,7 +2,7 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// subindo as telas 
+// subindo as telas
 
 class ApointmantMonitor extends StatefulWidget {
   final String monitorName;
@@ -21,8 +21,9 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        top: 50,
+        top: 0,
         right: 0,
+        left: 0,
         child: Material(
           elevation: 6.0,
           child: Container(
@@ -125,7 +126,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -161,6 +162,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                       color: AppColors.BLACK_TEXT,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    height: 350, 
                     child: TableCalendar(
                       locale: 'pt_BR',
                       firstDay: DateTime.utc(2020, 1, 1),
@@ -190,7 +192,6 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                         todayTextStyle:
                             TextStyle(color: AppColors.BACKGROUND_COLOR),
                       ),
-                      // Personalizando o cabeçalho do calendário
                       onPageChanged: (focusedDay) {
                         setState(() {
                           selectedDay = focusedDay;

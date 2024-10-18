@@ -19,10 +19,8 @@ class MyApp extends StatelessWidget {
 class SplashScreen extends StatefulWidget {
   @override
   SplashScreenState createState() => SplashScreenState();
-  SplashScreenState createState() => SplashScreenState();
 }
 
-class SplashScreenState extends State<SplashScreen> {
 class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
