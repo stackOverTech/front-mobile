@@ -59,7 +59,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                             hintText: 'Escreva aqui sua pergunta...',
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16.0, vertical: 10.0),
+                                horizontal: 16.0, vertical: 20.0),
                           ),
                           style: TextStyle(
                             fontFamily: 'Inter',
@@ -90,6 +90,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                                   height: 35,
                                 ),
                                 onPressed: () {
+                                  _sendFeedback(context);
                                   if (_contentController.text.isNotEmpty &&
                                       _selectedCategory.isNotEmpty) {
                                     Navigator.of(context).pop({
@@ -110,8 +111,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 12.0),
+              padding: const EdgeInsets.only(left: 12.0),
               child: const Text(
                 'Vincule a uma disciplina',
                 style: TextStyle(
@@ -123,8 +123,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
             ),
             const SizedBox(height: 8.0),
             SingleChildScrollView(
-              padding: const EdgeInsets.only(
-                  left: 12.0),
+              padding: const EdgeInsets.only(left: 14.0),
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
@@ -256,4 +255,39 @@ class UserProfileRow extends StatelessWidget {
       ],
     );
   }
+}
+
+void _sendFeedback(BuildContext context) {
+  final overlay = Overlay.of(context);
+  final overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      top: 0, 
+      left: 0,  
+      right: 0, 
+      child: Material(
+        elevation: 6.0,
+        child: Container( 
+          height: MediaQuery.of(context).size.height * 0.15,
+          color: const Color(0xFFFDFDFD),
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Pergunta publicada!',
+                style: TextStyle(fontSize: 20, color: Color(0xFF2C313A)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+
+  overlay.insert(overlayEntry);
+
+  Future.delayed(const Duration(seconds: 3), () {
+    overlayEntry.remove();
+    Navigator.pop(context);
+  });
 }

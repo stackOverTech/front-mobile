@@ -224,11 +224,13 @@ class _CreateGroupState extends State<CreateGroupPage> {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        top: 20,
+        top: 0,
+        left: 0,
+        right: 0,
         child: Material(
           elevation: 6.0,
           child: Container(
-            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.15,
             color: const Color(0xFFFDFDFD),
             padding: const EdgeInsets.all(16.0),
             child: Row(
