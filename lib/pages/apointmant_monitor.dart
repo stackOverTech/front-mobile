@@ -149,7 +149,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 30),
                   const Text(
                     'Selecione o dia desejado: ',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -162,7 +162,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                       color: AppColors.BLACK_TEXT,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    height: 350, 
+                    height: 350,
                     child: TableCalendar(
                       locale: 'pt_BR',
                       firstDay: DateTime.utc(2020, 1, 1),

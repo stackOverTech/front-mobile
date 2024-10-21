@@ -33,6 +33,7 @@ class ViewMonitors extends StatelessWidget {
       backgroundColor: AppColors.DARKER_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 30),
           Stack(
             children: [
               Padding(
@@ -203,7 +204,7 @@ class ViewMonitors extends StatelessWidget {
                             ],
                           ),
                         ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   AddDisciplineButton(), // Adicionando o novo botão
                 ],
               ),
