@@ -2,6 +2,7 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+
 // subindo as telas
 
 class ApointmantMonitor extends StatefulWidget {
@@ -105,6 +106,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 20),
           Stack(
             children: [
               const Padding(
@@ -149,7 +151,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
                   const Text(
                     'Selecione o dia desejado: ',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
@@ -162,9 +164,8 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                       color: AppColors.BLACK_TEXT,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    height: 350,
+                    height: 380,
                     child: TableCalendar(
-                      locale: 'pt_BR',
                       firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(2030, 12, 31),
                       focusedDay: selectedDay,

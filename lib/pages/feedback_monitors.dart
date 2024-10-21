@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas 
+// subindo as telas
 
 class FeedbackMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
@@ -17,14 +17,14 @@ class FeedbackMonitors extends StatelessWidget {
       "Bibia"
     ];
     List<String> imagensMonitores = [
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png"
+      "android/app/src/main/res/drawable/harry.png",
+      "android/app/src/main/res/drawable/taylor.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/bibia.png",
+      "android/app/src/main/res/drawable/harry.png",
+      "android/app/src/main/res/drawable/taylor.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/bibia.png"
     ];
 
     return {
@@ -42,6 +42,7 @@ class FeedbackMonitors extends StatelessWidget {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 30),
           Stack(
             children: [
               const Padding(
@@ -63,7 +64,7 @@ class FeedbackMonitors extends StatelessWidget {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -74,7 +75,7 @@ class FeedbackMonitors extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 60),
+          const SizedBox(height: 30),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
@@ -100,7 +101,8 @@ class FeedbackMonitors extends StatelessWidget {
                               builder: (context) => MonitorDetailPage(
                                 monitorName: monitorInfo['nomesMonitores'][i],
                                 disciplinasName: monitorInfo['materia'],
-                                monitorImage: monitorInfo['imagensMonitores'][i],
+                                monitorImage: monitorInfo['imagensMonitores']
+                                    [i],
                               ),
                             ),
                           );
@@ -131,10 +133,10 @@ class FeedbackMonitors extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              Image.asset(
-                                'android/app/src/main/res/drawable/arrow.png',
-                                width: 34,
-                                height: 34,
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 24,
+                                color: Color.fromRGBO(61, 112, 128, 1),
                               ),
                             ],
                           ),
@@ -177,40 +179,42 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
     });
   }
 
-void _sendFeedback(BuildContext context) {
-  final overlay = Overlay.of(context);
-  final overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: 50,
-      right: 0,
-      child: Material(
-        elevation: 6.0,
-        child: Container(
-          color: AppColors.BACKGROUND_COLOR,
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Image.asset(
-                'android/app/src/main/res/drawable/task_alt.png',
-                width: 38,
-                height: 38,
-              ),
-              const SizedBox(width: 8),
-              const Text('Enviado com sucesso!', style: TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT)),
-            ],
+  void _sendFeedback(BuildContext context) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 50,
+        right: 0,
+        child: Material(
+          elevation: 6.0,
+          child: Container(
+            color: AppColors.BACKGROUND_COLOR,
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Image.asset(
+                  'android/app/src/main/res/drawable/task_alt.png',
+                  width: 38,
+                  height: 38,
+                ),
+                const SizedBox(width: 8),
+                const Text('Enviado com sucesso!',
+                    style:
+                        TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT)),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
 
-  overlay.insert(overlayEntry);
+    overlay.insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 3), () {
-    overlayEntry.remove();
-    Navigator.pop(context);
-  });
-}
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+      Navigator.pop(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
