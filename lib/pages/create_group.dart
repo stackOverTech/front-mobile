@@ -230,7 +230,7 @@ class _CreateGroupState extends State<CreateGroupPage> {
         child: Material(
           elevation: 6.0,
           child: Container(
-            height: MediaQuery.of(context).size.height * 0.15,
+            height: MediaQuery.of(context).size.height * 0.12,
             color: const Color(0xFFFDFDFD),
             padding: const EdgeInsets.all(16.0),
             child: Row(
@@ -238,13 +238,13 @@ class _CreateGroupState extends State<CreateGroupPage> {
               children: [
                 Image.asset(
                   'android/app/src/main/res/drawable/task_alt.png',
-                  width: 100,
-                  height: 40,
+                  width: 90,
+                  height: 30,
                 ),
                 const SizedBox(width: 8),
                 const Text(
                   'Criado com sucesso!',
-                  style: TextStyle(fontSize: 24, color: Color(0xFF2C313A)),
+                  style: TextStyle(fontSize: 20, color: Color(0xFF2C313A)),
                 ),
               ],
             ),

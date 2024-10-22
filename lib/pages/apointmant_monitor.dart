@@ -2,7 +2,6 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
 // subindo as telas
 
 class ApointmantMonitor extends StatefulWidget {
@@ -28,19 +27,20 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
         child: Material(
           elevation: 6.0,
           child: Container(
+            height: MediaQuery.of(context).size.height * 0.12,
             color: AppColors.BACKGROUND_COLOR,
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Image.asset(
                   'android/app/src/main/res/drawable/task_alt.png',
-                  width: 38,
-                  height: 38,
+                  width: 90,
+                  height: 30,
                 ),
                 const SizedBox(width: 8),
                 const Text(
                   'Agendado com sucesso!',
-                  style: TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT),
+                  style: TextStyle(fontSize: 20, color: AppColors.BLACK_TEXT),
                 ),
               ],
             ),
@@ -56,7 +56,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
     });
   }
 
-  List<Widget> _buildTimeOptions() {
+  List<Widget>  _buildTimeOptions() {
     List<String> times = ['10h-11h', '12h-13h', '14h-15h'];
 
     return times.map((time) {
@@ -225,7 +225,6 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                       children: [
                         const Text(
                           'Horários disponíveis no dia\nselecionado:',
-                          textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.w500),
                         ),
@@ -239,13 +238,17 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.DARKER_COLOR,
                       minimumSize: const Size(262, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
                     ),
                     child: const Text(
                       'Agendar',
                       style: TextStyle(
-                          color: AppColors.BACKGROUND_COLOR,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.BACKGROUND_COLOR,
+                      ),
                     ),
                   ),
                 ],

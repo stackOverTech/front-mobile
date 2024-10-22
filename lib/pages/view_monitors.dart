@@ -9,7 +9,7 @@ class ViewMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
     String quantidadeMonitores = "4";
-    List<String> nomesMonitores = ["harry", "olivia", "bruno", "bibia"];  
+    List<String> nomesMonitores = ["harry", "olivia", "bruno", "bibia"];
     List<String> imagensMonitores = [
       "android/app/src/main/res/drawable/harry.png",
       "android/app/src/main/res/drawable/taylor.png",
@@ -92,7 +92,7 @@ class ViewMonitors extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 25),
                   Padding(
                     padding: const EdgeInsets.only(left: 0),
                     child: Text(
@@ -106,7 +106,7 @@ class ViewMonitors extends StatelessWidget {
                       textAlign: TextAlign.left,
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   // Lista os monitores com botão encapsulador
                   for (var i = 0; i < monitorInfo['nomesMonitores'].length; i++)
                     Padding(
@@ -126,7 +126,7 @@ class ViewMonitors extends StatelessWidget {
                         child: Container(
                           padding: const EdgeInsets.all(8.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: const Color.fromARGB(255, 243, 243, 243),
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Row(
@@ -140,14 +140,27 @@ class ViewMonitors extends StatelessWidget {
                                     height: 38,
                                   ),
                                   const SizedBox(width: 10),
-                                  Text(
-                                    monitorInfo['nomesMonitores'][i],
-                                    style: const TextStyle(
-                                      fontSize: 20,
-                                      fontFamily: "Inter",
-                                      fontWeight: FontWeight.w500,
-                                      color: Color(0xFF2C313A),
-                                    ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        monitorInfo['nomesMonitores'][i],
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                          fontFamily: "Inter",
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                      const Text(
+                                        'DAD',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontFamily: "Inter",
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -161,7 +174,7 @@ class ViewMonitors extends StatelessWidget {
                         ),
                       ),
                     ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 15),
                   (role == 'teacher')
                       ? const SizedBox(
                           height: 0,
@@ -181,31 +194,41 @@ class ViewMonitors extends StatelessWidget {
                                     fontSize: 16, fontWeight: FontWeight.w500),
                               ),
                               const SizedBox(height: 10),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
+                              ConstrainedBox(
+                                constraints: const BoxConstraints.tightFor(
+                                    width: 262, height: 55),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
                                         builder: (context) =>
-                                            FeedbackMonitors()),
-                                  );
-                                },
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: AppColors.MEDIUM_COLOR,
-                                    minimumSize: const Size(262, 55)),
-                                child: const Text(
-                                  'Feedback',
-                                  style: TextStyle(
-                                      color: AppColors.BACKGROUND_COLOR,
+                                            FeedbackMonitors(),
+                                      ),
+                                    );
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.DARKER_COLOR,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Feedback',
+                                    style: TextStyle(
                                       fontSize: 18,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w600,
+                                      color: AppColors.BACKGROUND_COLOR,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ],
                           ),
                         ),
                   const SizedBox(height: 20),
-                  AddDisciplineButton(), // Adicionando o novo botão
+                  AddDisciplineButton(), 
+                  const SizedBox(height: 10),
                 ],
               ),
             ),
@@ -252,9 +275,13 @@ class _AddDisciplineButtonState extends State<AddDisciplineButton> {
               _toggleFavorite();
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  _isAdded ? AppColors.DAD_COLOR : AppColors.DARKER_COLOR,
+              backgroundColor: _isAdded
+                  ? const Color.fromARGB(255, 124, 124, 124)
+                  : AppColors.DARKER_COLOR,
               minimumSize: const Size(262, 55),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
             ),
             child: Text(
               _isAdded ? 'Adicionado' : 'Adicionar',
