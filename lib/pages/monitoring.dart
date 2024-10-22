@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/add_monitoria.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 import 'package:one/pages/view_monitors.dart';
@@ -92,7 +93,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
 
                   // Se for monitor, adiciona mais uma coluna de disciplinas
                   if (userProfile == 'monitor') ...[
-                    const Column(
+                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -107,16 +108,33 @@ class _MonitoringPageState extends State<MonitoringPage> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              SizedBox(width: 16),
-                              SubjectCard(
+                              GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddMonitoria()),
+                                );
+                              },
+                              child: SubjectCard(
                                 title: 'Biologia',
                                 color: Color.fromARGB(255, 48, 119, 82),
                               ),
-                              SizedBox(width: 16),
-                              SubjectCard(
+                            ),
+                            SizedBox(width: 16),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddMonitoria()),
+                                );
+                              },
+                              child: SubjectCard(
                                 title: 'Geografia',
                                 color: Color.fromARGB(255, 119, 48, 81),
                               ),
+                            ),
                               SizedBox(width: 16),
                             ],
                           ),

@@ -73,6 +73,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 40),
           Stack(
             children: [
               const Padding(
@@ -94,7 +95,7 @@ class _EditTeacherAgendaState extends State<EditTeacherAgenda> {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),

@@ -45,6 +45,7 @@ class FeedbackMonitors extends StatelessWidget {
           const SizedBox(height: 30),
           Stack(
             children: [
+              const SizedBox(height: 30),
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
@@ -222,6 +223,7 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 30),
           Stack(
             children: [
               const Padding(
@@ -243,7 +245,7 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -266,7 +268,6 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 33),
                   Padding(
                     padding: const EdgeInsets.only(left: 0),
                     child: Image.asset(
@@ -302,15 +303,20 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(5, (index) {
-                            return GestureDetector(
-                              onTap: () => _onStarTap(index),
-                              child: Image.asset(
-                                index < _selectedStars
-                                    ? 'android/app/src/main/res/drawable/star_filled.png'
-                                    : 'android/app/src/main/res/drawable/star_null.png',
-                                width: 24,
-                                height: 24,
-                              ),
+                            return Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _onStarTap(index),
+                                  child: Image.asset(
+                                    index < _selectedStars
+                                        ? 'android/app/src/main/res/drawable/star_filled.png'
+                                        : 'android/app/src/main/res/drawable/star_null.png',
+                                    width: 24,
+                                    height: 24,
+                                  ),
+                                ),
+                                if (index < 4) SizedBox(width: 8),
+                              ],
                             );
                           }),
                         ),

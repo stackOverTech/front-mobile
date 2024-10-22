@@ -50,6 +50,8 @@ flutter:
     - android/app/src/main/res/drawable/taylor.png
     - android/app/src/main/res/drawable/enviar.png
     - android/app/src/main/res/drawable/anexo.png
+    - android/app/src/main/res/drawable/star_filled.png
+    - android/app/src/main/res/drawable/star_null.png
 
 
   uses-material-design: true

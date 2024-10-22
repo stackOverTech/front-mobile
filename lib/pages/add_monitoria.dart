@@ -4,7 +4,7 @@ import 'package:one/pages/edit_teacher_agenda.dart';
 import 'package:one/pages/view_teacher_agenda.dart';
 import 'package:one/pages/view_feedback_monitors.dart';
 
-// subindo as telas 
+// subindo as telas
 
 class AddMonitoria extends StatelessWidget {
   @override
@@ -13,6 +13,7 @@ class AddMonitoria extends StatelessWidget {
       backgroundColor: AppColors.DARKER_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 40),
           Stack(
             children: [
               const Padding(
@@ -43,7 +44,7 @@ class AddMonitoria extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 100,)
+              const SizedBox(height: 80)
             ],
           ),
           Expanded(
@@ -58,7 +59,7 @@ class AddMonitoria extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 70),
                   Container(
                     padding: const EdgeInsets.all(18.0),
                     decoration: BoxDecoration(
@@ -132,7 +133,9 @@ class AddMonitoria extends StatelessWidget {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 30,),
+                  const SizedBox(
+                    height: 30,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(18.0),
                     decoration: BoxDecoration(
@@ -169,7 +172,6 @@ class AddMonitoria extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),

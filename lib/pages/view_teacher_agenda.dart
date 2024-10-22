@@ -34,15 +34,14 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
   Map<String, dynamic> fetchMonitorInfo() {
     List<String> nomesAlunos = ["Bibia", "Luccas", "Felipe"];
     List<String> horariosAgendados = [
-      "20/10 10h até 11h",
-      "20/10 11h até 12h",
-      "21/10 10h até 11h"
+      "10/11 10h até 11h",
+      "11/11 11h até 12h",
+      "12/11 10h até 11h"
     ];
     List<String> imagensAlunos = [
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png"
+      "android/app/src/main/res/drawable/bibia.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/harry.png",
     ];
 
     return {
@@ -61,6 +60,7 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 40),
           Stack(
             children: [
               const Padding(
@@ -82,7 +82,7 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
