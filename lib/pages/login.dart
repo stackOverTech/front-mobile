@@ -50,20 +50,20 @@ class LoginPage extends StatelessWidget {
                 child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
-              // DefaultBtn(text: "Entrar", page: HomePage()),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                  minimumSize: const Size(double.infinity, 50),
-                ),
-                child: const Text('Entrar'),
-              ),
+              DefaultBtn(text: "Entrar", page: HomePage()),
+              // ElevatedButton(
+              //   onPressed: () {
+              //     Navigator.push(
+              //       context,
+              //       MaterialPageRoute(builder: (context) => HomePage()),
+              //     );
+              //   },
+              // style: ElevatedButton.styleFrom(
+              //   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+              //   minimumSize: const Size(double.infinity, 50),
+              // ),
+              //   child: const Text('Entrar'),
+              // ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
@@ -82,16 +82,19 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class DefaultBtn extends StatelessWidget {
+class DefaultBtn extends StatelessWidget{
   final String text;
   final StatelessWidget page;
 
-  DefaultBtn({required this.text, required this.page});
+  DefaultBtn({
+    required this.text,
+    required this.page
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () {
+      onPressed: (){
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => page),

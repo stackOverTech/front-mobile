@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/introduction.dart';
 
 class CadasterPage extends StatelessWidget {
@@ -126,7 +125,7 @@ class CadasterPage extends StatelessWidget {
                 child: const Text(
                   'Ajuda',
                   style: TextStyle(
-                      color: AppColors.LIGHT_COLOR,
+                      color: Color.fromRGBO(61, 112, 128, 1),
                       decoration: TextDecoration.underline),
                 ),
               ),
