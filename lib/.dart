@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/cadaster.dart';
+import 'package:one/pages/login.dart';
 import 'package:one/starter.dart';
 
 void main() {
@@ -26,9 +28,10 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
     _navigateToLogin();
   }
+
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
         context,
@@ -67,4 +70,3 @@ class SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-
