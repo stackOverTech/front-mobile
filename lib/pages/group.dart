@@ -55,7 +55,7 @@ class GroupPage extends StatelessWidget {
                     'Entre em um grupo \nde estudos :)',
                     style: TextStyle(
                       fontSize: 24,
-                      fontFamily: "inter",
+                      fontFamily: "Inter",
                       fontWeight: FontWeight.w600,
                       color: Color(0xFF2C313A),
                     ),
@@ -68,7 +68,7 @@ class GroupPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "inter"),
+                        fontFamily: "Inter"),
                   ),
                   const SizedBox(height: 8),
                   ListTile(
@@ -105,7 +105,7 @@ class GroupPage extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w500,
-                        fontFamily: "inter"),
+                        fontFamily: "Inter"),
                   ),
                   const SizedBox(height: 8),
                   ListTile(

@@ -1,6 +1,7 @@
 name: one
 description: A new Flutter project.
-
+# The following line prevents the package from being accidentally published to
+# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
@@ -14,11 +15,15 @@ dependencies:
   fluttertoast: ^8.2.1
   cupertino_icons: ^1.0.2
   http: ^1.2.2
+  table_calendar: ^3.1.2
+  # connectivity_plus: ^6.0.5
+  connectivity_plus: ^3.0.3
+  intl: ^0.19.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^5.0.0
   shared_preferences: ^2.0.13
 
 flutter:
@@ -37,6 +42,16 @@ flutter:
     - android/app/src/main/res/drawable/back_button_grey.png
     - android/app/src/main/res/drawable/task_alt.png
     - android/app/src/main/res/drawable/answer.png
+    - android/app/src/main/res/drawable/bibia.png
+    - android/app/src/main/res/drawable/bruninho.png
+    - android/app/src/main/res/drawable/bruno_code.png
+    - android/app/src/main/res/drawable/harry.png
+    - android/app/src/main/res/drawable/home_detail.png
+    - android/app/src/main/res/drawable/taylor.png
+    - android/app/src/main/res/drawable/enviar.png
+    - android/app/src/main/res/drawable/anexo.png
+    - android/app/src/main/res/drawable/star_filled.png
+    - android/app/src/main/res/drawable/star_null.png
 
 
   uses-material-design: true
