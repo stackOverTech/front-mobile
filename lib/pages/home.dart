@@ -4,6 +4,10 @@ import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';
 
 class HomePage extends StatelessWidget {
+  void _onSearch(String query) {
+    print('Searching for: $query');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,19 +25,17 @@ class HomePage extends StatelessWidget {
                       backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                       elevation: 0,
                       title: const Text(
-                    'One',
-                    style: TextStyle(
-                        fontFamily: "Righteous",
-                        fontSize: 24,
-                        color: Colors.white),
-                  ),
-                  actions: [
-                    IconButton(
-                      icon: const Icon(Icons.search),
-                      color: Colors.white,
-                      onPressed: () {},
-                    ),
-                  ],
+                        'One',
+                        style: TextStyle(
+                            fontFamily: "Righteous",
+                            fontSize: 24,
+                            color: Colors.white),
+                      ),
+                      actions: [
+                        SearchExpanded(
+                          onSearch: _onSearch,
+                        ),
+                      ],
                     ),
                     const SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -95,19 +97,19 @@ class HomePage extends StatelessWidget {
                       timeAgo: '3h',
                       content: 'Lorem ipsum dolor sit amet consectetur...',
                       codeSnippet: '''
-void main() {
-  runApp(MyApp());
-}
+                      void main() {
+                        runApp(MyApp());
+                      }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
-    );
-  }
-}
+                      class MyApp extends StatelessWidget {
+                        @override
+                        Widget build(BuildContext context) {
+                          return MaterialApp(
+                            debugShowCheckedModeBanner: false,
+                            home: SplashScreen(),
+                          );
+                        }
+                      }
                       ''',
                     ),
                     PostCard(
@@ -135,8 +137,8 @@ class MyApp extends StatelessWidget {
                       content:
                           'Como é que se fala "eu te odeio" em libras mesmo?',
                       codeSnippet: '''
-print("i hate you")
-hate()
+                        print("i hate you")
+                        hate()
                       ''',
                     ),
                   ],
@@ -146,67 +148,95 @@ hate()
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => NewQuestionPage(),
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
+            child: ConstrainedBox(
+              constraints:
+                  const BoxConstraints.tightFor(width: 150, height: 40),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NewQuestionPage(),
+                    ),
+                  );
+                },
+                backgroundColor: Colors.grey[600],
+                foregroundColor: Colors.white,
+                label: const Text(
+                  'Faça sua pergunta',
+                  style: TextStyle(fontSize: 14),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
             ),
-          );
-        },
-         child: const Icon(
+          ),
+          Positioned(
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NewQuestionPage(),
+                  ),
+                );
+              },
+              backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+              child: const Icon(
                 Icons.add,
-                color: Colors.white, // Cor do ícone "+"
+                color: Colors.white,
               ),
               shape: const CircleBorder(),
-        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
-            0, 
-        onTap: (int index) {
-          if (index == 1) {
-            // Verifica se o item "book" foi clicado
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    MonitoringPage(), 
-              ),
-            );
-          }
-          if (index == 2) {
-            // Verifica se o item "group" foi clicado
-             Navigator.of(context).push(
-               MaterialPageRoute(
-                 builder: (context) =>
-                     GroupPage(), 
-               ),
-             );
-          }
-          if (index == 3) {
-            // Verifica se o item "person" foi clicado
-            //  Navigator.of(context).push(
-            //    MaterialPageRoute(
-            //      builder: (context) =>
-            //          ProfilePage(), 
-            //    ),
-            //  );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
-         unselectedItemColor: Colors.white,
-        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
-        elevation: 10,
-        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        type: BottomNavigationBarType.fixed
-      ),
+          currentIndex: 0,
+          onTap: (int index) {
+            if (index == 1) {
+              // Verifica se o item "book" foi clicado
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MonitoringPage(),
+                ),
+              );
+            }
+            if (index == 2) {
+              // Verifica se o item "group" foi clicado
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GroupPage(),
+                ),
+              );
+            }
+            if (index == 3) {
+              // Verifica se o item "person" foi clicado
+              //  Navigator.of(context).push(
+              //    MaterialPageRoute(
+              //      builder: (context) =>
+              //          ProfilePage(),
+              //    ),
+              //  );
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+          ],
+          selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+          unselectedItemColor: Colors.white,
+          backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+          elevation: 10,
+          selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          type: BottomNavigationBarType.fixed),
     );
   }
 }
@@ -257,21 +287,56 @@ class PostCard extends StatelessWidget {
             Row(
               children: [
                 const CircleAvatar(
+                  radius: 20,
                   child: Icon(Icons.person),
                 ),
                 const SizedBox(width: 8.0),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(username,
-                        style: const TextStyle(fontWeight: FontWeight.bold)),
-                    Text(category,
-                        style: const TextStyle(
-                            color: Color.fromRGBO(97, 46, 88, 1))),
-                    Text(timeAgo,
-                        style: const TextStyle(
-                            color: Color.fromRGBO(91, 94, 85, 1))),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            username,
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Container(
+                            width: 5.0,
+                            height: 5.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color.fromRGBO(174, 176, 171, 100),
+                            ),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Text(
+                            category,
+                            style: const TextStyle(
+                                color: Color.fromRGBO(97, 46, 88, 1),
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const SizedBox(width: 4.0),
+                          Container(
+                            width: 5.0,
+                            height: 5.0,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Color.fromRGBO(174, 176, 171, 100),
+                            ),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Text(
+                            timeAgo,
+                            style: const TextStyle(
+                                color: Color.fromRGBO(91, 94, 85, 1),
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -279,8 +344,7 @@ class PostCard extends StatelessWidget {
             Text(content),
             if (codeSnippet != null)
               Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 8.0), 
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
                 padding: const EdgeInsets.all(8.0),
                 color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
@@ -292,15 +356,94 @@ class PostCard extends StatelessWidget {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(Icons.chat_bubble),
-                  label: const Text('Responder'),
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1))),
+                onPressed: () {},
+                icon: Image.asset(
+                    'android/app/src/main/res/drawable/answer.png',
+                    width: 15),
+                label: const Text(
+                  'Responder',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                  ),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 6.0),
+                  minimumSize: const Size(0, 0),
+                ).copyWith(
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0)),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class SearchExpanded extends StatefulWidget {
+  final Function(String) onSearch;
+
+  const SearchExpanded({required this.onSearch});
+
+  @override
+  _SearchExpandedState createState() => _SearchExpandedState();
+}
+
+class _SearchExpandedState extends State<SearchExpanded> {
+  final TextEditingController _searchController = TextEditingController();
+  bool _isSearching = false;
+
+  void _toggleSearch() {
+    setState(() {
+      _isSearching = !_isSearching;
+      if (!_isSearching) {
+        _searchController.clear();
+        widget.onSearch('');
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        if (_isSearching)
+          Container(
+            width: 280,
+            height: 35,
+            child: TextField(
+              controller: _searchController,
+              onChanged: widget.onSearch,
+              decoration: InputDecoration(
+                hintText: 'Quer procurar algo?',
+                filled: true,
+                fillColor: Color.fromRGBO(121, 147, 153, 100),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                  borderSide: BorderSide.none,
+                ),
+                contentPadding: const EdgeInsets.symmetric(
+                    vertical: 7.0, horizontal: 10.0),
+                hintStyle: const TextStyle(color: Colors.white),
+              ),
+              style: const TextStyle(color: Colors.white),
+            ),
+          ),
+        IconButton(
+          icon: Icon(
+            _isSearching ? Icons.close : Icons.search,
+            color: Colors.white,
+          ),
+          onPressed: _toggleSearch,
+        ),
+      ],
     );
   }
 }

@@ -228,12 +228,11 @@ class _CreateGroupState extends State<CreateGroupPage> {
         child: Material(
           elevation: 6.0,
           child: Container(
-            width: MediaQuery.of(context).size.width, 
+            width: MediaQuery.of(context).size.width,
             color: const Color(0xFFFDFDFD),
             padding: const EdgeInsets.all(16.0),
             child: Row(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, 
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Image.asset(
                   'android/app/src/main/res/drawable/task_alt.png',

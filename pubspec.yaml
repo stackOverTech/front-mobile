@@ -13,7 +13,7 @@ dependencies:
     sdk: flutter
   fluttertoast: ^8.2.1
   cupertino_icons: ^1.0.2
-  http: ^1.2.2
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -36,5 +36,7 @@ flutter:
     - android/app/src/main/res/drawable/back_button.png
     - android/app/src/main/res/drawable/back_button_grey.png
     - android/app/src/main/res/drawable/task_alt.png
+    - android/app/src/main/res/drawable/answer.png
+
 
   uses-material-design: true
