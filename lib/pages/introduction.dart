@@ -22,9 +22,9 @@ class IntroductionPage extends StatelessWidget {
                     fontSize: 36, fontWeight: FontWeight.w300, height: 0.9),
               ),
               const SizedBox(height: 48),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.home_outlined,
                     size: 30,
@@ -42,9 +42,9 @@ class IntroductionPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.book_outlined,
                     size: 30,
@@ -62,9 +62,9 @@ class IntroductionPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.people_alt_outlined,
                     size: 30,
@@ -82,9 +82,9 @@ class IntroductionPage extends StatelessWidget {
                 ],
               ),
               const SizedBox(height: 20),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Icon(
                     Icons.person_outline,
                     size: 30,
@@ -110,8 +110,8 @@ class IntroductionPage extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromRGBO(61, 112, 128, 1),
-                  minimumSize: Size(double.infinity, 50),
+                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                  minimumSize: const Size(double.infinity, 50),
                 ),
                 child: const Text('Entendi'),
               ),

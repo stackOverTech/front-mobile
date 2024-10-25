@@ -6,17 +6,17 @@ class GroupDetailsPage extends StatefulWidget {
 }
 
 class _GroupDetailsPageState extends State<GroupDetailsPage> {
-  String buttonText = 'Entrar no grupo'; 
-  Color buttonColor = const Color.fromRGBO(61, 112, 128, 1); 
+  String buttonText = 'Entrar no grupo';
+  Color buttonColor = const Color.fromRGBO(61, 112, 128, 1);
 
   void _toggleButton() {
     setState(() {
       if (buttonText == 'Entrar no grupo') {
-        buttonText = 'Sair do grupo'; 
-        buttonColor = Colors.grey; 
+        buttonText = 'Sair do grupo';
+        buttonColor = const Color.fromARGB(255, 124, 124, 124);
       } else {
-        buttonText = 'Entrar no grupo'; 
-        buttonColor = const Color.fromRGBO(61, 112, 128, 1); 
+        buttonText = 'Entrar no grupo';
+        buttonColor = const Color.fromRGBO(61, 112, 128, 1);
       }
     });
   }
@@ -31,7 +31,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
             children: [
               AppBar(
                 automaticallyImplyLeading: false,
-                toolbarHeight: 110,
+                toolbarHeight: 70,
                 backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                 leading: IconButton(
                   icon: Image.asset(
@@ -63,13 +63,13 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 15),
                   Center(
                     child: const Text(
                       'grupo dos estudiosos',
                       style: TextStyle(
                         fontSize: 26,
-                        fontFamily: "inter",
+                        fontFamily: "Inter",
                         fontWeight: FontWeight.w700,
                         color: Color(0xFF2C313A),
                       ),
@@ -81,7 +81,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      fontFamily: "inter",
+                      fontFamily: "Inter",
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -98,7 +98,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      fontFamily: "inter",
+                      fontFamily: "Inter",
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -115,7 +115,7 @@ class _GroupDetailsPageState extends State<GroupDetailsPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
-                      fontFamily: "inter",
+                      fontFamily: "Inter",
                     ),
                   ),
                   const SizedBox(height: 16),

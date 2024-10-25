@@ -2,16 +2,85 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// subindo as telas 
+// subindo as telas
 
-class ViewTeacherAgenda extends StatefulWidget {
+class ApointmantMonitor extends StatefulWidget {
+  final String monitorName;
+
+  ApointmantMonitor({required this.monitorName});
+
   @override
-  _ViewTeacherAgendaState createState() => _ViewTeacherAgendaState();
+  _ApointmantMonitorState createState() => _ApointmantMonitorState();
 }
 
-class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
+class _ApointmantMonitorState extends State<ApointmantMonitor> {
   DateTime selectedDay = DateTime.now();
   String? selectedTime;
+
+  void _sendFeedback(BuildContext context) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 0,
+        right: 0,
+        left: 0,
+        child: Material(
+          elevation: 6.0,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.12,
+            color: AppColors.BACKGROUND_COLOR,
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Image.asset(
+                  'android/app/src/main/res/drawable/task_alt.png',
+                  width: 90,
+                  height: 30,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  'Agendado com sucesso!',
+                  style: TextStyle(fontSize: 20, color: AppColors.BLACK_TEXT),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    overlay.insert(overlayEntry);
+    Future.delayed(const Duration(seconds: 2), () {
+      overlayEntry.remove();
+      Navigator.pop(context);
+    });
+  }
+
+  List<Widget>  _buildTimeOptions() {
+    List<String> times = ['10h-11h', '12h-13h', '14h-15h'];
+
+    return times.map((time) {
+      return Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Radio<String>(
+            value: time,
+            groupValue: selectedTime,
+            onChanged: (value) {
+              setState(() {
+                selectedTime = value;
+              });
+            },
+            activeColor: AppColors.DARKER_COLOR,
+          ),
+          Text(
+            time,
+            style: const TextStyle(color: AppColors.BLACK_TEXT, fontSize: 16),
+          ),
+        ],
+      );
+    }).toList();
+  }
 
   String _formatMonth(DateTime date) {
     List<String> months = [
@@ -31,43 +100,20 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
     return '${months[date.month - 1]} ${date.year}';
   }
 
-  Map<String, dynamic> fetchMonitorInfo() {
-    List<String> nomesAlunos = ["Bibia", "Luccas", "Felipe"];
-    List<String> horariosAgendados = [
-      "10/11 10h até 11h",
-      "11/11 11h até 12h",
-      "12/11 10h até 11h"
-    ];
-    List<String> imagensAlunos = [
-      "android/app/src/main/res/drawable/bibia.png",
-      "android/app/src/main/res/drawable/bruninho.png",
-      "android/app/src/main/res/drawable/harry.png",
-    ];
-
-    return {
-      'nomesAlunos': nomesAlunos,
-      'imagensAlunos': imagensAlunos,
-      'horariosAgendados': horariosAgendados
-    };
-  }
-
   @override
   Widget build(BuildContext context) {
-    // Obtenha os dados dos monitores
-    var monitorInfo = fetchMonitorInfo();
-
     return Scaffold(
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
-          const SizedBox(height: 40),
+          const SizedBox(height: 20),
           Stack(
             children: [
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
                   child: Text(
-                    'Agenda de monitorias',
+                    'Agenda do monitor',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
@@ -105,7 +151,12 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Selecione o dia desejado: ',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 15),
                   Container(
                     padding: const EdgeInsets.all(16.0),
                     decoration: BoxDecoration(
@@ -113,6 +164,7 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                       color: AppColors.BLACK_TEXT,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
+                    height: 380,
                     child: TableCalendar(
                       firstDay: DateTime.utc(2020, 1, 1),
                       lastDay: DateTime.utc(2030, 12, 31),
@@ -125,7 +177,7 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                       selectedDayPredicate: (day) {
                         return isSameDay(selectedDay, day);
                       },
-                      headerStyle: const HeaderStyle(
+                      headerStyle: HeaderStyle(
                         formatButtonVisible: false,
                         titleTextStyle: TextStyle(
                           color: AppColors.BACKGROUND_COLOR,
@@ -151,7 +203,7 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                           return Center(
                             child: Text(
                               _formatMonth(day),
-                              style: const TextStyle(
+                              style: TextStyle(
                                 color: AppColors.BACKGROUND_COLOR,
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
@@ -162,50 +214,43 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 30),
-                  // Exibir a lista dos monitores
-                  for (var i = 0; i < monitorInfo['nomesAlunos'].length; i++)
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: GestureDetector(
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Image.asset(
-                                    monitorInfo['imagensAlunos'][i],
-                                    width: 38,
-                                    height: 38,
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Text(
-                                    monitorInfo['nomesAlunos'][i],
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      color: AppColors.HOUR_TEXT,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Text(
-                                monitorInfo['horariosAgendados'][i],
-                                style: const TextStyle(
-                                  fontSize: 18,
-                                  color: AppColors.HOUR_TEXT,
-                                ),
-                              ),
-                            ],
-                          ),
+                  const SizedBox(height: 20),
+                  Container(
+                    padding: const EdgeInsets.all(18.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Horários disponíveis no dia\nselecionado:',
+                          style: TextStyle(
+                              fontSize: 20, fontWeight: FontWeight.w500),
                         ),
+                        ..._buildTimeOptions(),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () => _sendFeedback(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.DARKER_COLOR,
+                      minimumSize: const Size(262, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
                       ),
                     ),
+                    child: const Text(
+                      'Agendar',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: AppColors.BACKGROUND_COLOR,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

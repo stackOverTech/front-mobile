@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/add_monitoria.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
+import 'package:one/pages/view_monitors.dart';
 
 class MonitoringPage extends StatefulWidget {
   @override
@@ -8,7 +10,7 @@ class MonitoringPage extends StatefulWidget {
 }
 
 class _MonitoringPageState extends State<MonitoringPage> {
-  String userProfile = 'aluno'; 
+  String userProfile = 'aluno';
   String studentName = '';
   String teacherName = '';
   String monitorName = '';
@@ -91,7 +93,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
 
                   // Se for monitor, adiciona mais uma coluna de disciplinas
                   if (userProfile == 'monitor') ...[
-                    const Column(
+                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -106,16 +108,33 @@ class _MonitoringPageState extends State<MonitoringPage> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              SizedBox(width: 16),
-                              SubjectCard(
+                              GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddMonitoria()),
+                                );
+                              },
+                              child: SubjectCard(
                                 title: 'Biologia',
                                 color: Color.fromARGB(255, 48, 119, 82),
                               ),
-                              SizedBox(width: 16),
-                              SubjectCard(
+                            ),
+                            SizedBox(width: 16),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => AddMonitoria()),
+                                );
+                              },
+                              child: SubjectCard(
                                 title: 'Geografia',
                                 color: Color.fromARGB(255, 119, 48, 81),
                               ),
+                            ),
                               SizedBox(width: 16),
                             ],
                           ),
@@ -140,35 +159,89 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: const [
-                            SubjectCard(
-                              title: 'Matemática',
-                              color: Color(0xFFBB4C53),
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Matemática',
+                                color: Color(0xFFBB4C53),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'História',
-                              color: Color(0xFF7E4987),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'História',
+                                color: Color(0xFF7E4987),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'DAD',
-                              color: Color(0xFF305A77),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'DAD',
+                                color: Color(0xFF305A77),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Português',
-                              color: Color(0xFFD27051),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Português',
+                                color: Color(0xFFD27051),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Biologia',
-                              color: Color.fromARGB(255, 48, 119, 82),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Biologia',
+                                color: Color.fromARGB(255, 48, 119, 82),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Geografia',
-                              color: Color.fromARGB(255, 119, 48, 81),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Geografia',
+                                color: Color.fromARGB(255, 119, 48, 81),
+                              ),
                             ),
                           ],
                         ),
@@ -195,20 +268,47 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: const [
-                            SubjectCard(
-                              title: 'DAD',
-                              color: Color(0xFF305A77),
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'DAD',
+                                color: Color(0xFF305A77),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Português',
-                              color: Color(0xFFD27051),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Português',
+                                color: Color(0xFFD27051),
+                              ),
                             ),
                             SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Matemática',
-                              color: Color(0xFFBB4C53),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ViewMonitors()),
+                                );
+                              },
+                              child: SubjectCard(
+                                title: 'Matemática',
+                                color: Color(0xFFBB4C53),
+                              ),
                             ),
                           ],
                         ),
@@ -327,8 +427,8 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   borderRadius: BorderRadius.circular(10.0),
                   borderSide: BorderSide.none,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 7.0, horizontal: 10.0),
+                contentPadding:
+                    const EdgeInsets.symmetric(vertical: 7.0, horizontal: 10.0),
                 hintStyle: const TextStyle(color: Colors.white),
               ),
               style: const TextStyle(color: Colors.white),
