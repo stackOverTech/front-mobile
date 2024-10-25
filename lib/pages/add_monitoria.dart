@@ -67,6 +67,7 @@ class AddMonitoria extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Visualize as monitorias\nagendadas:',
@@ -83,8 +84,12 @@ class AddMonitoria extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.MEDIUM_COLOR,
-                              minimumSize: const Size(262, 55)),
+                            backgroundColor: AppColors.DARKER_COLOR,
+                            minimumSize: const Size(262, 55),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
                           child: const Text(
                             'Ver monitorias',
                             style: TextStyle(
@@ -120,10 +125,14 @@ class AddMonitoria extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.MEDIUM_COLOR,
-                              minimumSize: const Size(262, 55)),
+                            backgroundColor: AppColors.DARKER_COLOR,
+                            minimumSize: const Size(262, 55),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
                           child: const Text(
-                            'Editar monitoria',
+                            'Editar agenda',
                             style: TextStyle(
                                 color: AppColors.BACKGROUND_COLOR,
                                 fontSize: 18,
@@ -159,8 +168,12 @@ class AddMonitoria extends StatelessWidget {
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.MEDIUM_COLOR,
-                              minimumSize: const Size(262, 55)),
+                            backgroundColor: AppColors.DARKER_COLOR,
+                            minimumSize: const Size(262, 55),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
                           child: const Text(
                             'Feedback',
                             style: TextStyle(

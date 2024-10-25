@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/edit_profile.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
+import 'package:one/pages/profile.dart';
 import 'package:one/pages/question.dart';
 import 'package:one/pages/view_profile.dart';
 
@@ -257,12 +259,12 @@ class _HomePageState extends State<HomePage> {
             }
             if (index == 3) {
               // Verifica se o item "person" foi clicado
-              //  Navigator.of(context).push(
-              //    MaterialPageRoute(
-              //      builder: (context) =>
-              //          ProfilePage(),
-              //    ),
-              //  );
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProfilePage(),
+                  ),
+                );
             }
           },
           items: const [
@@ -343,6 +345,7 @@ class PostCard extends StatelessWidget {
   final String? codeSnippet;
   final String? imageUser;
   final String? imageUrl;
+  final bool? isProfile;
 
   PostCard({
     required this.username,
@@ -351,7 +354,8 @@ class PostCard extends StatelessWidget {
     required this.content,
     this.imageUser,
     this.imageUrl,
-    this.codeSnippet,
+    this.isProfile,
+    this.codeSnippet,  
   });
 
   @override

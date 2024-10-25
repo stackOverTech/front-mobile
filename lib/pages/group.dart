@@ -3,6 +3,7 @@ import 'package:one/pages/create_group.dart';
 import 'package:one/pages/home.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/group_details.dart';
+import 'package:one/pages/profile.dart';
 
 class GroupPage extends StatelessWidget {
   @override
@@ -256,6 +257,15 @@ class GroupPage extends StatelessWidget {
               ),
             );
           }
+           if (index == 3) {
+              // Verifica se o item "person" foi clicado
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProfilePage(),
+                  ),
+                );
+            }
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),

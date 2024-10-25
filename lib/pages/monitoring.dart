@@ -2,6 +2,7 @@
   import 'package:one/pages/add_monitoria.dart';
   import 'package:one/pages/group.dart';
   import 'package:one/pages/home.dart';
+import 'package:one/pages/profile.dart';
   import 'package:one/pages/view_monitors.dart';
 
   class MonitoringPage extends StatefulWidget {
@@ -10,7 +11,7 @@
   }
 
   class _MonitoringPageState extends State<MonitoringPage> {
-    String userProfile = 'aluno';
+    String userProfile = 'monitor';
     String studentName = '';
     String teacherName = '';
     String monitorName = '';
@@ -330,12 +331,21 @@
                   builder: (context) => HomePage(),
                 ),
               );
-            } else if (index == 2) {
+            } if (index == 2) {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => GroupPage(),
                 ),
               );
+            }
+             if (index == 3) {
+              // Verifica se o item "person" foi clicado
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        ProfilePage(),
+                  ),
+                );
             }
           },
           items: const [

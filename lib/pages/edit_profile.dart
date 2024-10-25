@@ -38,7 +38,7 @@ void _sendFeedback(BuildContext context) {
   });
 }
 
-class ProfilePage extends StatelessWidget {
+class EditProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

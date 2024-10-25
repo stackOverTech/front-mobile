@@ -273,11 +273,11 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                 children: [
                   ClipOval(
                     child: Align(
-                      alignment: Alignment.topCenter, // Foca na parte superior
-                      heightFactor: 1.0, // Ajuste conforme necessário
+                      alignment: Alignment.topCenter, 
+                      heightFactor: 1.0,
                       child: Image.asset(
                         widget.monitorImage,
-                        width: 150, // Ajuste para manter proporcional
+                        width: 150, 
                         height: 150,
                         fit: BoxFit
                             .cover, 
