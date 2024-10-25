@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/question.dart';
+import 'package:one/pages/view_profile.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -79,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    _buildDisciplineSelector(), 
+                    _buildDisciplineSelector(),
                     const SizedBox(height: 8),
                   ],
                 ),
@@ -365,15 +366,24 @@ class PostCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                imageUser != null
-                    ? CircleAvatar(
-                        radius: 20,
-                        backgroundImage: AssetImage(imageUser!),
-                      )
-                    : const CircleAvatar(
-                        radius: 20,
-                        child: Icon(Icons.person),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => ViewProfile(),
                       ),
+                    );
+                  },
+                  child: imageUser != null
+                      ? CircleAvatar(
+                          radius: 20,
+                          backgroundImage: AssetImage(imageUser!),
+                        )
+                      : const CircleAvatar(
+                          radius: 20,
+                          child: Icon(Icons.person),
+                        ),
+                ),
                 const SizedBox(width: 8.0),
                 Expanded(
                   child: Column(
@@ -432,8 +442,7 @@ class PostCard extends StatelessWidget {
             ],
             if (codeSnippet != null)
               Container(
-                margin: const EdgeInsets.symmetric(
-                    vertical: 8.0), 
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
                 padding: const EdgeInsets.all(8.0),
                 color: const Color.fromRGBO(202, 202, 202, 1),
                 child: Text(
@@ -447,8 +456,8 @@ class PostCard extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {
                   //Navigator.push(
-                    //context,
-                    //MaterialPageRoute(builder: (context) => NewQuestionPage()),
+                  //context,
+                  //MaterialPageRoute(builder: (context) => NewQuestionPage()),
                   //);
                 },
                 icon: Image.asset(

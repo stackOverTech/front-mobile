@@ -4,7 +4,6 @@ import 'package:one/pages/conect.dart';
 
 void main() {
   runApp(MyApp());
-  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -28,9 +27,10 @@ class SplashScreenState extends State<SplashScreen> {
     super.initState();
     _navigateToLogin();
   }
+
   _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5), () {});
-    
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Navigator.pushReplacement(
         context,
@@ -62,7 +62,6 @@ class SplashScreenState extends State<SplashScreen> {
               width: 250,
             ),
             const SizedBox(height: 200),
-            const SizedBox(height: 200),
             Image.asset('android/app/src/main/res/drawable/charging.gif'),
           ],
         ),
@@ -70,4 +69,3 @@ class SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

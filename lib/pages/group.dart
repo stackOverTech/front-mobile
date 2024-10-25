@@ -127,7 +127,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -153,7 +153,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -179,7 +179,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -198,22 +198,23 @@ class GroupPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
             child: ConstrainedBox(
-              constraints: const BoxConstraints.tightFor(width: 120, height: 40),
+              constraints:
+                  const BoxConstraints.tightFor(width: 120, height: 40),
               child: FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                    MaterialPageRoute(
+                      builder: (context) => CreateGroupPage(),
+                    ),
+                  );
                 },
                 backgroundColor: Colors.grey[600],
                 foregroundColor: Colors.white,
                 label: const Text(
-                  'Crie um grupo',  
+                  'Crie um grupo',
                   style: TextStyle(fontSize: 14),
                 ),
-                 shape: RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
@@ -223,10 +224,10 @@ class GroupPage extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                  MaterialPageRoute(
+                    builder: (context) => CreateGroupPage(),
+                  ),
+                );
               },
               backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
               child: const Icon(

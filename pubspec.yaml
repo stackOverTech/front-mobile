@@ -52,6 +52,7 @@ flutter:
     - android/app/src/main/res/drawable/anexo.png
     - android/app/src/main/res/drawable/star_filled.png
     - android/app/src/main/res/drawable/star_null.png
+    - android/app/src/main/res/drawable/medal.png
 
 
   uses-material-design: true
