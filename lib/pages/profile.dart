@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/edit_profile.dart';
 
 import 'group.dart';
 import 'home.dart';
@@ -9,7 +10,8 @@ class ProfilePage extends StatefulWidget {
   _ProfilePageState createState() => _ProfilePageState();
 }
 
-class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStateMixin {
+class _ProfilePageState extends State<ProfilePage>
+    with SingleTickerProviderStateMixin {
   TabController? _tabController;
 
   @override
@@ -27,6 +29,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Column(
         children: [
           Stack(
@@ -35,15 +38,36 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
             children: [
               _buildTopSection(),
               const Positioned(
-                top: 100, // Ajustando a posição para a foto de perfil
+                top: 90, // Ajustando a posição para a foto de perfil
                 child: CircleAvatar(
-                  radius: 50,
-                  backgroundImage: AssetImage('one/android/app/src/main/res/drawable/profile.png'),
+                  radius: 80,
+                  backgroundImage: AssetImage(
+                      'android/app/src/main/res/drawable/taylor.png'),
                 ),
               ),
+              Positioned(
+                top: 200,
+                right: 120,
+                child: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color.fromARGB(255, 198, 198, 198),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.edit, color: Colors.black),
+                    onPressed: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => EditProfilePage(),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              )
             ],
           ),
-          const SizedBox(height: 70), // Espaço para a imagem sobreposta
+          const SizedBox(height: 80), // Espaço para a imagem sobreposta
           _buildUserInfo(),
           TabBar(
             controller: _tabController,
@@ -110,11 +134,30 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     );
   }
 
-  // Seção superior com a cor de fundo verde
+  // Seção superior com fundo verde e parte inferior branca arredondada
   Widget _buildTopSection() {
-    return Container(
-      height: 130,
-      color: const Color.fromRGBO(61, 112, 128, 1), // Cor verde do topo sem bordas arredondadas
+    return Stack(
+      children: [
+        Container(
+          height: 200,
+          color: const Color.fromRGBO(61, 112, 128, 1), // Cor verde
+        ),
+        Positioned(
+          top: 150,
+          left: 0,
+          right: 0,
+          child: Container(
+            height: 50,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 
@@ -124,7 +167,7 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
       children: const [
         Text(
           'Taylor',
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),
         ),
         Text(
           '17 anos\n3ºD Tech',
@@ -156,18 +199,23 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
   Widget _buildRankingPodium() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.end, // Alinha a parte de baixo dos itens
+      crossAxisAlignment:
+          CrossAxisAlignment.end, // Alinha a parte de baixo dos itens
       children: [
-        _buildRankingBox('2º', 'ziza', const Color.fromARGB(255, 20, 67, 105), 60), // 2º lugar
+        _buildRankingBox('2º', 'ziza', const Color.fromARGB(255, 20, 67, 105),
+            60), // 2º lugar
         const SizedBox(width: 8),
-        _buildRankingBox('1º', 'bibia', const Color.fromARGB(255, 117, 20, 13), 80), // 1º lugar sobreposto
+        _buildRankingBox('1º', 'bibia', const Color.fromARGB(255, 117, 20, 13),
+            80), // 1º lugar sobreposto
         const SizedBox(width: 8),
-        _buildRankingBox('3º', 'taylor', const Color.fromARGB(255, 180, 124, 40), 60), // 3º lugar
+        _buildRankingBox('3º', 'taylor',
+            const Color.fromARGB(255, 180, 124, 40), 60), // 3º lugar
       ],
     );
   }
 
-  Widget _buildRankingBox(String position, String name, Color color, double height) {
+  Widget _buildRankingBox(
+      String position, String name, Color color, double height) {
     return Container(
       height: height,
       width: 70,
@@ -188,7 +236,8 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
         children: [
           Text(
             position,
-            style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                color: Colors.white, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 4),
           Text(
@@ -223,7 +272,13 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
     return ListView.builder(
       itemCount: 2,
       itemBuilder: (context, index) {
-        return PostCard(username: "Taylor", category: "category", timeAgo: "timeAgo", content: "content", isProfile: true,);
+        return PostCard(
+          username: "Taylor",
+          category: "category",
+          timeAgo: "timeAgo",
+          content: "content",
+          isProfile: true,
+        );
       },
     );
   }
@@ -240,15 +295,16 @@ class _ProfilePageState extends State<ProfilePage> with SingleTickerProviderStat
           const SizedBox(height: 16),
           DropdownButtonFormField(
             items: [
-              DropdownMenuItem(child: Text('Matéria 1'), value: 'mat1'),
-              DropdownMenuItem(child: Text('Matéria 2'), value: 'mat2'),
+              DropdownMenuItem(value: 'mat1', child: Text('Matéria 1')),
+              DropdownMenuItem(value: 'mat2', child: Text('Matéria 2')),
             ],
             onChanged: (value) {},
             decoration: InputDecoration(labelText: 'Matéria *'),
           ),
           const SizedBox(height: 16),
           TextField(
-            decoration: InputDecoration(labelText: 'Por que você quer ser monitor dessa matéria? *'),
+            decoration: InputDecoration(
+                labelText: 'Por que você quer ser monitor dessa matéria? *'),
           ),
           const SizedBox(height: 16),
           ElevatedButton(
