@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/monitoring.dart';
-import 'package:one/question.dart';
+import 'package:one/pages/question.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -153,33 +153,30 @@ hate()
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex:
-            0, 
-        onTap: (int index) {
-          if (index == 1) {
-            // Verifica se o item "people" foi clicado
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) =>
-                    MonitoringPage(), 
-              ),
-            );
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
-        ],
-        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
-         unselectedItemColor: Colors.white,
-        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
-        elevation: 10,
-        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
-        type: BottomNavigationBarType.fixed
-      ),
+          currentIndex: 0,
+          onTap: (int index) {
+            if (index == 1) {
+              // Verifica se o item "people" foi clicado
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => MonitoringPage(),
+                ),
+              );
+            }
+          },
+          items: const [
+            BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+          ],
+          selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+          unselectedItemColor: Colors.white,
+          backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+          elevation: 10,
+          selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+          type: BottomNavigationBarType.fixed),
     );
   }
 }

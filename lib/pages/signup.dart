@@ -12,21 +12,19 @@ class SignUpPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              Image.asset('android/app/src/main/res/drawable/onelogo.png',
-                  height: 220),
+              Image.asset('android/app/src/main/res/drawable/onelogo.png', height: 220),
               const SizedBox(height: 30),
               const Text(
                 'Sua jornada\ncomeça aqui',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
+                style: TextStyle(fontSize: 36, fontWeight: FontWeight.w400, height: 0.9),
               ),
               const SizedBox(height: 48),
               const TextField(
                 decoration: InputDecoration(
                   labelText: 'Email',
                   labelStyle: TextStyle(color: Color.fromRGBO(61, 112, 128, 1)),
-                  border: OutlineInputBorder(),
+                  border: OutlineInputBorder(), 
                 ),
               ),
               const SizedBox(height: 16),
@@ -42,8 +40,8 @@ class SignUpPage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 style: ButtonStyle(
-                    foregroundColor: MaterialStateProperty.all<Color>(
-                        const Color.fromARGB(211, 0, 0, 0))),
+                  foregroundColor: MaterialStateProperty.all<Color>(const Color.fromARGB(211, 0, 0, 0))
+                ),
                 child: const Text('Já tem uma conta? Faça seu login'),
               ),
               const SizedBox(height: 20),
@@ -52,10 +50,11 @@ class SignUpPage extends StatelessWidget {
               TextButton(
                 onPressed: () {},
                 child: const Text(
-                  'Ajuda',
-                  style: TextStyle(
+                    'Ajuda',
+                    style: TextStyle(
                       color: Color.fromRGBO(61, 112, 128, 1),
-                      decoration: TextDecoration.underline),
+                      decoration: TextDecoration.underline
+                  ),
                 ),
               ),
             ],
