@@ -156,8 +156,7 @@ class _HomePageState extends State<HomePage> {
                             username: 'taylor',
                             category: 'Banco de Dados',
                             timeAgo: '1d',
-                            content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                            content: 'Fiz um DELETE sem WHERE e agora',
                             imageUser:
                                 'android/app/src/main/res/drawable/taylor.png',
                           ),
@@ -258,12 +257,11 @@ class _HomePageState extends State<HomePage> {
             }
             if (index == 3) {
               // Verifica se o item "person" foi clicado
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProfilePage(),
-                  ),
-                );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
             }
           },
           items: const [
@@ -336,6 +334,7 @@ class CategoryChip extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class PostCard extends StatelessWidget {
   final String username;
   final String category;
@@ -345,17 +344,18 @@ class PostCard extends StatelessWidget {
   final String? imageUser;
   final String? imageUrl;
   final bool? isProfile;
+  final bool? showReplyButton;
 
-  PostCard({
-    required this.username,
-    required this.category,
-    required this.timeAgo,
-    required this.content,
-    this.imageUser,
-    this.imageUrl,
-    this.isProfile,
-    this.codeSnippet,  
-  });
+  PostCard(
+      {required this.username,
+      required this.category,
+      required this.timeAgo,
+      required this.content,
+      this.imageUser,
+      this.imageUrl,
+      this.isProfile,
+      this.codeSnippet,
+      this.showReplyButton = true});
 
   @override
   Widget build(BuildContext context) {
@@ -454,38 +454,39 @@ class PostCard extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  //Navigator.push(
-                  //context,
-                  //MaterialPageRoute(builder: (context) => NewQuestionPage()),
-                  //);
-                },
-                icon: Image.asset(
+            if (showReplyButton ==
+                true) // Condição para mostrar o botão "Responder"
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    // Ação do botão Responder
+                  },
+                  icon: Image.asset(
                     'android/app/src/main/res/drawable/answer.png',
-                    width: 15),
-                label: const Text(
-                  'Responder',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+                    width: 15,
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 6.0),
-                  minimumSize: const Size(0, 0),
-                ).copyWith(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
+                  label: const Text(
+                    'Responder',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 6.0),
+                    minimumSize: const Size(0, 0),
+                  ).copyWith(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
