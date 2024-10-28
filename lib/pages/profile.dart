@@ -44,12 +44,13 @@ class _ProfilePageState extends State<ProfilePage>
                 child: CircleAvatar(
                   radius: 80,
                   backgroundImage: AssetImage(
-                      'android/app/src/main/res/drawable/taylor.png'),
+                    'android/app/src/main/res/drawable/taylor.png',
+                  ),
                 ),
               ),
               Positioned(
                 top: 200,
-                right: 120,
+                right: 130,
                 child: _buildEditButton(context),
               ),
             ],
@@ -176,43 +177,30 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   Widget _buildRankingTab() {
-    return Padding(
-      padding: EdgeInsets.zero, 
-      child: ListView.builder(
-        itemCount: 2, // Temos 2 seções principais (pódio e lista de badges)
-        itemBuilder: (context, index) {
-          if (index == 0) {
-            return Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 60.0, vertical: 16.0),
-                  decoration: BoxDecoration(
-                    border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  child: const Text(
-                    'Perguntas Mais Respondidas',
-                    style: TextStyle(
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18.0,
-                      fontFamily: "Inter",
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 15),
-                _buildRankingPodium(),
-                const SizedBox(height: 16),
-              ],
-            );
-          } else if (index == 1) {
-            return _buildBadgeList();
-          }
-          return SizedBox
-              .shrink(); // Para garantir que não há erro se index for fora do alcance
-        },
-      ),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        const SizedBox(height: 8),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 60.0, vertical: 16.0),
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
+            borderRadius: BorderRadius.circular(8.0),
+          ),
+          child: const Text(
+            'Perguntas Mais Respondidas',
+            style: TextStyle(
+              fontWeight: FontWeight.w600,
+              fontSize: 18.0,
+              fontFamily: "Inter",
+            ),
+          ),
+        ),
+        const SizedBox(height: 15),
+        _buildRankingPodium(),
+        const SizedBox(height: 16),
+        _buildBadgeList(),
+      ],
     );
   }
 
@@ -279,10 +267,11 @@ class _ProfilePageState extends State<ProfilePage>
     return Column(
       children: List.generate(badges.length, (index) {
         return Padding(
-          padding: const EdgeInsets.only(bottom: 8.0, right: 20, left: 20), // Espaço entre os badges
+          padding: const EdgeInsets.only(
+              bottom: 8.0, right: 20, left: 20), // Espaço entre os badges
           child: Container(
             padding: const EdgeInsets.symmetric(
-                horizontal: 16.0, vertical:2.0), // Padding interno
+                horizontal: 16.0, vertical: 2.0), // Padding interno
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
               borderRadius: BorderRadius.circular(8.0),
@@ -415,20 +404,19 @@ class _ProfilePageState extends State<ProfilePage>
 }
 
 Widget _buildEditButton(BuildContext context) {
-  return Container(
-    decoration: BoxDecoration(
-      shape: BoxShape.circle,
-      color: const Color.fromARGB(255, 198, 198, 198),
-    ),
-    child: IconButton(
-      icon: const Icon(Icons.edit, color: Colors.black),
-      onPressed: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => EditProfilePage(),
-          ),
-        );
-      },
+  return InkWell(
+    borderRadius: BorderRadius.circular(40), // Para efeito de clique circular
+    onTap: () {
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => EditProfilePage(),
+        ),
+      );
+    },
+    child: CircleAvatar(
+      radius: 25,
+      backgroundColor: const Color.fromARGB(255, 198, 198, 198),
+      child: const Icon(Icons.edit, color: Colors.black),
     ),
   );
 }
