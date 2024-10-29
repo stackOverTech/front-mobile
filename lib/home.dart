@@ -351,7 +351,7 @@ class PostCard extends StatelessWidget {
     required this.content,
     this.imageUser,
     this.imageUrl,
-    this.codeSnippet,
+    this.codeSnippet, 
   });
 
   @override

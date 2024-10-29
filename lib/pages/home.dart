@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/answer.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/profile.dart';
 import 'package:one/pages/question.dart';
 import 'package:one/pages/view_profile.dart';
+import 'package:one/pages/answer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -343,7 +345,6 @@ class PostCard extends StatelessWidget {
   final String? codeSnippet;
   final String? imageUser;
   final String? imageUrl;
-  final bool? isProfile;
   final bool? showReplyButton;
 
   PostCard(
@@ -353,7 +354,6 @@ class PostCard extends StatelessWidget {
       required this.content,
       this.imageUser,
       this.imageUrl,
-      this.isProfile,
       this.codeSnippet,
       this.showReplyButton = true});
 
@@ -460,7 +460,20 @@ class PostCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    // Ação do botão Responder
+                    try {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AnswerPage(
+                            username: username,
+                            category: category,
+                            timeAgo: timeAgo,
+                            content: content,
+                          ),
+                        ),
+                      );
+                    } catch (e) {
+                      print("Erro ao navegar para AnswerPage: $e");
+                    }
                   },
                   icon: Image.asset(
                     'android/app/src/main/res/drawable/answer.png',

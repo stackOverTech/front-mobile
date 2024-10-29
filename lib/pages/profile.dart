@@ -339,7 +339,6 @@ class _ProfilePageState extends State<ProfilePage>
           timeAgo: posts[index]["timeAgo"]!,
           content: posts[index]["content"]!,
           imageUser: posts[index]["imageUser"],
-          isProfile: true,
           showReplyButton: false,
         );
       },
