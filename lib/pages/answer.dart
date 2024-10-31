@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one/home.dart';
+import 'package:one/pages/question.dart';
 import 'package:one/pages/view_profile.dart';
 
 class AnswerPage extends StatefulWidget {
@@ -21,8 +21,8 @@ class AnswerPage extends StatefulWidget {
     this.imageUrl,
     this.codeSnippet,
     this.showReplyButton = true,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   _AnswerPageState createState() => _AnswerPageState();
@@ -83,15 +83,18 @@ class _AnswerPageState extends State<AnswerPage> {
                       ),
                     );
                   },
-                  child: widget.imageUser != null
-                      ? CircleAvatar(
-                          radius: 20,
-                          backgroundImage: AssetImage(widget.imageUser!),
-                        )
-                      : const CircleAvatar(
-                          radius: 20,
-                          child: Icon(Icons.person),
-                        ),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 70),
+                    child: widget.imageUser != null
+                        ? CircleAvatar(
+                            radius: 20,
+                            backgroundImage: AssetImage(widget.imageUser!),
+                          )
+                        : const CircleAvatar(
+                            radius: 20,
+                            child: Icon(Icons.person),
+                          ),
+                  ),
                 ),
                 const SizedBox(width: 8.0),
                 Expanded(
@@ -102,17 +105,15 @@ class _AnswerPageState extends State<AnswerPage> {
                         widget.username,
                         style: const TextStyle(fontWeight: FontWeight.bold),
                       ),
-
-                      Text(
-                        widget.category,
-                        style: const TextStyle(
-                          color: Color.fromRGBO(97, 46, 88, 1),
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 4.0), // Espaçamento entre category e timeAgo
                       Row(
                         children: [
+                          Text(
+                            widget.category,
+                            style: const TextStyle(
+                              color: Color.fromRGBO(97, 46, 88, 1),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                           const SizedBox(width: 5.0),
                           Container(
                             width: 5.0,
@@ -132,6 +133,12 @@ class _AnswerPageState extends State<AnswerPage> {
                           ),
                         ],
                       ),
+                      const SizedBox(height: 8.0),
+                      Text(widget.content),
+                      if (widget.imageUrl != null) ...[
+                        const SizedBox(height: 8.0),
+                        Image.asset(widget.imageUrl!),
+                      ],
                       if (widget.codeSnippet != null) ...[
                         const SizedBox(height: 8.0),
                         Container(
@@ -159,48 +166,110 @@ class _AnswerPageState extends State<AnswerPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const SizedBox(height: 10.0),
         const Padding(
-          padding: EdgeInsets.only(left: 12.0),
-          child: Text(
-            'Responda:',
-            style: TextStyle(
-              fontFamily: 'Inter',
-              fontSize: 16.0,
-              color: Colors.black87,
-            ),
+          padding: EdgeInsets.only(left: 26.0),
+          child: UserProfileRow(
+            username: 'taylor',
+            imageUser: 'android/app/src/main/res/drawable/taylor.png',
           ),
         ),
-        const SizedBox(height: 8.0),
-        TextField(
-          controller: _answerController,
-          maxLines: 5,
-          decoration: const InputDecoration(
-            hintText: 'Escreva aqui sua resposta...',
-            border: OutlineInputBorder(),
+        const SizedBox(height: 15.0),
+        Padding(
+          padding: const EdgeInsets.only(
+              left: 16.0, right: 16.0), 
+          child: Stack(
+            children: [
+              Container(
+                height: 190,
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
+                child: TextField(
+                  controller: _answerController,
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    hintText: 'Escreva aqui sua resposta...',
+                    border: InputBorder.none,
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+                  ),
+                  style: TextStyle(
+                    fontFamily: 'Inter',
+                    fontSize: 16.0,
+                    color: Colors.black87,
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 10,
+                right: 16,
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Image.asset(
+                        'android/app/src/main/res/drawable/anexo.png',
+                        width: 30,
+                        height: 30,
+                      ),
+                      onPressed: () {
+                        // Não implementado: funcionalidade de anexo de arquivo
+                      },
+                    ),
+                    IconButton(
+                      icon: Image.asset(
+                        'android/app/src/main/res/drawable/enviar.png',
+                        width: 35,
+                        height: 35,
+                      ),
+                      onPressed: () {
+                        _sendFeedback(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 16.0),
-        Row(
-          children: [
-            IconButton(
-              icon: const Icon(Icons.attach_file),
-              onPressed: () {
-                // Não implementado: funcionalidade de anexo de arquivo
-              },
-            ),
-            const Spacer(),
-            IconButton(
-              icon: const Icon(Icons.send),
-              onPressed: () {
-                if (_answerController.text.isNotEmpty) {
-                  print('Resposta enviada: ${_answerController.text}');
-                  Navigator.of(context).pop();
-                }
-              },
-            ),
-          ],
-        ),
+        )
       ],
     );
   }
+}
+
+void _sendFeedback(BuildContext context) {
+  final overlay = Overlay.of(context);
+  final overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: Material(
+        elevation: 6.0,
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.15,
+          color: const Color(0xFFFDFDFD),
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                'Resposta publicada!',
+                style: TextStyle(fontSize: 20, color: Color(0xFF2C313A)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+
+  overlay.insert(overlayEntry);
+
+  Future.delayed(const Duration(seconds: 3), () {
+    overlayEntry.remove();
+    Navigator.pop(context);
+  });
 }

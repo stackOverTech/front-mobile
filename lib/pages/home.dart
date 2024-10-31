@@ -132,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                             category: 'Banco de Dados',
                             timeAgo: '2h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'Qual é a diferença entre uma chave primária e uma chave estrangeira em um banco de dados relacional?',
                             imageUser:
                                 'android/app/src/main/res/drawable/harry.png',
                           ),
@@ -141,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                             category: 'POO',
                             timeAgo: '3h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'O que é encapsulamento em POO e como ele contribui para a segurança e a manutenção do código? Me de exemplos por favor',
                             imageUrl:
                                 'android/app/src/main/res/drawable/bruno_code.png',
                             imageUser:
@@ -152,7 +152,7 @@ class _HomePageState extends State<HomePage> {
                             category: 'Inglês',
                             timeAgo: '4h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'Qual é a diferença entre o uso de "who" e "whom" em uma frase?',
                           ),
                           PostCard(
                             username: 'taylor',
@@ -438,7 +438,12 @@ class PostCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              maxLines: 1, // Limite de 3 linhas
+              overflow: TextOverflow
+                  .ellipsis, // Exibe "..." se o texto for muito longo
+            ),
             if (imageUrl != null) ...[
               const SizedBox(height: 8.0),
               Image.asset(imageUrl!),
@@ -468,6 +473,9 @@ class PostCard extends StatelessWidget {
                             category: category,
                             timeAgo: timeAgo,
                             content: content,
+                            imageUrl: imageUrl,
+                            imageUser: imageUser,
+                            codeSnippet: codeSnippet,
                           ),
                         ),
                       );
