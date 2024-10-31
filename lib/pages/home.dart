@@ -5,7 +5,6 @@ import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/profile.dart';
 import 'package:one/pages/question.dart';
 import 'package:one/pages/view_profile.dart';
-import 'package:one/pages/answer.dart';
 
 class HomePage extends StatefulWidget {
   @override
