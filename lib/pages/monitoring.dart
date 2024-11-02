@@ -11,7 +11,7 @@ import 'package:one/pages/profile.dart';
   }
 
   class _MonitoringPageState extends State<MonitoringPage> {
-    String userProfile = 'monitor';
+    String userProfile = 'aluno';
     String studentName = '';
     String teacherName = '';
     String monitorName = '';
