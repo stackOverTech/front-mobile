@@ -55,6 +55,7 @@ flutter:
     - android/app/src/main/res/drawable/star_filled.png
     - android/app/src/main/res/drawable/star_null.png
     - android/app/src/main/res/drawable/medal.png
+    - android/app/src/main/res/drawable/wifi.png
 
 
   uses-material-design: true

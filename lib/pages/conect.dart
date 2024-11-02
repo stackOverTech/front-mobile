@@ -35,15 +35,6 @@ class _ConectState extends State<Conect> {
     setState(() {
       isConnected = conectado;
     });
-    
-    // Se estiver conectado, recarregar a tela
-    if (conectado) {
-      // Isso pode ser uma navegação, ou apenas um setState para reconstruir o widget
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => widget.child),
-        (Route<dynamic> route) => false,
-      );
-    }
   }
 
   @override
@@ -65,8 +56,7 @@ class _ConectState extends State<Conect> {
                 width: MediaQuery.of(context).size.width * 0.6,
                 height: MediaQuery.of(context).size.height * 0.3,
                 child: Image.asset(
-                  'android/app/src/main/res/drawable/error.png',
-                  fit: BoxFit.fitHeight,
+                  'android/app/src/main/res/drawable/wifi.png'
                 ),
               ),
               const SizedBox(height: 30),
@@ -92,6 +82,7 @@ class _ConectState extends State<Conect> {
       );
     }
 
+    // Retorna o child normalmente se estiver conectado
     return widget.child;
   }
 }
