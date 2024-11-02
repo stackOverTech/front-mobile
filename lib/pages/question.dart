@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:one/functions/get-disciplines.dart';
+import 'package:one/functions/post-questions.dart';
+import 'package:one/models/disciplinas.model.dart';
 
 class NewQuestionPage extends StatefulWidget {
   @override
@@ -7,7 +10,55 @@ class NewQuestionPage extends StatefulWidget {
 
 class _NewQuestionPageState extends State<NewQuestionPage> {
   final TextEditingController _contentController = TextEditingController();
-  String _selectedCategory = '';
+  List<Disciplina> _disciplinas = [];
+  Disciplina? _selectedDisciplina;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadDisciplinas();
+  }
+
+  Future<void> _loadDisciplinas() async {
+    try {
+      final disciplinas = await fetchDisciplinas();
+      setState(() {
+        _disciplinas = disciplinas;
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Erro ao carregar disciplinas')),
+      );
+    }
+  }
+
+  Future<void> _submitQuestion() async {
+    if (_selectedDisciplina != null && _contentController.text.isNotEmpty) {
+      final success = await postQuestion(
+        idUsuario: 1,
+        idDisciplina: _selectedDisciplina!.id,
+        idInstituicao: 1,
+        enunciado: _contentController.text,
+        imagem: "http://url",
+        codigo: "SELECT * FROM popopo",
+      );
+
+      if (!success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Erro ao enviar a pergunta')),
+        );
+      } else {
+        // Limpar o campo após enviar
+        _contentController.clear();
+        setState(() {
+          _selectedDisciplina = null; // Limpar a seleção da disciplina
+        });
+
+        // Retornar à tela anterior
+        Navigator.of(context).pop(); // Adicione esta linha
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +67,7 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(); // Retorna à tela anterior
           },
         ),
         backgroundColor: Colors.white,
@@ -27,15 +78,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Row(
-              children: [
-                CircleAvatar(
-                  child: Icon(Icons.person),
-                ),
-                SizedBox(width: 8.0),
-                Text('taylor', style: TextStyle(fontWeight: FontWeight.bold)),
-              ],
-            ),
             const SizedBox(height: 16.0),
             TextField(
               controller: _contentController,
@@ -46,101 +88,56 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               ),
             ),
             const SizedBox(height: 16.0),
-            Row(
-              children: [
-                IconButton(
-                  icon:const  Icon(Icons.attach_file),
-                  onPressed: () {
-                    // Não implementado: funcionalidade de anexo de arquivo
-                  },
-                ),
-                const Spacer(),
-                IconButton(
-                  icon: const Icon(Icons.send),
-                  onPressed: () {
-                    if (_contentController.text.isNotEmpty && _selectedCategory.isNotEmpty) {
-                      Navigator.of(context).pop({
-                        'content': _contentController.text,
-                        'category': _selectedCategory,
-                      });
-                    }
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 16.0),
             const Text('Vincule a uma disciplina'),
             const SizedBox(height: 8.0),
             SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
-                children: [
-                  CategoryChip(
-                    label: 'Banco de Dados',
-                    onSelected: () {
+                children: _disciplinas.map((disciplina) {
+                  return GestureDetector(
+                    onTap: () {
                       setState(() {
-                        _selectedCategory = 'Banco de Dados';
+                        _selectedDisciplina = _selectedDisciplina == disciplina
+                            ? null
+                            : disciplina;
                       });
                     },
-                    selected: _selectedCategory == 'Banco de Dados',
-                  ),
-                  CategoryChip(
-                    label: 'Português',
-                    onSelected: () {
-                      setState(() {
-                        _selectedCategory = 'Português';
-                      });
-                    },
-                    selected: _selectedCategory == 'Português',
-                  ),
-                  CategoryChip(
-                    label: 'Matemática',
-                    onSelected: () {
-                      setState(() {
-                        _selectedCategory = 'Matemática';
-                      });
-                    },
-                    selected: _selectedCategory == 'Matemática',
-                  ),
-                  CategoryChip(
-                    label: 'Inglês',
-                    onSelected: () {
-                      setState(() {
-                        _selectedCategory = 'Inglês';
-                      });
-                    },
-                    selected: _selectedCategory == 'Inglês',
-                  ),
-                ],
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16.0, vertical: 8.0),
+                      decoration: BoxDecoration(
+                        color: _selectedDisciplina == disciplina
+                            ? Colors.teal
+                            : Colors.transparent,
+                        border: Border.all(color: Colors.teal),
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                      child: Text(
+                        disciplina.nome,
+                        style: TextStyle(
+                          color: _selectedDisciplina == disciplina
+                              ? Colors.white
+                              : Colors.teal,
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () async {
+                  await _submitQuestion();
+                },
+                child: const Text('Enviar Pergunta'),
               ),
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CategoryChip extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final Function onSelected;
-
-  CategoryChip({required this.label, required this.selected, required this.onSelected});
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 4.0),
-      child: ChoiceChip(
-        label: Text(label, style: TextStyle(color: selected ? Colors.white : Colors.teal)),
-        selected: selected,
-        onSelected: (bool value) {
-          onSelected();
-        },
-        selectedColor: Colors.teal,
-        backgroundColor: Colors.transparent,
-        shape: StadiumBorder(side: BorderSide(color: Colors.teal)),
       ),
     );
   }

@@ -1,6 +1,10 @@
+import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
+import '../models/disciplinas.model.dart';
 
 class MonitoringPage extends StatefulWidget {
   @override
@@ -8,15 +12,17 @@ class MonitoringPage extends StatefulWidget {
 }
 
 class _MonitoringPageState extends State<MonitoringPage> {
-  String userProfile = 'aluno'; 
+  String userProfile = 'aluno';
   String studentName = '';
   String teacherName = '';
   String monitorName = '';
+  List<Disciplina> _disciplinas = [];
 
   @override
   void initState() {
     super.initState();
     fetchNamesFromDatabase();
+    fetchDisciplinas(); // Chama a função para buscar as disciplinas
   }
 
   void fetchNamesFromDatabase() async {
@@ -25,6 +31,34 @@ class _MonitoringPageState extends State<MonitoringPage> {
       teacherName = 'Grilo';
       monitorName = 'Harry';
     });
+  }
+
+  Future<void> fetchDisciplinas() async {
+    final response = await http
+        .get(Uri.parse('https://back-cyc5.onrender.com/disciplina/all'));
+
+    if (response.statusCode == 200) {
+      List jsonResponse = json.decode(response.body);
+      setState(() {
+        _disciplinas =
+            jsonResponse.map((data) => Disciplina.fromJson(data)).toList();
+      });
+    } else {
+      throw Exception('Falha ao carregar disciplinas');
+    }
+  }
+
+  Color _getRandomColor() {
+    const List<Color> colors = [
+      Color(0xFFBB4C53),
+      Color(0xFF7E4987),
+      Color(0xFF305A77),
+      Color(0xFFD27051),
+      Color.fromARGB(255, 48, 119, 82),
+      Color.fromARGB(255, 119, 48, 81),
+    ];
+
+    return colors[Random().nextInt(colors.length)];
   }
 
   void _onSearch(String query) {
@@ -140,36 +174,19 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: const [
-                            SubjectCard(
-                              title: 'Matemática',
-                              color: Color(0xFFBB4C53),
-                            ),
-                            SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'História',
-                              color: Color(0xFF7E4987),
-                            ),
-                            SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'DAD',
-                              color: Color(0xFF305A77),
-                            ),
-                            SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Português',
-                              color: Color(0xFFD27051),
-                            ),
-                            SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Biologia',
-                              color: Color.fromARGB(255, 48, 119, 82),
-                            ),
-                            SizedBox(width: 16),
-                            SubjectCard(
-                              title: 'Geografia',
-                              color: Color.fromARGB(255, 119, 48, 81),
-                            ),
+                          children: [
+                            ..._disciplinas.map((disciplina) {
+                              // Aplica a cor aleatória para cada disciplina
+                              Color randomColor = _getRandomColor();
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: SubjectCard(
+                                  title: disciplina.nome,
+                                  color: randomColor, // Aplica a cor aleatória
+                                ),
+                              );
+                            }).toList(),
                           ],
                         ),
                       ),
@@ -178,7 +195,6 @@ class _MonitoringPageState extends State<MonitoringPage> {
 
                   const SizedBox(height: 16),
 
-                  // Disciplinas que recebo monitoria (Para aluno e monitor)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -296,52 +312,40 @@ class SearchExpanded extends StatefulWidget {
 
 class _SearchExpandedState extends State<SearchExpanded> {
   final TextEditingController _searchController = TextEditingController();
-  bool _isSearching = false;
-
-  void _toggleSearch() {
-    setState(() {
-      _isSearching = !_isSearching;
-      if (!_isSearching) {
-        _searchController.clear();
-        widget.onSearch('');
-      }
-    });
-  }
+  bool _isExpanded = false;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (_isSearching)
-          Container(
-            width: 280,
-            height: 35,
-            child: TextField(
-              controller: _searchController,
-              onChanged: widget.onSearch,
-              decoration: InputDecoration(
-                hintText: 'Quer procurar algo?',
-                filled: true,
-                fillColor: Color.fromRGBO(121, 147, 153, 100),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                  borderSide: BorderSide.none,
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _isExpanded = !_isExpanded;
+        });
+      },
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: _isExpanded ? 300 : 50,
+        height: 40,
+        child: Row(
+          children: [
+            if (_isExpanded)
+              Expanded(
+                child: TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                    hintText: 'Buscar',
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: widget.onSearch,
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                    vertical: 7.0, horizontal: 10.0),
-                hintStyle: const TextStyle(color: Colors.white),
               ),
-              style: const TextStyle(color: Colors.white),
+            Icon(
+              _isExpanded ? Icons.close : Icons.search,
+              color: Colors.white,
             ),
-          ),
-        IconButton(
-          icon: Icon(
-            _isSearching ? Icons.close : Icons.search,
-            color: Colors.white,
-          ),
-          onPressed: _toggleSearch,
+          ],
         ),
-      ],
+      ),
     );
   }
 }
