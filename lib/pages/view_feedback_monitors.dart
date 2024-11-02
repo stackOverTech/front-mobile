@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
+// subindo as telas
+
 class ViewFeedbackMonitors extends StatefulWidget {
   @override
   _ViewFeedbackMonitorsState createState() => _ViewFeedbackMonitorsState();
@@ -29,6 +31,7 @@ class _ViewFeedbackMonitorsState extends State<ViewFeedbackMonitors> {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 40),
           Stack(
             children: [
               const Padding(
@@ -50,7 +53,7 @@ class _ViewFeedbackMonitorsState extends State<ViewFeedbackMonitors> {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -106,15 +109,20 @@ class _ViewFeedbackMonitorsState extends State<ViewFeedbackMonitors> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(5, (index) {
-                            return GestureDetector(
-                              onTap: () => _onStarTap(index),
-                              child: Image.asset(
-                                index < _selectedStars
-                                    ? 'android/app/src/main/res/drawable/star_filled.png'
-                                    : 'android/app/src/main/res/drawable/star_null.png',
-                                width: 24,
-                                height: 24,
-                              ),
+                            return Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _onStarTap(index),
+                                  child: Image.asset(
+                                    index < _selectedStars
+                                        ? 'android/app/src/main/res/drawable/star_filled.png'
+                                        : 'android/app/src/main/res/drawable/star_null.png',
+                                    width: 24,
+                                    height: 24,
+                                  ),
+                                ),
+                                if (index < 4) SizedBox(width: 8),
+                              ],
                             );
                           }),
                         ),
