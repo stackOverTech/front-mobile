@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one/pages/question.dart';
 import 'package:one/pages/view_profile.dart';
 
-class AnswerPage extends StatefulWidget {
+class SeeAnswerPage extends StatefulWidget {
   final String username;
   final String category;
   final String timeAgo;
@@ -11,8 +10,9 @@ class AnswerPage extends StatefulWidget {
   final String? imageUser;
   final String? imageUrl;
   final bool? showReplyButton;
+  final List<Map<String, String>> answers; // Adicione aqui as respostas
 
-  const AnswerPage({
+  const SeeAnswerPage({
     required this.username,
     required this.category,
     required this.timeAgo,
@@ -20,24 +20,23 @@ class AnswerPage extends StatefulWidget {
     this.imageUser,
     this.imageUrl,
     this.codeSnippet,
-    this.showReplyButton = false,
+    this.showReplyButton = true,
+    this.answers = const [], // Inicialize com uma lista vazia se não houver respostas
     super.key,
   });
 
   @override
-  _AnswerPageState createState() => _AnswerPageState();
+  _SeeAnswerPageState createState() => _SeeAnswerPageState();
 }
 
-class _AnswerPageState extends State<AnswerPage> {
-  final TextEditingController _answerController = TextEditingController();
-
+class _SeeAnswerPageState extends State<SeeAnswerPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFDFDFD),
+      backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFFDFDFD),
+        backgroundColor: const Color.fromRGBO(238, 238, 238, 1),
         toolbarHeight: 70,
         leading: IconButton(
           padding: const EdgeInsets.only(left: 15.0),
@@ -57,7 +56,25 @@ class _AnswerPageState extends State<AnswerPage> {
           children: [
             _buildUserProfileCard(),
             const SizedBox(height: 16.0),
-            _buildAnswerInput(),
+            const Text(
+              'Respostas',
+              style: TextStyle(
+                fontSize: 16,
+                fontFamily: "Inter",
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF2C313A),
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Expanded(
+              child: ListView.builder(
+                itemCount: widget.answers.length,
+                itemBuilder: (context, index) {
+                  final answer = widget.answers[index];
+                  return _buildAnswerCard(answer);
+                },
+              ),
+            ),
           ],
         ),
       ),
@@ -118,7 +135,7 @@ class _AnswerPageState extends State<AnswerPage> {
                           Container(
                             width: 5.0,
                             height: 5.0,
-                            decoration: BoxDecoration(
+                            decoration: const BoxDecoration(
                               shape: BoxShape.circle,
                               color: Color.fromRGBO(174, 176, 171, 100),
                             ),
@@ -162,113 +179,42 @@ class _AnswerPageState extends State<AnswerPage> {
     );
   }
 
-  Widget _buildAnswerInput() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 10.0),
-        const Padding(
-          padding: EdgeInsets.only(left: 26.0),
-          child: UserProfileRow(
-            username: 'taylor',
-            imageUser: 'android/app/src/main/res/drawable/taylor.png',
-          ),
-        ),
-        const SizedBox(height: 15.0),
-        Padding(
-          padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-          child: Stack(
-            children: [
-              Container(
-                height: 190,
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(15.0),
+  Widget _buildAnswerCard(Map<String, String> answer) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                CircleAvatar(
+                  radius: 16,
+                  backgroundImage: answer['imageUser'] != null
+                      ? AssetImage(answer['imageUser']!)
+                      : null,
+                  child: answer['imageUser'] == null
+                      ? const Icon(Icons.person)
+                      : null,
                 ),
-                child: TextField(
-                  controller: _answerController,
-                  maxLines: 5,
-                  decoration: InputDecoration(
-                    hintText: 'Escreva aqui sua resposta...',
-                    border: InputBorder.none,
-                    contentPadding:
-                        EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
-                  ),
-                  style: TextStyle(
-                    fontFamily: 'Inter',
-                    fontSize: 16.0,
-                    color: Colors.black87,
-                  ),
+                const SizedBox(width: 8.0),
+                Text(
+                  answer['username'] ?? 'Usuário',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-              ),
-              Positioned(
-                bottom: 10,
-                right: 16,
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Image.asset(
-                        'android/app/src/main/res/drawable/anexo.png',
-                        width: 30,
-                        height: 30,
-                      ),
-                      onPressed: () {
-                        // Não implementado: funcionalidade de anexo de arquivo
-                      },
-                    ),
-                    IconButton(
-                      icon: Image.asset(
-                        'android/app/src/main/res/drawable/enviar.png',
-                        width: 35,
-                        height: 35,
-                      ),
-                      onPressed: () {
-                        _sendFeedback(context);
-                      },
-                    ),
-                  ],
+                const SizedBox(width: 8.0),
+                Text(
+                  answer['timeAgo'] ?? '',
+                  style: const TextStyle(color: Colors.grey),
                 ),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
-  }
-}
-
-void _sendFeedback(BuildContext context) {
-  final overlay = Overlay.of(context);
-  final overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: 0,
-      left: 0,
-      right: 0,
-      child: Material(
-        elevation: 6.0,
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.15,
-          color: const Color(0xFFFDFDFD),
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                'Resposta publicada!',
-                style: TextStyle(fontSize: 20, color: Color(0xFF2C313A)),
-              ),
-            ],
-          ),
+              ],
+            ),
+            const SizedBox(height: 8.0),
+            Text(answer['content'] ?? ''),
+          ],
         ),
       ),
-    ),
-  );
-
-  overlay.insert(overlayEntry);
-
-  Future.delayed(const Duration(seconds: 3), () {
-    overlayEntry.remove();
-    Navigator.pop(context);
-  });
+    );
+  }
 }

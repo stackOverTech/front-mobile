@@ -349,7 +349,7 @@ class _ProfilePageState extends State<ProfilePage>
     return Center(
       child: Column(
         children: [
-          const SizedBox(height: 60),
+          const SizedBox(height: 20),
           Text(
             'Você ainda não é um monitor :(',
             style: TextStyle(fontSize: 18),
