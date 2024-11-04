@@ -113,7 +113,10 @@ class IntroductionPage extends StatelessWidget {
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Entendi'),
+                child: Text(
+                  'Entendi',
+                  style: const TextStyle(color: Colors.white),
+                ),
               ),
               const SizedBox(height: 20),
             ],

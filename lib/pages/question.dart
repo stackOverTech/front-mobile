@@ -201,44 +201,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
               ),
             ),
             const SizedBox(height: 16.0),
-            SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 14.0),
-              scrollDirection: Axis.horizontal,
-              child: Row(
-                children: _disciplinas.map((disciplina) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedDisciplina = _selectedDisciplina == disciplina
-                            ? null
-                            : disciplina;
-                      });
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 4.0),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16.0, vertical: 8.0),
-                      decoration: BoxDecoration(
-                        color: _selectedDisciplina == disciplina
-                            ? Colors.teal
-                            : Colors.transparent,
-                        border: Border.all(color: Colors.teal),
-                        borderRadius: BorderRadius.circular(30.0),
-                      ),
-                      child: Text(
-                        disciplina.nome,
-                        style: TextStyle(
-                          color: _selectedDisciplina == disciplina
-                              ? Colors.white
-                              : Colors.teal,
-                        ),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
-            const SizedBox(height: 16.0),
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
@@ -368,8 +330,7 @@ void _sendFeedback(BuildContext context) {
 
   overlay.insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 3), () {
+  Future.delayed(const Duration(seconds: 2), () {
     overlayEntry.remove();
-    Navigator.pop(context);
   });
 }

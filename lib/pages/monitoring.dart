@@ -1,17 +1,14 @@
 import 'dart:convert';
 import 'dart:math';
 import 'package:flutter/material.dart';
-<<<<<<< HEAD
 import 'package:http/http.dart' as http;
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 import '../models/disciplinas.model.dart';
-=======
 import 'package:one/pages/add_monitoria.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
 import 'package:one/pages/view_monitors.dart';
->>>>>>> c14ab93db44a9940fc2f1bbbbb74d9bc294fd0ec
 
 class MonitoringPage extends StatefulWidget {
   @override
@@ -132,7 +129,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
 
                   // Se for monitor, adiciona mais uma coluna de disciplinas
                   if (userProfile == 'monitor') ...[
-                     Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -148,32 +145,32 @@ class _MonitoringPageState extends State<MonitoringPage> {
                           child: Row(
                             children: [
                               GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddMonitoria()),
-                                );
-                              },
-                              child: SubjectCard(
-                                title: 'Biologia',
-                                color: Color.fromARGB(255, 48, 119, 82),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddMonitoria()),
+                                  );
+                                },
+                                child: SubjectCard(
+                                  title: 'Biologia',
+                                  color: Color.fromARGB(255, 48, 119, 82),
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 16),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddMonitoria()),
-                                );
-                              },
-                              child: SubjectCard(
-                                title: 'Geografia',
-                                color: Color.fromARGB(255, 119, 48, 81),
+                              SizedBox(width: 16),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddMonitoria()),
+                                  );
+                                },
+                                child: SubjectCard(
+                                  title: 'Geografia',
+                                  color: Color.fromARGB(255, 119, 48, 81),
+                                ),
                               ),
-                            ),
                               SizedBox(width: 16),
                             ],
                           ),
@@ -389,12 +386,6 @@ class _SearchExpandedState extends State<SearchExpanded> {
                   ),
                   onChanged: widget.onSearch,
                 ),
-<<<<<<< HEAD
-=======
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 7.0, horizontal: 10.0),
-                hintStyle: const TextStyle(color: Colors.white),
->>>>>>> c14ab93db44a9940fc2f1bbbbb74d9bc294fd0ec
               ),
             Icon(
               _isExpanded ? Icons.close : Icons.search,
