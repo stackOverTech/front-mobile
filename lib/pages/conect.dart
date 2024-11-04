@@ -20,7 +20,11 @@ class _ConectState extends State<Conect> {
   void initState() {
     super.initState();
     _checkInitialConnection();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
+    subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) {
+      debugPrint(
+          'Conectividade alterada: $result'); // Adicionado para diagnóstico
       verificarConexao(result);
     });
   }
@@ -31,10 +35,13 @@ class _ConectState extends State<Conect> {
   }
 
   void verificarConexao(ConnectivityResult result) {
-    bool conectado = (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi);
-    setState(() {
-      isConnected = conectado;
-    });
+    bool conectado = (result == ConnectivityResult.mobile ||
+        result == ConnectivityResult.wifi);
+    if (conectado != isConnected) {
+      setState(() {
+        isConnected = conectado;
+      });
+    }
   }
 
   @override
@@ -45,44 +52,42 @@ class _ConectState extends State<Conect> {
 
   @override
   Widget build(BuildContext context) {
-    if (!isConnected) {
-      return Scaffold(
-        backgroundColor: AppColors.BACKGROUND_COLOR,
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width * 0.6,
-                height: MediaQuery.of(context).size.height * 0.3,
-                child: Image.asset(
-                  'android/app/src/main/res/drawable/wifi.png'
-                ),
+    return isConnected
+        ? widget.child
+        : Scaffold(
+            backgroundColor: AppColors.BACKGROUND_COLOR,
+            body: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    child: Image.asset(
+                      'android/app/src/main/res/drawable/wifi.png',
+                    ),
+                  ),
+                  const SizedBox(height: 30),
+                  const Text(
+                    'Ops... Parece que você \nestá sem internet',
+                    style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 120),
+                  ElevatedButton(
+                    onPressed: () {
+                      _checkInitialConnection();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.MEDIUM_COLOR,
+                      minimumSize: const Size(262, 55),
+                    ),
+                    child: const Text('Tentar Novamente',
+                        style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
+                  ),
+                ],
               ),
-              const SizedBox(height: 30),
-              const Text(
-                'Ops... Parece que você \nestá sem internet',
-                style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 120),
-              ElevatedButton(
-                onPressed: () {
-                  _checkInitialConnection();
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.MEDIUM_COLOR,
-                  minimumSize: const Size(262, 55),
-                ),
-                child: const Text('Tentar Novamente', style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
-              ),
-            ],
-          ),
-        ),
-      );
-    }
-
-    // Retorna o child normalmente se estiver conectado
-    return widget.child;
+            ),
+          );
   }
 }
