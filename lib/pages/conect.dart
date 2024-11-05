@@ -19,24 +19,22 @@ class _ConectState extends State<Conect> {
   @override
   void initState() {
     super.initState();
-    _checkInitialConnection();
-    subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) {
-      debugPrint(
-          'Conectividade alterada: $result'); // Adicionado para diagnóstico
-      verificarConexao(result);
-    });
+    _initializeConnectivity();
   }
 
-  Future<void> _checkInitialConnection() async {
-    var result = await Connectivity().checkConnectivity();
-    verificarConexao(result);
+  Future<void> _initializeConnectivity() async {
+    // Verifica a conectividade inicial
+    final result = await Connectivity().checkConnectivity();
+    _updateConnectivityStatus(result);
+
+    // Inscreve-se para monitorar mudanças de conectividade
+    subscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectivityStatus);
   }
 
-  void verificarConexao(ConnectivityResult result) {
-    bool conectado = (result == ConnectivityResult.mobile ||
-        result == ConnectivityResult.wifi);
+  void _updateConnectivityStatus(ConnectivityResult result) {
+    final conectado = result == ConnectivityResult.mobile ||
+        result == ConnectivityResult.wifi;
     if (conectado != isConnected) {
       setState(() {
         isConnected = conectado;
@@ -52,42 +50,51 @@ class _ConectState extends State<Conect> {
 
   @override
   Widget build(BuildContext context) {
-    return isConnected
-        ? widget.child
-        : Scaffold(
-            backgroundColor: AppColors.BACKGROUND_COLOR,
-            body: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    child: Image.asset(
-                      'android/app/src/main/res/drawable/wifi.png',
-                    ),
-                  ),
-                  const SizedBox(height: 30),
-                  const Text(
-                    'Ops... Parece que você \nestá sem internet',
-                    style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 120),
-                  ElevatedButton(
-                    onPressed: () {
-                      _checkInitialConnection();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.MEDIUM_COLOR,
-                      minimumSize: const Size(262, 55),
-                    ),
-                    child: const Text('Tentar Novamente',
-                        style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
-                  ),
-                ],
+    return isConnected ? widget.child : _buildNoInternetScreen();
+  }
+
+  Widget _buildNoInternetScreen() {
+    return Directionality(
+      // Adiciona Directionality
+      textDirection:
+          TextDirection.ltr, // Define o texto da esquerda para a direita
+      child: Scaffold(
+        backgroundColor: AppColors.BACKGROUND_COLOR,
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.6,
+                height: MediaQuery.of(context).size.height * 0.3,
+                child: Image.asset(
+                  'android/app/src/main/res/drawable/wifi.png',
+                  fit: BoxFit.fitHeight,
+                ),
               ),
-            ),
-          );
+              const SizedBox(height: 30),
+              const Text(
+                'Ops... Parece que você \nestá sem internet',
+                style: TextStyle(fontSize: 24, color: AppColors.HOUR_TEXT),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 120),
+              ElevatedButton(
+                onPressed: () async {
+                  final result = await Connectivity().checkConnectivity();
+                  _updateConnectivityStatus(result);
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.MEDIUM_COLOR,
+                  minimumSize: const Size(262, 55),
+                ),
+                child: const Text('Tentar Novamente',
+                    style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
