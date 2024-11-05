@@ -29,8 +29,16 @@ flutter:
     - family: Righteous
       fonts:
         - asset: android/fonts/righ.ttf
-        
+
   assets:
+    # - android/app/src/main/res/drawable/onelogo.png
+    # - android/app/src/main/res/drawable/charging.gif
+    # - android/app/src/main/res/drawable/osbrabosdojava.png
+    # - android/app/src/main/res/drawable/thebrabos.png
+    # - android/app/src/main/res/drawable/grupodeestudos.png
+    # - android/app/src/main/res/drawable/back_button.png
+    # - android/app/src/main/res/drawable/back_button_grey.png
+    # - android/app/src/main/res/drawable/task_alt.png
     - android/app/src/main/res/drawable/onelogo.png
     - android/app/src/main/res/drawable/charging.gif
     - android/app/src/main/res/drawable/osbrabosdojava.png
@@ -39,5 +47,17 @@ flutter:
     - android/app/src/main/res/drawable/back_button.png
     - android/app/src/main/res/drawable/back_button_grey.png
     - android/app/src/main/res/drawable/task_alt.png
+    - android/app/src/main/res/drawable/answer.png
+    - android/app/src/main/res/drawable/bibia.png
+    - android/app/src/main/res/drawable/bruninho.png
+    - android/app/src/main/res/drawable/bruno_code.png
+    - android/app/src/main/res/drawable/harry.png
+    - android/app/src/main/res/drawable/home_detail.png
+    - android/app/src/main/res/drawable/taylor.png
+    # - android/app/src/main/res/drawable/enviar.png
+    # - android/app/src/main/res/drawable/anexo.png
+    - android/app/src/main/res/drawable/star_filled.png
+    - android/app/src/main/res/drawable/star_null.png
+    # - android/app/src/main/res/drawable/medal.png
 
   uses-material-design: true

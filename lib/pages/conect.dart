@@ -19,30 +19,26 @@ class _ConectState extends State<Conect> {
   @override
   void initState() {
     super.initState();
-    _checkInitialConnection();
-    subscription = Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      verificarConexao(result);
-    });
+    _initializeConnectivity();
   }
 
-  Future<void> _checkInitialConnection() async {
-    var result = await Connectivity().checkConnectivity();
-    verificarConexao(result);
+  Future<void> _initializeConnectivity() async {
+    // Verifica a conectividade inicial
+    final result = await Connectivity().checkConnectivity();
+    _updateConnectivityStatus(result);
+
+    // Inscreve-se para monitorar mudanças de conectividade
+    subscription =
+        Connectivity().onConnectivityChanged.listen(_updateConnectivityStatus);
   }
 
-  void verificarConexao(ConnectivityResult result) {
-    bool conectado = (result == ConnectivityResult.mobile || result == ConnectivityResult.wifi);
-    setState(() {
-      isConnected = conectado;
-    });
-    
-    // Se estiver conectado, recarregar a tela
-    if (conectado) {
-      // Isso pode ser uma navegação, ou apenas um setState para reconstruir o widget
-      Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => widget.child),
-        (Route<dynamic> route) => false,
-      );
+  void _updateConnectivityStatus(ConnectivityResult result) {
+    final conectado = result == ConnectivityResult.mobile ||
+        result == ConnectivityResult.wifi;
+    if (conectado != isConnected) {
+      setState(() {
+        isConnected = conectado;
+      });
     }
   }
 
@@ -54,8 +50,15 @@ class _ConectState extends State<Conect> {
 
   @override
   Widget build(BuildContext context) {
-    if (!isConnected) {
-      return Scaffold(
+    return isConnected ? widget.child : _buildNoInternetScreen();
+  }
+
+  Widget _buildNoInternetScreen() {
+    return Directionality(
+      // Adiciona Directionality
+      textDirection:
+          TextDirection.ltr, // Define o texto da esquerda para a direita
+      child: Scaffold(
         backgroundColor: AppColors.BACKGROUND_COLOR,
         body: Center(
           child: Column(
@@ -77,21 +80,21 @@ class _ConectState extends State<Conect> {
               ),
               const SizedBox(height: 120),
               ElevatedButton(
-                onPressed: () {
-                  _checkInitialConnection();
+                onPressed: () async {
+                  final result = await Connectivity().checkConnectivity();
+                  _updateConnectivityStatus(result);
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.MEDIUM_COLOR,
                   minimumSize: const Size(262, 55),
                 ),
-                child: const Text('Tentar Novamente', style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
+                child: const Text('Tentar Novamente',
+                    style: TextStyle(color: AppColors.BACKGROUND_COLOR)),
               ),
             ],
           ),
         ),
-      );
-    }
-
-    return widget.child;
+      ),
+    );
   }
 }

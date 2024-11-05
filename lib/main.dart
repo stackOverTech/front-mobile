@@ -9,9 +9,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Conect(child: SplashScreen()),
+    return Conect(
+      // `Conect` envolve todo o `MaterialApp`
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: SplashScreen(), // Tela inicial
+      ),
     );
   }
 }
@@ -28,25 +31,16 @@ class SplashScreenState extends State<SplashScreen> {
     _navigateToLogin();
   }
 
-  _navigateToLogin() async {
-    await Future.delayed(const Duration(seconds: 5), () {});
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+  Future<void> _navigateToLogin() async {
+    await Future.delayed(const Duration(seconds: 5));
+    // Navega para a próxima página sem bloquear a atualização do estado de conectividade
+    if (mounted) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => StarterPage()),
       );
-    });
+    }
   }
-
-  // _navigateToLogin() async {
-  //   await Future.delayed(const Duration(seconds: 5), () {});
-  //   // ignore: use_build_context_synchronously
-  //   Navigator.pushReplacement(
-  //     context,
-  //     MaterialPageRoute(builder: (context) => StarterPage()),
-  //   );
-  // }
 
   @override
   Widget build(BuildContext context) {

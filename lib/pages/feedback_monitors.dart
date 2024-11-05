@@ -1,30 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas 
+// subindo as telas
 
 class FeedbackMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
     List<String> nomesMonitores = [
-      "Harry",
-      "Olivia",
-      "Bruno",
-      "Bibia",
-      "Harry",
-      "Olivia",
-      "Bruno",
-      "Bibia"
+      "harry",
+      "olivia",
+      "bruno",
+      "bibia",
+      "harry",
+      "olivia",
+      "bruno",
+      "bibia"
     ];
     List<String> imagensMonitores = [
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png",
-      "android/app/src/main/res/drawable/onelogo.png",
-      "android/app/src/main/res/drawable/error.png"
+      "android/app/src/main/res/drawable/harry.png",
+      "android/app/src/main/res/drawable/taylor.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/bibia.png",
+      "android/app/src/main/res/drawable/harry.png",
+      "android/app/src/main/res/drawable/taylor.png",
+      "android/app/src/main/res/drawable/bruninho.png",
+      "android/app/src/main/res/drawable/bibia.png"
     ];
 
     return {
@@ -42,8 +42,10 @@ class FeedbackMonitors extends StatelessWidget {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 30),
           Stack(
             children: [
+              const SizedBox(height: 30),
               const Padding(
                 padding: EdgeInsets.all(16.0),
                 child: Center(
@@ -63,7 +65,7 @@ class FeedbackMonitors extends StatelessWidget {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -74,7 +76,7 @@ class FeedbackMonitors extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 60),
+          const SizedBox(height: 30),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
@@ -100,7 +102,8 @@ class FeedbackMonitors extends StatelessWidget {
                               builder: (context) => MonitorDetailPage(
                                 monitorName: monitorInfo['nomesMonitores'][i],
                                 disciplinasName: monitorInfo['materia'],
-                                monitorImage: monitorInfo['imagensMonitores'][i],
+                                monitorImage: monitorInfo['imagensMonitores']
+                                    [i],
                               ),
                             ),
                           );
@@ -126,15 +129,16 @@ class FeedbackMonitors extends StatelessWidget {
                                     monitorInfo['nomesMonitores'][i],
                                     style: const TextStyle(
                                       fontSize: 18,
-                                      color: AppColors.HOUR_TEXT,
+                                      fontFamily: "Inter",
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
                               ),
-                              Image.asset(
-                                'android/app/src/main/res/drawable/arrow.png',
-                                width: 34,
-                                height: 34,
+                              const Icon(
+                                Icons.arrow_forward_ios,
+                                size: 24,
+                                color: Color.fromRGBO(61, 112, 128, 1),
                               ),
                             ],
                           ),
@@ -177,40 +181,44 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
     });
   }
 
-void _sendFeedback(BuildContext context) {
-  final overlay = Overlay.of(context);
-  final overlayEntry = OverlayEntry(
-    builder: (context) => Positioned(
-      top: 50,
-      right: 0,
-      child: Material(
-        elevation: 6.0,
-        child: Container(
-          color: AppColors.BACKGROUND_COLOR,
-          padding: const EdgeInsets.all(16.0),
-          child: Row(
-            children: [
-              Image.asset(
-                'android/app/src/main/res/drawable/task_alt.png',
-                width: 38,
-                height: 38,
-              ),
-              const SizedBox(width: 8),
-              const Text('Enviado com sucesso!', style: TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT)),
-            ],
+  void _sendFeedback(BuildContext context) {
+    final overlay = Overlay.of(context);
+    final overlayEntry = OverlayEntry(
+      builder: (context) => Positioned(
+        top: 0,
+        left: 0,
+        right: 0,
+        child: Material(
+          elevation: 6.0,
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.12,
+            color: AppColors.BACKGROUND_COLOR,
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                Image.asset(
+                  'android/app/src/main/res/drawable/task_alt.png',
+                  width: 90,
+                  height: 30,
+                ),
+                const SizedBox(width: 8),
+                const Text('Enviado com sucesso!',
+                    style:
+                        TextStyle(fontSize: 18, color: AppColors.BLACK_TEXT)),
+              ],
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
 
-  overlay.insert(overlayEntry);
+    overlay.insert(overlayEntry);
 
-  Future.delayed(const Duration(seconds: 3), () {
-    overlayEntry.remove();
-    Navigator.pop(context);
-  });
-}
+    Future.delayed(const Duration(seconds: 3), () {
+      overlayEntry.remove();
+      Navigator.pop(context);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,6 +226,7 @@ void _sendFeedback(BuildContext context) {
       backgroundColor: AppColors.BACKGROUND_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 30),
           Stack(
             children: [
               const Padding(
@@ -239,7 +248,7 @@ void _sendFeedback(BuildContext context) {
                 top: 6,
                 child: IconButton(
                   icon: Image.asset(
-                    'android/app/src/main/res/drawable/back_button_light.png',
+                    'android/app/src/main/res/drawable/back_button_grey.png',
                     width: 40,
                     height: 40,
                   ),
@@ -262,13 +271,11 @@ void _sendFeedback(BuildContext context) {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  const SizedBox(height: 33),
                   Padding(
                     padding: const EdgeInsets.only(left: 0),
                     child: Image.asset(
                       widget.monitorImage,
-                      width: 144,
-                      height: 144,
+                      height: 150,
                     ),
                   ),
                   const SizedBox(height: 10),
@@ -277,10 +284,26 @@ void _sendFeedback(BuildContext context) {
                       style: const TextStyle(
                           fontSize: 32, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 10),
-                  Text('Monitor ${widget.disciplinasName}',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500)),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Centraliza na horizontal
+                    children: [
+                      Text(
+                        'Monitor ${widget.disciplinasName}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Image.asset(
+                        'android/app/src/main/res/drawable/star_filled.png',
+                        width: 24,
+                        height: 24,
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 30),
                   Container(
                     padding: const EdgeInsets.all(18.0),
@@ -289,6 +312,7 @@ void _sendFeedback(BuildContext context) {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Classifique o quanto achou a\naula boa:',
@@ -298,15 +322,20 @@ void _sendFeedback(BuildContext context) {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: List.generate(5, (index) {
-                            return GestureDetector(
-                              onTap: () => _onStarTap(index),
-                              child: Image.asset(
-                                index < _selectedStars
-                                    ? 'android/app/src/main/res/drawable/star_filled.png'
-                                    : 'android/app/src/main/res/drawable/star_null.png',
-                                width: 24,
-                                height: 24,
-                              ),
+                            return Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () => _onStarTap(index),
+                                  child: Image.asset(
+                                    index < _selectedStars
+                                        ? 'android/app/src/main/res/drawable/star_filled.png'
+                                        : 'android/app/src/main/res/drawable/star_null.png',
+                                    width: 24,
+                                    height: 24,
+                                  ),
+                                ),
+                                if (index < 4) SizedBox(width: 8),
+                              ],
                             );
                           }),
                         ),
@@ -322,21 +351,41 @@ void _sendFeedback(BuildContext context) {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Deixe seu feedback para esse\nmonitor (elogios, pontos de\nmelhoria...)',
-                          textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
-                        TextField(
-                          controller: _feedbackController,
-                          decoration: const InputDecoration(
-                            labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
-                            border: OutlineInputBorder(),
+                        Container(
+                          width: double.infinity,
+                          height: 100, 
+                          child: TextField(
+                            controller: _feedbackController,
+                            maxLines:
+                                null,
+                            expands:
+                                true, 
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: const BorderSide(
+                                  color: Color.fromRGBO(61, 112, 128, 1),
+                                  width: 2.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: const BorderSide(
+                                  color: Color.fromRGBO(61, 112, 128, 1),
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -346,8 +395,12 @@ void _sendFeedback(BuildContext context) {
                       _sendFeedback(context);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.DARKER_COLOR,
-                        minimumSize: const Size(262, 55)),
+                      backgroundColor: AppColors.DARKER_COLOR,
+                      minimumSize: const Size(262, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     child: const Text(
                       'Enviar',
                       style: TextStyle(

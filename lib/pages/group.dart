@@ -5,7 +5,7 @@ import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/group_details.dart';
 
 class GroupPage extends StatelessWidget {
-  final String role = 'teacher';
+  final String role = 'student';
 
   @override
   Widget build(BuildContext context) {
