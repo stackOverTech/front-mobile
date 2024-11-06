@@ -115,7 +115,10 @@ class CadasterPage extends StatelessWidget {
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   minimumSize: const Size(double.infinity, 50),
                 ),
-                child: const Text('Cadastrar'),
+                child: const Text(
+                  'Cadastrar',
+                  style: TextStyle(color: Colors.white),
+                ),
               ),
             ),
             const Spacer(),
