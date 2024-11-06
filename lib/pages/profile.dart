@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 import 'package:one/pages/edit_profile.dart';
+import 'package:one/pages/post-card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'group.dart';
@@ -95,11 +96,11 @@ class _ProfilePageState extends State<ProfilePage>
         currentIndex: 3, // Current index set to 3 for the profile page
         onTap: (int index) {
           if (index == 0) {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => HomePage(),
-              ),
-            );
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => HomePage(),
+            //   ),
+            // );
           }
           if (index == 1) {
             Navigator.of(context).push(
@@ -334,13 +335,10 @@ class _ProfilePageState extends State<ProfilePage>
       itemCount: posts.length,
       itemBuilder: (context, index) {
         return PostCard(
-          username: posts[index]["username"]!,
-          category: posts[index]["category"]!,
-          timeAgo: posts[index]["timeAgo"]!,
-          content: posts[index]["content"]!,
-          imageUser: posts[index]["imageUser"],
-          showReplyButton: false,
-        );
+            username: posts[index]["username"]!,
+            category: posts[index]["category"]!,
+            timeAgo: posts[index]["timeAgo"]!,
+            content: posts[index]["content"]!);
       },
     );
   }
