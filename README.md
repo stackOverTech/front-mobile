@@ -43,6 +43,10 @@ Acesse a Branch 'bia':
 Instale as Dependências: Navegue até o diretório do projeto e instale as dependências do Flutter:
 
 ```bash
+flutter upgrade
+```
+
+```bash
 flutter pub get
 ```
 
