@@ -24,10 +24,19 @@ class SeeAnswerPage extends StatefulWidget {
     this.answers = const [
       {
         "username": "bruno",
-        "timeAgo": "2h",
+        "timeAgo": "1h",
         "content": "Essa é uma resposta de exemplo.",
         "imageUser": "android/app/src/main/res/drawable/bruninho.png",
         "isBest": "true",
+        "likes": "3", // Número inicial de curtidas
+      },
+      {
+        "username": "taylor",
+        "timeAgo": "2h",
+        "content": "Outra resposta de exemplo.",
+        "imageUser": "android/app/src/main/res/drawable/taylor.png",
+        "isBest": "false",
+        "likes": "2", // Número inicial de curtidas
       },
       {
         "username": "bibia",
@@ -35,6 +44,7 @@ class SeeAnswerPage extends StatefulWidget {
         "content": "Outra resposta de exemplo.",
         "imageUser": "android/app/src/main/res/drawable/bibia.png",
         "isBest": "false",
+        "likes": "1", // Número inicial de curtidas
       }
     ],
     super.key,
@@ -45,15 +55,21 @@ class SeeAnswerPage extends StatefulWidget {
 }
 
 class _SeeAnswerPageState extends State<SeeAnswerPage> {
-  List<bool> isLikedList = []; // Inicializa como lista vazia
+  List<bool> isLikedList = [];
+  List<int> likeCountList = [];
 
   @override
   void initState() {
     super.initState();
-    // Inicializa isLikedList apenas se answers tiver elementos
     if (widget.answers.isNotEmpty) {
       isLikedList = List<bool>.filled(widget.answers.length, false);
+      likeCountList = widget.answers.map((answer) {
+        print("Likes: ${answer['likes']}"); // Debug: imprime o número de likes
+        return int.parse(answer['likes'] ?? '0');
+      }).toList();
     }
+    print(
+        "Number of answers: ${widget.answers.length}"); // Debug: imprime o número de respostas
   }
 
   @override
@@ -81,14 +97,17 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildUserProfileCard(),
-            const SizedBox(height: 16.0),
-            const Text(
-              'Respostas',
-              style: TextStyle(
-                fontSize: 16,
-                fontFamily: "Inter",
-                fontWeight: FontWeight.w600,
-                color: Color(0xFF2C313A),
+            const SizedBox(height: 8.0),
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0),
+              child: Text(
+                'Respostas (${widget.answers.length})', // Altere para widget.answers.length
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontFamily: "Inter",
+                  fontWeight: FontWeight.w500,
+                  color: Color(0xFF2C313A),
+                ),
               ),
             ),
             const SizedBox(height: 8.0),
@@ -98,6 +117,8 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
                       itemCount: widget.answers.length,
                       itemBuilder: (context, index) {
                         final answer = widget.answers[index];
+                        print(
+                            "Construindo card para: ${answer['username']}"); // Debug
                         return _buildAnswerCard(answer, index);
                       },
                     )
@@ -220,12 +241,13 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
   }
 
   Widget _buildAnswerCard(Map<String, String> answer, int index) {
-    final bool isBest = answer['isBest'] == "true";
+    print("Index: $index, Answer: ${answer['username']}"); // Debug
+    if (index >= isLikedList.length || index >= likeCountList.length) {
+      return const SizedBox(); // Retorna um widget vazio se o índice for inválido
+    }
 
-    // Verificação para evitar acesso fora do índice
-    final bool isLiked = isLikedList.isNotEmpty && index < isLikedList.length
-        ? isLikedList[index]
-        : false;
+    final bool isBest = answer['isBest'] == "true";
+    final int likeCount = likeCountList[index];
 
     return Card(
       color: Colors.white,
@@ -283,10 +305,7 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
                         const SizedBox(width: 4.0),
                         const Text(
                           'Melhor resposta',
-                          style: TextStyle(
-                            color: Colors.green,
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: TextStyle(color: Colors.green),
                         ),
                       ],
                     ),
@@ -294,26 +313,36 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
               ],
             ),
             Positioned(
-              right: 0,
               bottom: 0,
-              child: IconButton(
-                icon: SizedBox(
-                  width: 25,
-                  height: 25,
-                  child: Image.asset(
-                    isLiked
-                        ? 'android/app/src/main/res/drawable/filled_heart.png'
-                        : 'android/app/src/main/res/drawable/unfilled_heart.png',
+              right: 12,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Image.asset(
+                      width: 20,
+                      isLikedList[index]
+                          ? 'android/app/src/main/res/drawable/filled_heart.png'
+                          : 'android/app/src/main/res/drawable/unfilled_heart.png',
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        isLikedList[index] = !isLikedList[index];
+                        if (isLikedList[index]) {
+                          likeCountList[
+                              index]++; // Incrementa o contador de likes
+                        } else {
+                          likeCountList[
+                              index]--; // Decrementa o contador de likes
+                        }
+                      });
+                    },
                   ),
-                ),
-                onPressed: () {
-                  setState(() {
-                    // Garante que o índice está no range
-                    if (index < isLikedList.length) {
-                      isLikedList[index] = !isLikedList[index];
-                    }
-                  });
-                },
+                  const SizedBox(width: 4.0),
+                  Text(
+                    likeCount.toString(),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                ],
               ),
             ),
           ],
