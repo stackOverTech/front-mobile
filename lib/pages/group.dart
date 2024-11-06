@@ -257,15 +257,13 @@ class GroupPage extends StatelessWidget {
               ),
             );
           }
-           if (index == 3) {
-              // Verifica se o item "person" foi clicado
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProfilePage(),
-                  ),
-                );
-            }
+          if (index == 3) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
+              ),
+            );
+          }
         },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),

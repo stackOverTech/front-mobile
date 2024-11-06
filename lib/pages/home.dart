@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:one/home.dart';
+import 'package:one/pages/monitoring.dart';
+import 'package:one/pages/profile.dart';
 
 class Post {
   final int id;
@@ -71,8 +74,6 @@ class Disciplinas {
   }
 }
 
-// HomePage
-
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -86,6 +87,7 @@ class _HomePageState extends State<HomePage> {
   List<Post> _posts = [];
   Map<String, int> _disciplineIds = {};
   bool _isLoading = false;
+  int _currentIndex = 0;
 
   @override
   void initState() {
@@ -116,7 +118,6 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  // Função para buscar postagens (perguntas) por disciplina
   Future<void> _fetchPosts({int? disciplinaId}) async {
     setState(() {
       _isLoading = true;
@@ -264,6 +265,40 @@ class _HomePageState extends State<HomePage> {
           ),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (int index) {
+          setState(() {
+            _currentIndex = index;
+          });
+          if (index == 0) {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => HomePage(),
+            ));
+          } else if (index == 1) {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => MonitoringPage(),
+            ));
+          } else if (index == 3) {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ProfilePage(),
+            ));
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.book), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.people), label: ''),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: ''),
+        ],
+        selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
+        unselectedItemColor: Colors.white,
+        backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
+        elevation: 10,
+        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        type: BottomNavigationBarType.fixed,
+      ),
     );
   }
 
@@ -272,81 +307,5 @@ class _HomePageState extends State<HomePage> {
     final hours = duration.inHours;
     final minutes = duration.inMinutes % 60;
     return '$hours h $minutes min';
-  }
-}
-
-class CategoryChip extends StatelessWidget {
-  final String label;
-  final bool selected;
-  final ValueChanged<bool> onSelected;
-
-  const CategoryChip({
-    Key? key,
-    required this.label,
-    required this.selected,
-    required this.onSelected,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: onSelected,
-      selectedColor: Colors.blue,
-      labelStyle: TextStyle(
-        color: selected ? Colors.white : Colors.black,
-      ),
-    );
-  }
-}
-
-class PostCard extends StatelessWidget {
-  final String username;
-  final String category;
-  final String timeAgo;
-  final String content;
-
-  const PostCard({
-    Key? key,
-    required this.username,
-    required this.category,
-    required this.timeAgo,
-    required this.content,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      elevation: 4.0,
-      child: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  child: Text(username[0],
-                      style: const TextStyle(color: Colors.white)),
-                ),
-                const SizedBox(width: 8),
-                Text(username,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                const SizedBox(width: 8),
-                Text('• $timeAgo', style: const TextStyle(color: Colors.grey)),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Text(category,
-                style: const TextStyle(fontSize: 14, color: Colors.blue)),
-            const SizedBox(height: 8),
-            Text(content),
-          ],
-        ),
-      ),
-    );
   }
 }
