@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:one/pages/answer.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
+import 'package:one/pages/profile.dart';
 import 'package:one/pages/question.dart';
+import 'package:one/pages/seeanswer.dart';
 import 'package:one/pages/view_profile.dart';
 
 class HomePage extends StatefulWidget {
@@ -129,7 +132,7 @@ class _HomePageState extends State<HomePage> {
                             category: 'Banco de Dados',
                             timeAgo: '2h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'Qual é a diferença entre uma chave primária e uma chave estrangeira em um banco de dados relacional?',
                             imageUser:
                                 'android/app/src/main/res/drawable/harry.png',
                           ),
@@ -138,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                             category: 'POO',
                             timeAgo: '3h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'O que é encapsulamento em POO e como ele contribui para a segurança e a manutenção do código? Me de exemplos por favor',
                             imageUrl:
                                 'android/app/src/main/res/drawable/bruno_code.png',
                             imageUser:
@@ -149,14 +152,13 @@ class _HomePageState extends State<HomePage> {
                             category: 'Inglês',
                             timeAgo: '4h',
                             content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                                'Qual é a diferença entre o uso de "who" e "whom" em uma frase?',
                           ),
                           PostCard(
                             username: 'taylor',
                             category: 'Banco de Dados',
                             timeAgo: '1d',
-                            content:
-                                'Lorem ipsum dolor sit amet consectetur...',
+                            content: 'Fiz um DELETE sem WHERE e agora',
                             imageUser:
                                 'android/app/src/main/res/drawable/taylor.png',
                           ),
@@ -257,12 +259,11 @@ class _HomePageState extends State<HomePage> {
             }
             if (index == 3) {
               // Verifica se o item "person" foi clicado
-              //  Navigator.of(context).push(
-              //    MaterialPageRoute(
-              //      builder: (context) =>
-              //          ProfilePage(),
-              //    ),
-              //  );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => ProfilePage(),
+                ),
+              );
             }
           },
           items: const [
@@ -335,6 +336,7 @@ class CategoryChip extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class PostCard extends StatelessWidget {
   final String username;
   final String category;
@@ -343,20 +345,37 @@ class PostCard extends StatelessWidget {
   final String? codeSnippet;
   final String? imageUser;
   final String? imageUrl;
+  final bool? showReplyButton;
 
-  PostCard({
-    required this.username,
-    required this.category,
-    required this.timeAgo,
-    required this.content,
-    this.imageUser,
-    this.imageUrl,
-    this.codeSnippet, 
-  });
+  PostCard(
+      {required this.username,
+      required this.category,
+      required this.timeAgo,
+      required this.content,
+      this.imageUser,
+      this.imageUrl,
+      this.codeSnippet,
+      this.showReplyButton = true});
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => SeeAnswerPage(
+              username: username,
+              category: category,
+              timeAgo: timeAgo,
+              content: content,
+              imageUser: imageUser,
+              imageUrl: imageUrl,
+              codeSnippet: codeSnippet,
+            ),
+          ),
+        );
+      },
+    child: Card(
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       color: const Color.fromRGBO(238, 238, 238, 1),
       child: Padding(
@@ -435,7 +454,12 @@ class PostCard extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              maxLines: 1, // Limite de 3 linhas
+              overflow: TextOverflow
+                  .ellipsis, // Exibe "..." se o texto for muito longo
+            ),
             if (imageUrl != null) ...[
               const SizedBox(height: 8.0),
               Image.asset(imageUrl!),
@@ -451,41 +475,59 @@ class PostCard extends StatelessWidget {
                 ),
               ),
             const SizedBox(height: 8),
-            Align(
-              alignment: Alignment.centerRight,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  //Navigator.push(
-                  //context,
-                  //MaterialPageRoute(builder: (context) => NewQuestionPage()),
-                  //);
-                },
-                icon: Image.asset(
+            if (showReplyButton ==
+                true) // Condição para mostrar o botão "Responder"
+              Align(
+                alignment: Alignment.centerRight,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    try {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => AnswerPage(
+                            username: username,
+                            category: category,
+                            timeAgo: timeAgo,
+                            content: content,
+                            imageUrl: imageUrl,
+                            imageUser: imageUser,
+                            codeSnippet: codeSnippet,
+                          ),
+                        ),
+                      );
+                    } catch (e) {
+                      print("Erro ao navegar para AnswerPage: $e");
+                    }
+                  },
+                  icon: Image.asset(
                     'android/app/src/main/res/drawable/answer.png',
-                    width: 15),
-                label: const Text(
-                  'Responder',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
+                    width: 15,
                   ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 8.0, vertical: 6.0),
-                  minimumSize: const Size(0, 0),
-                ).copyWith(
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0)),
+                  label: const Text(
+                    'Responder',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 12,
+                    ),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 8.0, vertical: 6.0),
+                    minimumSize: const Size(0, 0),
+                  ).copyWith(
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
           ],
         ),
       ),
+    ),
     );
   }
 }

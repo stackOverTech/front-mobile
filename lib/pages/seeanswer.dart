@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:one/pages/view_profile.dart';
+import 'package:one/home.dart';
 
-class SeeAnswerPage extends StatefulWidget {
+class SeeAnswerPage extends StatelessWidget {
   final String username;
   final String category;
   final String timeAgo;
   final String content;
-  final String? codeSnippet;
   final String? imageUser;
   final String? imageUrl;
-  final bool? showReplyButton;
+  final String? codeSnippet;
+  final bool showReplyButton;
   final List<Map<String, String>> answers;
 
   const SeeAnswerPage({
@@ -20,7 +20,7 @@ class SeeAnswerPage extends StatefulWidget {
     this.imageUser,
     this.imageUrl,
     this.codeSnippet,
-    this.showReplyButton = false,
+    this.showReplyButton = true,
     this.answers = const [
       {
         "username": "bruno",
@@ -28,7 +28,7 @@ class SeeAnswerPage extends StatefulWidget {
         "content": "Essa é uma resposta de exemplo.",
         "imageUser": "android/app/src/main/res/drawable/bruninho.png",
         "isBest": "true",
-        "likes": "3", // Número inicial de curtidas
+        "likes": "3",
       },
       {
         "username": "taylor",
@@ -36,7 +36,7 @@ class SeeAnswerPage extends StatefulWidget {
         "content": "Outra resposta de exemplo.",
         "imageUser": "android/app/src/main/res/drawable/taylor.png",
         "isBest": "false",
-        "likes": "2", // Número inicial de curtidas
+        "likes": "2",
       },
       {
         "username": "bibia",
@@ -47,30 +47,8 @@ class SeeAnswerPage extends StatefulWidget {
         "likes": "1", // Número inicial de curtidas
       }
     ],
-    super.key,
-  });
-
-  @override
-  _SeeAnswerPageState createState() => _SeeAnswerPageState();
-}
-
-class _SeeAnswerPageState extends State<SeeAnswerPage> {
-  List<bool> isLikedList = [];
-  List<int> likeCountList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    if (widget.answers.isNotEmpty) {
-      isLikedList = List<bool>.filled(widget.answers.length, false);
-      likeCountList = widget.answers.map((answer) {
-        print("Likes: ${answer['likes']}"); // Debug: imprime o número de likes
-        return int.parse(answer['likes'] ?? '0');
-      }).toList();
-    }
-    print(
-        "Number of answers: ${widget.answers.length}"); // Debug: imprime o número de respostas
-  }
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -96,12 +74,22 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _buildUserProfileCard(),
+            PostCard(
+              // Utilize o PostCard aqui
+              username: username,
+              category: category,
+              timeAgo: timeAgo,
+              content: content,
+              imageUser: imageUser,
+              imageUrl: imageUrl,
+              codeSnippet: codeSnippet,
+              showReplyButton: showReplyButton,
+            ),
             const SizedBox(height: 8.0),
             Padding(
               padding: const EdgeInsets.only(left: 16.0),
               child: Text(
-                'Respostas (${widget.answers.length})', // Altere para widget.answers.length
+                'Respostas (${answers.length})',
                 style: const TextStyle(
                   fontSize: 16,
                   fontFamily: "Inter",
@@ -112,40 +100,28 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
             ),
             const SizedBox(height: 8.0),
             Expanded(
-              child: widget.answers.isNotEmpty
+              child: answers.isNotEmpty
                   ? ListView.builder(
-                      itemCount: widget.answers.length,
+                      itemCount: answers.length,
                       itemBuilder: (context, index) {
-                        final answer = widget.answers[index];
-                        print(
-                            "Construindo card para: ${answer['username']}"); // Debug
-                        return _buildAnswerCard(answer, index);
+                        final answer = answers[index];
+                        return _buildAnswerCard(answer);
                       },
                     )
                   : const Center(child: Text('Nenhuma resposta disponível')),
             ),
-            if (widget.showReplyButton == true)
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    // Aqui você pode adicionar a lógica para a ação do botão de resposta
-                  },
-                  icon: Icon(Icons.chat_bubble_outline),
-                  label: Text('Responder'),
-                  style: ElevatedButton.styleFrom(),
-                ),
-              ),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildUserProfileCard() {
+  Widget _buildAnswerCard(Map<String, String> answer) {
+    final bool isBest = answer['isBest'] == "true";
+
     return Card(
+      color: Colors.white,
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      color: const Color.fromRGBO(238, 238, 238, 1),
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -153,198 +129,49 @@ class _SeeAnswerPageState extends State<SeeAnswerPage> {
           children: [
             Row(
               children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ViewProfile(),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    margin: const EdgeInsets.only(bottom: 70),
-                    child: widget.imageUser != null
-                        ? CircleAvatar(
-                            radius: 20,
-                            backgroundImage: AssetImage(widget.imageUser!),
-                          )
-                        : const CircleAvatar(
-                            radius: 20,
-                            child: Icon(Icons.person),
-                          ),
+                CircleAvatar(
+                  radius: 16,
+                  backgroundImage: AssetImage(answer['imageUser'] ?? ''),
+                ),
+                const SizedBox(width: 8.0),
+                Text(
+                  answer['username'] ?? 'Usuário',
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                 const SizedBox(width: 8.0),
+                Container(
+                  width: 5.0,
+                  height: 5.0,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color.fromRGBO(174, 176, 171, 100),
                   ),
                 ),
                 const SizedBox(width: 8.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.username,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            widget.category,
-                            style: const TextStyle(
-                              color: Color.fromRGBO(97, 46, 88, 1),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(width: 5.0),
-                          Container(
-                            width: 5.0,
-                            height: 5.0,
-                            decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(174, 176, 171, 100),
-                            ),
-                          ),
-                          const SizedBox(width: 8.0),
-                          Text(
-                            widget.timeAgo,
-                            style: const TextStyle(
-                              color: Color.fromRGBO(91, 94, 85, 1),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 8.0),
-                      Text(widget.content),
-                      if (widget.imageUrl != null) ...[
-                        const SizedBox(height: 8.0),
-                        Image.asset(widget.imageUrl!),
-                      ],
-                      if (widget.codeSnippet != null) ...[
-                        const SizedBox(height: 8.0),
-                        Container(
-                          width: double.infinity,
-                          padding: const EdgeInsets.all(8.0),
-                          color: Colors.grey[200],
-                          child: Text(
-                            widget.codeSnippet!,
-                            style: const TextStyle(fontFamily: 'monospace'),
-                          ),
-                        ),
-                      ],
-                    ],
-                  ),
+                Text(
+                  answer['timeAgo'] ?? '',
+                  style: const TextStyle(
+                      color: Color.fromRGBO(91, 94, 85, 1),
+                      fontWeight: FontWeight.w500),
                 ),
               ],
             ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildAnswerCard(Map<String, String> answer, int index) {
-    print("Index: $index, Answer: ${answer['username']}"); // Debug
-    if (index >= isLikedList.length || index >= likeCountList.length) {
-      return const SizedBox(); // Retorna um widget vazio se o índice for inválido
-    }
-
-    final bool isBest = answer['isBest'] == "true";
-    final int likeCount = likeCountList[index];
-
-    return Card(
-      color: Colors.white,
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Stack(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
+            const SizedBox(height: 8.0),
+            Text(answer['content'] ?? ''),
+            if (isBest)
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Row(
                   children: [
-                    CircleAvatar(
-                      radius: 16,
-                      backgroundImage: (answer['imageUser'] != null &&
-                              answer['imageUser']!.isNotEmpty)
-                          ? AssetImage(answer['imageUser']!)
-                          : null,
-                      child: answer['imageUser'] == null
-                          ? const Icon(Icons.person)
-                          : null,
-                    ),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      answer['username'] ?? 'Usuário',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(width: 8.0),
-                    Container(
-                      width: 5.0,
-                      height: 5.0,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Color.fromRGBO(174, 176, 171, 100),
-                      ),
-                    ),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      answer['timeAgo'] ?? '',
-                      style: const TextStyle(
-                          color: Color.fromRGBO(91, 94, 85, 1),
-                          fontWeight: FontWeight.w500),
+                    Icon(Icons.emoji_events, color: Colors.green),
+                    const SizedBox(width: 4.0),
+                    const Text(
+                      'Melhor resposta',
+                      style: TextStyle(color: Colors.green),
                     ),
                   ],
                 ),
-                const SizedBox(height: 8.0),
-                Text(answer['content'] ?? ''),
-                if (isBest)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Row(
-                      children: [
-                        Icon(Icons.emoji_events, color: Colors.green),
-                        const SizedBox(width: 4.0),
-                        const Text(
-                          'Melhor resposta',
-                          style: TextStyle(color: Colors.green),
-                        ),
-                      ],
-                    ),
-                  ),
-              ],
-            ),
-            Positioned(
-              bottom: 0,
-              right: 12,
-              child: Row(
-                children: [
-                  IconButton(
-                    icon: Image.asset(
-                      width: 20,
-                      isLikedList[index]
-                          ? 'android/app/src/main/res/drawable/filled_heart.png'
-                          : 'android/app/src/main/res/drawable/unfilled_heart.png',
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        isLikedList[index] = !isLikedList[index];
-                        if (isLikedList[index]) {
-                          likeCountList[
-                              index]++; // Incrementa o contador de likes
-                        } else {
-                          likeCountList[
-                              index]--; // Decrementa o contador de likes
-                        }
-                      });
-                    },
-                  ),
-                  const SizedBox(width: 4.0),
-                  Text(
-                    likeCount.toString(),
-                    style: const TextStyle(fontWeight: FontWeight.w500),
-                  ),
-                ],
               ),
-            ),
           ],
         ),
       ),
