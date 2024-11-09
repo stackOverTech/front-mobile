@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Column(
             // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
-            // isso ta armazenando tudo que tem antes do Draggable (elemento de listagem dos posts)
+
             children: [
               Container(
                 color: const Color.fromRGBO(61, 112, 128, 1),
@@ -242,7 +242,6 @@ class _HomePageState extends State<HomePage> {
           currentIndex: 0,
           onTap: (int index) {
             if (index == 1) {
-              // Verifica se o item "book" foi clicado
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => MonitoringPage(),
@@ -250,7 +249,6 @@ class _HomePageState extends State<HomePage> {
               );
             }
             if (index == 2) {
-              // Verifica se o item "group" foi clicado
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => GroupPage(),
@@ -258,7 +256,6 @@ class _HomePageState extends State<HomePage> {
               );
             }
             if (index == 3) {
-              // Verifica se o item "person" foi clicado
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => ProfilePage(),
@@ -375,159 +372,159 @@ class PostCard extends StatelessWidget {
           ),
         );
       },
-    child: Card(
-      margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      color: const Color.fromRGBO(238, 238, 238, 1),
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => ViewProfile(),
-                      ),
-                    );
-                  },
-                  child: imageUser != null
-                      ? CircleAvatar(
-                          radius: 20,
-                          backgroundImage: AssetImage(imageUser!),
-                        )
-                      : const CircleAvatar(
-                          radius: 20,
-                          child: Icon(Icons.person),
-                        ),
-                ),
-                const SizedBox(width: 8.0),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            username,
-                            style: const TextStyle(fontWeight: FontWeight.bold),
-                          ),
-                          const SizedBox(width: 8.0),
-                          Container(
-                            width: 5.0,
-                            height: 5.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(174, 176, 171, 100),
-                            ),
-                          ),
-                          const SizedBox(width: 8.0),
-                          Text(
-                            category,
-                            style: const TextStyle(
-                                color: Color.fromRGBO(97, 46, 88, 1),
-                                fontWeight: FontWeight.w500),
-                          ),
-                          const SizedBox(width: 4.0),
-                          Container(
-                            width: 5.0,
-                            height: 5.0,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Color.fromRGBO(174, 176, 171, 100),
-                            ),
-                          ),
-                          const SizedBox(width: 8.0),
-                          Text(
-                            timeAgo,
-                            style: const TextStyle(
-                                color: Color.fromRGBO(91, 94, 85, 1),
-                                fontWeight: FontWeight.w500),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 8.0),
-            Text(
-              content,
-              maxLines: 1, // Limite de 3 linhas
-              overflow: TextOverflow
-                  .ellipsis, // Exibe "..." se o texto for muito longo
-            ),
-            if (imageUrl != null) ...[
-              const SizedBox(height: 8.0),
-              Image.asset(imageUrl!),
-            ],
-            if (codeSnippet != null)
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 8.0),
-                padding: const EdgeInsets.all(8.0),
-                color: const Color.fromRGBO(202, 202, 202, 1),
-                child: Text(
-                  codeSnippet!,
-                  style: const TextStyle(fontFamily: 'monospace'),
-                ),
-              ),
-            const SizedBox(height: 8),
-            if (showReplyButton ==
-                true) // Condição para mostrar o botão "Responder"
-              Align(
-                alignment: Alignment.centerRight,
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    try {
+      child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+        color: const Color.fromRGBO(238, 238, 238, 1),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  GestureDetector(
+                    onTap: () {
                       Navigator.of(context).push(
                         MaterialPageRoute(
-                          builder: (context) => AnswerPage(
-                            username: username,
-                            category: category,
-                            timeAgo: timeAgo,
-                            content: content,
-                            imageUrl: imageUrl,
-                            imageUser: imageUser,
-                            codeSnippet: codeSnippet,
-                          ),
+                          builder: (context) => ViewProfile(),
                         ),
                       );
-                    } catch (e) {
-                      print("Erro ao navegar para AnswerPage: $e");
-                    }
-                  },
-                  icon: Image.asset(
-                    'android/app/src/main/res/drawable/answer.png',
-                    width: 15,
+                    },
+                    child: imageUser != null
+                        ? CircleAvatar(
+                            radius: 20,
+                            backgroundImage: AssetImage(imageUser!),
+                          )
+                        : const CircleAvatar(
+                            radius: 20,
+                            child: Icon(Icons.person),
+                          ),
                   ),
-                  label: const Text(
-                    'Responder',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 12,
+                  const SizedBox(width: 8.0),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              username,
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Container(
+                              width: 5.0,
+                              height: 5.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(174, 176, 171, 100),
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text(
+                              category,
+                              style: const TextStyle(
+                                  color: Color.fromRGBO(97, 46, 88, 1),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const SizedBox(width: 4.0),
+                            Container(
+                              width: 5.0,
+                              height: 5.0,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Color.fromRGBO(174, 176, 171, 100),
+                              ),
+                            ),
+                            const SizedBox(width: 8.0),
+                            Text(
+                              timeAgo,
+                              style: const TextStyle(
+                                  color: Color.fromRGBO(91, 94, 85, 1),
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 8.0, vertical: 6.0),
-                    minimumSize: const Size(0, 0),
-                  ).copyWith(
-                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                ],
+              ),
+              const SizedBox(height: 8.0),
+              Text(
+                content,
+                maxLines: 1,
+                overflow:
+                    TextOverflow.ellipsis, // "..."  para texto  muito longo
+              ),
+              if (imageUrl != null) ...[
+                const SizedBox(height: 8.0),
+                Image.asset(imageUrl!),
+              ],
+              if (codeSnippet != null)
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.all(8.0),
+                  color: const Color.fromRGBO(202, 202, 202, 1),
+                  child: Text(
+                    codeSnippet!,
+                    style: const TextStyle(fontFamily: 'monospace'),
+                  ),
+                ),
+              const SizedBox(height: 8),
+              if (showReplyButton == true)
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: ElevatedButton.icon(
+                    onPressed: () {
+                      try {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => AnswerPage(
+                              username: username,
+                              category: category,
+                              timeAgo: timeAgo,
+                              content: content,
+                              imageUrl: imageUrl,
+                              imageUser: imageUser,
+                              codeSnippet: codeSnippet,
+                            ),
+                          ),
+                        );
+                      } catch (e) {
+                        print("Erro ao navegar para AnswerPage: $e");
+                      }
+                    },
+                    icon: Image.asset(
+                      'android/app/src/main/res/drawable/answer.png',
+                      width: 15,
+                    ),
+                    label: const Text(
+                      'Responder',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8.0, vertical: 6.0),
+                      minimumSize: const Size(0, 0),
+                    ).copyWith(
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

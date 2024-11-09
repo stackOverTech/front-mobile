@@ -91,8 +91,6 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Se for monitor, adiciona mais uma coluna de disciplinas
                   if (userProfile == 'monitor') ...[
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -144,8 +142,6 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     ),
                     const SizedBox(height: 16),
                   ],
-
-                  // Disciplinas Existentes (Para todos os perfis)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -249,10 +245,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 16),
-
-                  // Disciplinas que recebo monitoria (Para aluno e monitor)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -340,7 +333,6 @@ class _MonitoringPageState extends State<MonitoringPage> {
             );
           }
           if (index == 3) {
-            // Verifica se o item "person" foi clicado
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => ProfilePage(),

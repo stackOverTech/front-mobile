@@ -72,7 +72,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Conect(
-      // Conect envolve todo o MaterialApp
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         home: SplashScreen(), // Tela inicial
@@ -95,7 +94,7 @@ class SplashScreenState extends State<SplashScreen> {
 
   Future<void> _navigateToLogin() async {
     await Future.delayed(const Duration(seconds: 5));
-    // Navega para a próxima página sem bloquear a atualização do estado de conectividade
+
     if (mounted) {
       Navigator.pushReplacement(
         context,

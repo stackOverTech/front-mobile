@@ -41,7 +41,7 @@ class _ProfilePageState extends State<ProfilePage>
             children: [
               _buildTopSection(),
               const Positioned(
-                top: 90, // Ajustando a posição para a foto de perfil
+                top: 90,
                 child: CircleAvatar(
                   radius: 80,
                   backgroundImage: AssetImage(
@@ -56,7 +56,7 @@ class _ProfilePageState extends State<ProfilePage>
               ),
             ],
           ),
-          const SizedBox(height: 80), // Espaço para a imagem sobreposta
+          const SizedBox(height: 80),
           _buildUserInfo(),
           const SizedBox(height: 20),
           TabBar(
@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage>
             labelColor: const Color(0xFF2C313A),
             unselectedLabelColor: const Color.fromARGB(255, 75, 75, 75),
             indicatorColor: const Color.fromRGBO(61, 112, 128, 1),
-            indicatorWeight: 2.0, // Deixa o indicador mais fino
+            indicatorWeight: 2.0,
             indicatorPadding: const EdgeInsets.symmetric(horizontal: 0),
             labelStyle: const TextStyle(
               fontWeight: FontWeight.w700,
@@ -93,7 +93,7 @@ class _ProfilePageState extends State<ProfilePage>
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 3, // Current index set to 3 for the profile page
+        currentIndex: 3,
         onTap: (int index) {
           if (index == 0) {
             // Navigator.of(context).push(
@@ -134,7 +134,6 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  // Seção superior com fundo verde e parte inferior branca arredondada
   Widget _buildTopSection() {
     return Stack(
       children: [
@@ -161,7 +160,6 @@ class _ProfilePageState extends State<ProfilePage>
     );
   }
 
-  // Informações do usuário (nome, idade e série)
   Widget _buildUserInfo() {
     return Column(
       children: const [
@@ -208,17 +206,15 @@ class _ProfilePageState extends State<ProfilePage>
   Widget _buildRankingPodium() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment:
-          CrossAxisAlignment.end, // Alinha a parte de baixo dos itens
+      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
-        _buildRankingBox('2º', 'ziza', const Color.fromARGB(255, 48, 89, 119),
-            70), // 2º lugar
-        const SizedBox(width: 8),
-        _buildRankingBox('1º', 'bibia', const Color.fromARGB(255, 187, 76, 83),
-            90), // 1º lugar sobreposto
+        _buildRankingBox(
+            '2º', 'ziza', const Color.fromARGB(255, 48, 89, 119), 70),
         const SizedBox(width: 8),
         _buildRankingBox(
-            '3º', 'taylor', Color.fromRGBO(210, 111, 81, 1), 70), // 3º lugar
+            '1º', 'bibia', const Color.fromARGB(255, 187, 76, 83), 90),
+        const SizedBox(width: 8),
+        _buildRankingBox('3º', 'taylor', Color.fromRGBO(210, 111, 81, 1), 70),
       ],
     );
   }
@@ -268,11 +264,10 @@ class _ProfilePageState extends State<ProfilePage>
     return Column(
       children: List.generate(badges.length, (index) {
         return Padding(
-          padding: const EdgeInsets.only(
-              bottom: 8.0, right: 20, left: 20), // Espaço entre os badges
+          padding: const EdgeInsets.only(bottom: 8.0, right: 20, left: 20),
           child: Container(
-            padding: const EdgeInsets.symmetric(
-                horizontal: 16.0, vertical: 2.0), // Padding interno
+            padding:
+                const EdgeInsets.symmetric(horizontal: 16.0, vertical: 2.0),
             decoration: BoxDecoration(
               border: Border.all(color: AppColors.BLACK_TEXT, width: 1),
               borderRadius: BorderRadius.circular(8.0),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/pages/introduction.dart';
 
-// subindo as telas 
-
 class NotificationScreen extends StatefulWidget {
   @override
   _NotificationScreenState createState() => _NotificationScreenState();

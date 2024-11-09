@@ -92,6 +92,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
+    _fetchPosts();
     _fetchDisciplines(); // Buscar disciplinas do CHIP (antes da página/ não mover isso)
   }
 
@@ -306,6 +307,6 @@ class _HomePageState extends State<HomePage> {
     final duration = Duration(seconds: seconds);
     final hours = duration.inHours;
     final minutes = duration.inMinutes % 60;
-    return '$hours h $minutes min';
+    return '$hours hrs $minutes min ago';
   }
 }

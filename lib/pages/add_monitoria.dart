@@ -4,8 +4,6 @@ import 'package:one/pages/edit_teacher_agenda.dart';
 import 'package:one/pages/view_teacher_agenda.dart';
 import 'package:one/pages/view_feedback_monitors.dart';
 
-// subindo as telas
-
 class AddMonitoria extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -40,7 +38,7 @@ class AddMonitoria extends StatelessWidget {
                     height: 40,
                   ),
                   onPressed: () {
-                    Navigator.pop(context); // Volta para a página anterior
+                    Navigator.pop(context);
                   },
                 ),
               ),

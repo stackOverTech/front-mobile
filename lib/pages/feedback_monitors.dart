@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas
-
 class FeedbackMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
@@ -89,13 +87,11 @@ class FeedbackMonitors extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  // Lista os monitores com botão encapsulador
                   for (var i = 0; i < monitorInfo['nomesMonitores'].length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: GestureDetector(
                         onTap: () {
-                          // Navega para a nova página
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -155,7 +151,6 @@ class FeedbackMonitors extends StatelessWidget {
   }
 }
 
-// Página de feedback do monitor
 class MonitorDetailPage extends StatefulWidget {
   final String monitorName;
   final String disciplinasName;
@@ -273,14 +268,13 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                 children: [
                   ClipOval(
                     child: Align(
-                      alignment: Alignment.topCenter, 
+                      alignment: Alignment.topCenter,
                       heightFactor: 1.0,
                       child: Image.asset(
                         widget.monitorImage,
-                        width: 150, 
+                        width: 150,
                         height: 150,
-                        fit: BoxFit
-                            .cover, 
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

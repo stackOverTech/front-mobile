@@ -62,8 +62,6 @@ class GroupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Grupos que você já participa
                   const Text(
                     'Grupos que você já participa (1)',
                     style: TextStyle(
@@ -99,8 +97,6 @@ class GroupPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 24),
-
-                  // Grupos que você ainda não participa
                   const Text(
                     'Grupos que você ainda não participa (3)',
                     style: TextStyle(
@@ -233,7 +229,7 @@ class GroupPage extends StatelessWidget {
               backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
               child: const Icon(
                 Icons.add,
-                color: Colors.white, // Cor do ícone "+"
+                color: Colors.white,
               ),
               shape: const CircleBorder(),
             ),

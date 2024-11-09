@@ -44,7 +44,7 @@ class SeeAnswerPage extends StatelessWidget {
         "content": "Outra resposta de exemplo.",
         "imageUser": "android/app/src/main/res/drawable/bibia.png",
         "isBest": "false",
-        "likes": "1", // Número inicial de curtidas
+        "likes": "1",
       }
     ],
     Key? key,
@@ -75,7 +75,6 @@ class SeeAnswerPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PostCard(
-              // Utilize o PostCard aqui
               username: username,
               category: category,
               timeAgo: timeAgo,
@@ -138,7 +137,7 @@ class SeeAnswerPage extends StatelessWidget {
                   answer['username'] ?? 'Usuário',
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
-                 const SizedBox(width: 8.0),
+                const SizedBox(width: 8.0),
                 Container(
                   width: 5.0,
                   height: 5.0,

@@ -2,8 +2,6 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// subindo as telas 
-
 class ViewTeacherAgenda extends StatefulWidget {
   @override
   _ViewTeacherAgendaState createState() => _ViewTeacherAgendaState();
@@ -53,7 +51,6 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
 
   @override
   Widget build(BuildContext context) {
-    // Obtenha os dados dos monitores
     var monitorInfo = fetchMonitorInfo();
 
     return Scaffold(
@@ -163,7 +160,6 @@ class _ViewTeacherAgendaState extends State<ViewTeacherAgenda> {
                     ),
                   ),
                   const SizedBox(height: 30),
-                  // Exibir a lista dos monitores
                   for (var i = 0; i < monitorInfo['nomesAlunos'].length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),

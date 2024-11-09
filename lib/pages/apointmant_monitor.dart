@@ -2,8 +2,6 @@ import 'package:one/helpers/appcolors.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-// subindo as telas
-
 class ApointmantMonitor extends StatefulWidget {
   final String monitorName;
 
@@ -56,7 +54,7 @@ class _ApointmantMonitorState extends State<ApointmantMonitor> {
     });
   }
 
-  List<Widget>  _buildTimeOptions() {
+  List<Widget> _buildTimeOptions() {
     List<String> times = ['10h-11h', '12h-13h', '14h-15h'];
 
     return times.map((time) {

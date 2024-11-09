@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas
-
 class ViewProfile extends StatelessWidget {
   final int age = 17;
   final String name = 'harry'; // Correção: Renomeei a variável para 'name'
@@ -83,8 +81,7 @@ class ViewProfile extends StatelessWidget {
                     ),
                   ),
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.center, // Centraliza na horizontal
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
                         'Monitor ${materia}',
@@ -161,12 +158,10 @@ class ViewProfile extends StatelessWidget {
                           children: [
                             Image.asset(
                               'android/app/src/main/res/drawable/medal.png',
-                              width: 24, // Ajuste o tamanho da imagem
+                              width: 24,
                               height: 24,
                             ),
-                            const SizedBox(
-                                width:
-                                    8), // Espaçamento entre a imagem e o texto
+                            const SizedBox(width: 8),
                             Text(
                               ' $mostAnswer',
                               style: const TextStyle(

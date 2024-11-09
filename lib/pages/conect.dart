@@ -23,11 +23,9 @@ class _ConectState extends State<Conect> {
   }
 
   Future<void> _initializeConnectivity() async {
-    // Verifica a conectividade inicial
     final result = await Connectivity().checkConnectivity();
     _updateConnectivityStatus(result);
 
-    // Inscreve-se para monitorar mudanças de conectividade
     subscription =
         Connectivity().onConnectivityChanged.listen(_updateConnectivityStatus);
   }
@@ -55,9 +53,7 @@ class _ConectState extends State<Conect> {
 
   Widget _buildNoInternetScreen() {
     return Directionality(
-      // Adiciona Directionality
-      textDirection:
-          TextDirection.ltr, // Define o texto da esquerda para a direita
+      textDirection: TextDirection.ltr,
       child: Scaffold(
         backgroundColor: AppColors.BACKGROUND_COLOR,
         body: Center(
