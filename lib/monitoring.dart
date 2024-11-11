@@ -7,7 +7,6 @@ class MonitoringPage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          // Cabeçalho com o nome do usuário e saudação
           Container(
             padding: const EdgeInsets.all(16.0),
             decoration: BoxDecoration(
@@ -18,7 +17,7 @@ class MonitoringPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppBar(
-                  automaticallyImplyLeading: false, // remove o botão de back
+                  automaticallyImplyLeading: false,
                   backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
                   elevation: 0,
                   title: const Text(
@@ -48,7 +47,6 @@ class MonitoringPage extends StatelessWidget {
               color: const Color(0xFF2C313A),
             ),
           ),
-          // Disciplinas existentes
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -78,8 +76,6 @@ class MonitoringPage extends StatelessWidget {
               ],
             ),
           ),
-
-          // Disciplinas que recebe monitoria
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -115,7 +111,6 @@ class MonitoringPage extends StatelessWidget {
           currentIndex: 1,
           onTap: (int index) {
             if (index == 0) {
-              // Verifica se o item "home" foi clicado
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => HomePage(),

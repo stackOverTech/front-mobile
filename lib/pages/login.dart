@@ -59,7 +59,7 @@ class LoginPage extends StatelessWidget {
                 child: const Text('Não tem uma conta? Cadastre-se'),
               ),
               const SizedBox(height: 20),
-              DefaultBtn(text: "Entrar", page: HomePage()), // Passando HomePage diretamente
+              DefaultBtn(text: "Entrar", page: HomePage()),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {},
@@ -79,9 +79,9 @@ class LoginPage extends StatelessWidget {
   }
 }
 
-class DefaultBtn extends StatelessWidget{
+class DefaultBtn extends StatelessWidget {
   final String text;
-  final Widget page; // Mudamos para Widget em vez de StatelessWidget
+  final Widget page;
 
   const DefaultBtn({
     Key? key,
@@ -92,7 +92,7 @@ class DefaultBtn extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: (){
+      onPressed: () {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => page),
@@ -102,7 +102,10 @@ class DefaultBtn extends StatelessWidget{
         backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
         minimumSize: const Size(double.infinity, 50),
       ),
-      child: Text(text),
+      child: Text(
+        text,
+        style: TextStyle(color: Colors.white),
+      ),
     );
   }
 }

@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas
-
 class FeedbackMonitors extends StatelessWidget {
   Map<String, dynamic> fetchMonitorInfo() {
     String materia = "DAD";
     List<String> nomesMonitores = [
-      "Harry",
-      "Olivia",
-      "Bruno",
-      "Bibia",
-      "Harry",
-      "Olivia",
-      "Bruno",
-      "Bibia"
+      "harry",
+      "olivia",
+      "bruno",
+      "bibia",
+      "harry",
+      "olivia",
+      "bruno",
+      "bibia"
     ];
     List<String> imagensMonitores = [
       "android/app/src/main/res/drawable/harry.png",
@@ -89,13 +87,11 @@ class FeedbackMonitors extends StatelessWidget {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  // Lista os monitores com botão encapsulador
                   for (var i = 0; i < monitorInfo['nomesMonitores'].length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: GestureDetector(
                         onTap: () {
-                          // Navega para a nova página
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -129,7 +125,8 @@ class FeedbackMonitors extends StatelessWidget {
                                     monitorInfo['nomesMonitores'][i],
                                     style: const TextStyle(
                                       fontSize: 18,
-                                      color: AppColors.HOUR_TEXT,
+                                      fontFamily: "Inter",
+                                      fontWeight: FontWeight.w500,
                                     ),
                                   ),
                                 ],
@@ -154,7 +151,6 @@ class FeedbackMonitors extends StatelessWidget {
   }
 }
 
-// Página de feedback do monitor
 class MonitorDetailPage extends StatefulWidget {
   final String monitorName;
   final String disciplinasName;
@@ -184,19 +180,21 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
     final overlay = Overlay.of(context);
     final overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        top: 50,
+        top: 0,
+        left: 0,
         right: 0,
         child: Material(
           elevation: 6.0,
           child: Container(
+            height: MediaQuery.of(context).size.height * 0.12,
             color: AppColors.BACKGROUND_COLOR,
             padding: const EdgeInsets.all(16.0),
             child: Row(
               children: [
                 Image.asset(
                   'android/app/src/main/res/drawable/task_alt.png',
-                  width: 38,
-                  height: 38,
+                  width: 90,
+                  height: 30,
                 ),
                 const SizedBox(width: 8),
                 const Text('Enviado com sucesso!',
@@ -268,24 +266,52 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
               child: ListView(
                 padding: const EdgeInsets.symmetric(horizontal: 26.0),
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 0),
-                    child: Image.asset(
-                      widget.monitorImage,
-                      width: 144,
-                      height: 144,
+                  ClipOval(
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      heightFactor: 1.0,
+                      child: Image.asset(
+                        widget.monitorImage,
+                        width: 150,
+                        height: 150,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
+
+                  // Padding(
+                  //   padding: const EdgeInsets.only(left: 0),
+                  //   child: Image.asset(
+                  //     widget.monitorImage,
+                  //     height: 150,
+                  //   ),
+                  // ),
                   const SizedBox(height: 10),
                   Text(widget.monitorName,
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                           fontSize: 32, fontWeight: FontWeight.w600)),
                   const SizedBox(height: 10),
-                  Text('Monitor ${widget.disciplinasName}',
-                      textAlign: TextAlign.center,
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500)),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.center, // Centraliza na horizontal
+                    children: [
+                      Text(
+                        'Monitor ${widget.disciplinasName}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Image.asset(
+                        'android/app/src/main/res/drawable/star_filled.png',
+                        width: 24,
+                        height: 24,
+                      ),
+                    ],
+                  ),
                   const SizedBox(height: 30),
                   Container(
                     padding: const EdgeInsets.all(18.0),
@@ -294,6 +320,7 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Classifique o quanto achou a\naula boa:',
@@ -332,21 +359,39 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Deixe seu feedback para esse\nmonitor (elogios, pontos de\nmelhoria...)',
-                          textAlign: TextAlign.left,
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.w500),
                         ),
                         const SizedBox(height: 10),
-                        TextField(
-                          controller: _feedbackController,
-                          decoration: const InputDecoration(
-                            labelStyle: TextStyle(color: AppColors.BLUE_AGENDA),
-                            border: OutlineInputBorder(),
+                        Container(
+                          width: double.infinity,
+                          height: 100,
+                          child: TextField(
+                            controller: _feedbackController,
+                            maxLines: null,
+                            expands: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: const BorderSide(
+                                  color: Color.fromRGBO(61, 112, 128, 1),
+                                  width: 2.0,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                                borderSide: const BorderSide(
+                                  color: Color.fromRGBO(61, 112, 128, 1),
+                                  width: 2.0,
+                                ),
+                              ),
+                            ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -356,8 +401,12 @@ class _MonitorDetailPageState extends State<MonitorDetailPage> {
                       _sendFeedback(context);
                     },
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: AppColors.DARKER_COLOR,
-                        minimumSize: const Size(262, 55)),
+                      backgroundColor: AppColors.DARKER_COLOR,
+                      minimumSize: const Size(262, 55),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15.0),
+                      ),
+                    ),
                     child: const Text(
                       'Enviar',
                       style: TextStyle(

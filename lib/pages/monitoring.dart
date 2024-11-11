@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one/pages/add_monitoria.dart';
 import 'package:one/pages/group.dart';
 import 'package:one/pages/home.dart';
+import 'package:one/pages/profile.dart';
 import 'package:one/pages/view_monitors.dart';
 
 class MonitoringPage extends StatefulWidget {
@@ -50,11 +51,11 @@ class _MonitoringPageState extends State<MonitoringPage> {
                 color: Colors.white,
               ),
             ),
-            actions: [
-              SearchExpanded(
-                onSearch: _onSearch,
-              ),
-            ],
+            // actions: [
+            //   SearchExpanded(
+            //     onSearch: _onSearch,
+            //   ),
+            // ],
           ),
           Expanded(
             child: Container(
@@ -90,10 +91,8 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Se for monitor, adiciona mais uma coluna de disciplinas
                   if (userProfile == 'monitor') ...[
-                     Column(
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -109,32 +108,32 @@ class _MonitoringPageState extends State<MonitoringPage> {
                           child: Row(
                             children: [
                               GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddMonitoria()),
-                                );
-                              },
-                              child: SubjectCard(
-                                title: 'Biologia',
-                                color: Color.fromARGB(255, 48, 119, 82),
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddMonitoria()),
+                                  );
+                                },
+                                child: SubjectCard(
+                                  title: 'Biologia',
+                                  color: Color.fromARGB(255, 48, 119, 82),
+                                ),
                               ),
-                            ),
-                            SizedBox(width: 16),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => AddMonitoria()),
-                                );
-                              },
-                              child: SubjectCard(
-                                title: 'Geografia',
-                                color: Color.fromARGB(255, 119, 48, 81),
+                              SizedBox(width: 16),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => AddMonitoria()),
+                                  );
+                                },
+                                child: SubjectCard(
+                                  title: 'Geografia',
+                                  color: Color.fromARGB(255, 119, 48, 81),
+                                ),
                               ),
-                            ),
                               SizedBox(width: 16),
                             ],
                           ),
@@ -143,8 +142,6 @@ class _MonitoringPageState extends State<MonitoringPage> {
                     ),
                     const SizedBox(height: 16),
                   ],
-
-                  // Disciplinas Existentes (Para todos os perfis)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -248,10 +245,7 @@ class _MonitoringPageState extends State<MonitoringPage> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 16),
-
-                  // Disciplinas que recebo monitoria (Para aluno e monitor)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -330,10 +324,18 @@ class _MonitoringPageState extends State<MonitoringPage> {
                 builder: (context) => HomePage(),
               ),
             );
-          } else if (index == 2) {
+          }
+          if (index == 2) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => GroupPage(),
+              ),
+            );
+          }
+          if (index == 3) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
               ),
             );
           }
@@ -386,9 +388,7 @@ class SubjectCard extends StatelessWidget {
 }
 
 class SearchExpanded extends StatefulWidget {
-  final Function(String) onSearch;
-
-  const SearchExpanded({required this.onSearch});
+  // final Function(String) onSearch;
 
   @override
   _SearchExpandedState createState() => _SearchExpandedState();
@@ -403,7 +403,7 @@ class _SearchExpandedState extends State<SearchExpanded> {
       _isSearching = !_isSearching;
       if (!_isSearching) {
         _searchController.clear();
-        widget.onSearch('');
+        // widget.onSearch('');
       }
     });
   }
@@ -418,7 +418,7 @@ class _SearchExpandedState extends State<SearchExpanded> {
             height: 35,
             child: TextField(
               controller: _searchController,
-              onChanged: widget.onSearch,
+              // onChanged: widget.onSearch,
               decoration: InputDecoration(
                 hintText: 'Quer procurar algo?',
                 filled: true,

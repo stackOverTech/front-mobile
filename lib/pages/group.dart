@@ -3,6 +3,7 @@ import 'package:one/pages/create_group.dart';
 import 'package:one/pages/home.dart';
 import 'package:one/pages/monitoring.dart';
 import 'package:one/pages/group_details.dart';
+import 'package:one/pages/profile.dart';
 
 class GroupPage extends StatelessWidget {
   @override
@@ -61,8 +62,6 @@ class GroupPage extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 24),
-
-                  // Grupos que você já participa
                   const Text(
                     'Grupos que você já participa (1)',
                     style: TextStyle(
@@ -98,8 +97,6 @@ class GroupPage extends StatelessWidget {
                     },
                   ),
                   const SizedBox(height: 24),
-
-                  // Grupos que você ainda não participa
                   const Text(
                     'Grupos que você ainda não participa (3)',
                     style: TextStyle(
@@ -127,7 +124,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -153,7 +150,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -179,7 +176,7 @@ class GroupPage extends StatelessWidget {
                       color: Color.fromRGBO(61, 112, 128, 1),
                     ),
                     onTap: () {
-                       Navigator.of(context).push(
+                      Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) => GroupDetailsPage(),
                         ),
@@ -198,22 +195,23 @@ class GroupPage extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
             child: ConstrainedBox(
-              constraints: const BoxConstraints.tightFor(width: 120, height: 40),
+              constraints:
+                  const BoxConstraints.tightFor(width: 120, height: 40),
               child: FloatingActionButton.extended(
                 onPressed: () {
                   Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                    MaterialPageRoute(
+                      builder: (context) => CreateGroupPage(),
+                    ),
+                  );
                 },
                 backgroundColor: Colors.grey[600],
                 foregroundColor: Colors.white,
                 label: const Text(
-                  'Crie um grupo',  
+                  'Crie um grupo',
                   style: TextStyle(fontSize: 14),
                 ),
-                 shape: RoundedRectangleBorder(
+                shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
@@ -223,15 +221,15 @@ class GroupPage extends StatelessWidget {
             child: FloatingActionButton(
               onPressed: () {
                 Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => CreateGroupPage(),
-                        ),
-                      );
+                  MaterialPageRoute(
+                    builder: (context) => CreateGroupPage(),
+                  ),
+                );
               },
               backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
               child: const Icon(
                 Icons.add,
-                color: Colors.white, // Cor do ícone "+"
+                color: Colors.white,
               ),
               shape: const CircleBorder(),
             ),
@@ -252,6 +250,13 @@ class GroupPage extends StatelessWidget {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => MonitoringPage(),
+              ),
+            );
+          }
+          if (index == 3) {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ProfilePage(),
               ),
             );
           }

@@ -91,13 +91,6 @@ class _NewQuestionPageState extends State<NewQuestionPage> {
                                 ),
                                 onPressed: () {
                                   _sendFeedback(context);
-                                  if (_contentController.text.isNotEmpty &&
-                                      _selectedCategory.isNotEmpty) {
-                                    Navigator.of(context).pop({
-                                      'content': _contentController.text,
-                                      'category': _selectedCategory,
-                                    });
-                                  }
                                 },
                               ),
                             ],
@@ -261,12 +254,12 @@ void _sendFeedback(BuildContext context) {
   final overlay = Overlay.of(context);
   final overlayEntry = OverlayEntry(
     builder: (context) => Positioned(
-      top: 0, 
-      left: 0,  
-      right: 0, 
+      top: 0,
+      left: 0,
+      right: 0,
       child: Material(
         elevation: 6.0,
-        child: Container( 
+        child: Container(
           height: MediaQuery.of(context).size.height * 0.15,
           color: const Color(0xFFFDFDFD),
           padding: const EdgeInsets.all(16.0),

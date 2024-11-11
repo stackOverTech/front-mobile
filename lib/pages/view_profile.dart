@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one/helpers/appcolors.dart';
 
-// subindo as telas 
-
 class ViewProfile extends StatelessWidget {
   final int age = 17;
   final String name = 'harry'; // Correção: Renomeei a variável para 'name'
@@ -17,6 +15,7 @@ class ViewProfile extends StatelessWidget {
       backgroundColor: AppColors.DARKER_COLOR,
       body: Column(
         children: [
+          const SizedBox(height: 40.0),
           Stack(
             children: [
               const Padding(
@@ -49,6 +48,7 @@ class ViewProfile extends StatelessWidget {
               ),
             ],
           ),
+          const SizedBox(height: 10),
           Expanded(
             child: Container(
               decoration: const BoxDecoration(
@@ -66,11 +66,13 @@ class ViewProfile extends StatelessWidget {
                     child: CircleAvatar(
                       radius: 75,
                       backgroundImage: AssetImage(
-                          'android/app/src/main/res/drawable/onelogo.png'),
+                          'android/app/src/main/res/drawable/harry.png'),
                       backgroundColor: AppColors.BACKGROUND_COLOR,
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Center(
                     child: Text(
                       name,
@@ -78,12 +80,24 @@ class ViewProfile extends StatelessWidget {
                           fontSize: 32, fontWeight: FontWeight.w600),
                     ),
                   ),
-                  Center(
-                    child: Text(
-                      'Monitor $materia',
-                      style: const TextStyle(
-                          fontSize: 20, fontWeight: FontWeight.w500),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'Monitor ${materia}',
+                        textAlign: TextAlign.center,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Image.asset(
+                        'android/app/src/main/res/drawable/star_filled.png',
+                        width: 24,
+                        height: 24,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 20),
                   Container(
@@ -130,7 +144,7 @@ class ViewProfile extends StatelessWidget {
                       borderRadius: BorderRadius.circular(8.0),
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text(
                           'Perguntas Mais Respondidas',
@@ -140,12 +154,22 @@ class ViewProfile extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 10),
-                        Text(
-                          mostAnswer,
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        Row(
+                          children: [
+                            Image.asset(
+                              'android/app/src/main/res/drawable/medal.png',
+                              width: 24,
+                              height: 24,
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              ' $mostAnswer',
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(height: 10),
                       ],

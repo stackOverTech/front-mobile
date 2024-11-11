@@ -60,7 +60,7 @@ class ViewMonitors extends StatelessWidget {
                     height: 40,
                   ),
                   onPressed: () {
-                    Navigator.pop(context); // Volta para a página anterior
+                    Navigator.pop(context);
                   },
                 ),
               ),
@@ -107,13 +107,11 @@ class ViewMonitors extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // Lista os monitores com botão encapsulador
                   for (var i = 0; i < monitorInfo['nomesMonitores'].length; i++)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: GestureDetector(
                         onTap: () {
-                          // Navega para a nova página
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -227,7 +225,7 @@ class ViewMonitors extends StatelessWidget {
                           ),
                         ),
                   const SizedBox(height: 20),
-                  AddDisciplineButton(), 
+                  AddDisciplineButton(),
                   const SizedBox(height: 10),
                 ],
               ),
@@ -239,14 +237,13 @@ class ViewMonitors extends StatelessWidget {
   }
 }
 
-// StatefulWidget para o botão de adicionar disciplina
 class AddDisciplineButton extends StatefulWidget {
   @override
   _AddDisciplineButtonState createState() => _AddDisciplineButtonState();
 }
 
 class _AddDisciplineButtonState extends State<AddDisciplineButton> {
-  bool _isAdded = false; // indica se a materia foi adicionada
+  bool _isAdded = false;
 
   void _toggleFavorite() {
     setState(() {

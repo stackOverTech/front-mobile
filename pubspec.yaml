@@ -19,6 +19,8 @@ dependencies:
   # connectivity_plus: ^6.0.5
   connectivity_plus: ^3.0.3
   intl: ^0.19.0
+  url_launcher: ^6.0.9
+
 
 dev_dependencies:
   flutter_test:
@@ -52,6 +54,10 @@ flutter:
     - android/app/src/main/res/drawable/anexo.png
     - android/app/src/main/res/drawable/star_filled.png
     - android/app/src/main/res/drawable/star_null.png
+    - android/app/src/main/res/drawable/medal.png
+    - android/app/src/main/res/drawable/wifi.png
+    - android/app/src/main/res/drawable/filled_heart.png
+    - android/app/src/main/res/drawable/unfilled_heart.png
 
 
   uses-material-design: true
