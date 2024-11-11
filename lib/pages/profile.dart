@@ -5,6 +5,7 @@ import 'package:one/pages/post-card.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'group.dart';
+import 'home.dart';
 import 'monitoring.dart';
 
 class ProfilePage extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:one/home.dart';
+import 'package:one/home.dart' as myhome;
+import 'package:one/pages/group.dart';
 import 'package:one/pages/monitoring.dart';
-import 'package:one/pages/post-card.dart';
 import 'package:one/pages/profile.dart';
 import 'package:one/pages/question.dart';
 
@@ -168,7 +168,7 @@ class _HomePageState extends State<HomePage> {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: _disciplines.map((discipline) {
-              return CategoryChip(
+              return myhome.CategoryChip(
                 label: discipline,
                 selected: _selectedDiscipline == discipline,
                 onSelected: (selected) {
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                             child: ListView(
                               controller: scrollController,
                               children: _posts.map((post) {
-                                return PostCard(
+                                return myhome.PostCard(
                                   username: post.usuario.nome,
                                   category: post.disciplinas.nome,
                                   timeAgo: _getTimeAgo(post.tempoDesdeCriacao),
@@ -282,6 +282,10 @@ class _HomePageState extends State<HomePage> {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => MonitoringPage(),
             ));
+          } else if (index == 2) {
+            Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => GroupPage(),
+            ));
           } else if (index == 3) {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => ProfilePage(),
@@ -297,32 +301,65 @@ class _HomePageState extends State<HomePage> {
         selectedItemColor: const Color.fromRGBO(61, 112, 128, 1),
         unselectedItemColor: Colors.white,
         backgroundColor: const Color.fromRGBO(72, 79, 92, 1.0),
-        elevation: 15,
+        elevation: 10,
+        selectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        unselectedIconTheme: const IconThemeData(size: 24, weight: 24),
+        type: BottomNavigationBarType.fixed,
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => NewQuestionPage(),
+      floatingActionButton: Stack(
+        alignment: Alignment.bottomRight,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 60.0, bottom: 7.0),
+            child: ConstrainedBox(
+              constraints:
+                  const BoxConstraints.tightFor(width: 150, height: 40),
+              child: FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => NewQuestionPage(),
+                    ),
+                  );
+                },
+                backgroundColor: Colors.grey[600],
+                foregroundColor: Colors.white,
+                label: const Text(
+                  'Faça sua pergunta',
+                  style: TextStyle(fontSize: 14),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
             ),
-          );
-        },
-        child: const Icon(Icons.add, color: Colors.white),
-        backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+          ),
+          Positioned(
+            child: FloatingActionButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NewQuestionPage(),
+                  ),
+                );
+              },
+              backgroundColor: const Color.fromRGBO(61, 112, 128, 1),
+              child: const Icon(
+                Icons.add,
+                color: Colors.white,
+              ),
+              shape: const CircleBorder(),
+            ),
+          ),
+        ],
       ),
     );
   }
 
-  String _getTimeAgo(int timeSinceCreation) {
-    if (timeSinceCreation < 60) {
-      return '$timeSinceCreation sec ago';
-    } else if (timeSinceCreation < 3600) {
-      return '${(timeSinceCreation / 60).floor()} min ago';
-    } else if (timeSinceCreation < 86400) {
-      return '${(timeSinceCreation / 3600).floor()} hr ago';
-    } else {
-      return '${(timeSinceCreation / 86400).floor()} days ago';
-    }
+  String _getTimeAgo(int seconds) {
+    final duration = Duration(seconds: seconds);
+    final hours = duration.inHours;
+    final minutes = duration.inMinutes % 60;
+    return '$hours hrs $minutes min ago';
   }
 }
